@@ -97,14 +97,14 @@
 <meta property="og:description" content="这几天折腾了下ubuntu的安装，尝试了几种方式的安装并将遇到的问题列出来，以供大家参考。
 一、制作u盘启动盘可以使用常用的镜像制作工具来制作启动盘，例如UltraISO，具体的教程参考http://blog.csdn.net/zjx2014430/article/details/49303785
 二、win7+ubuntu在thinkpad笔记本的win7系统上安装ubuntu双系统：">
-<meta property="og:image" content="http://yoursite.com/2017/04/12/ubuntu/install.png">
-<meta property="og:updated_time" content="2017-04-15T08:59:13.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/ubuntu/ubuntu.png">
+<meta property="og:updated_time" content="2017-04-18T13:43:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows安装ubuntu双系统详解">
 <meta name="twitter:description" content="这几天折腾了下ubuntu的安装，尝试了几种方式的安装并将遇到的问题列出来，以供大家参考。
 一、制作u盘启动盘可以使用常用的镜像制作工具来制作启动盘，例如UltraISO，具体的教程参考http://blog.csdn.net/zjx2014430/article/details/49303785
 二、win7+ubuntu在thinkpad笔记本的win7系统上安装ubuntu双系统：">
-<meta name="twitter:image" content="http://yoursite.com/2017/04/12/ubuntu/install.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/04/12/ubuntu/ubuntu.png">
 
 
 
@@ -395,7 +395,7 @@
 <h5 id="无法识别win10分区"><a href="#无法识别win10分区" class="headerlink" title="无法识别win10分区"></a>无法识别win10分区</h5><p>进入安装引导界面后，无法识别已安装的win10系统，有如下几个错误表现：1、直接跳过了选择安装类型（覆盖、另外分区安装这些选项）；2、安装分区为空。这个问题尝试了多个解决方案：  </p>
 <ul>
 <li>win10相对win7而言增加了快速启动功能，在安装ubuntn过程中由于开启该功能或处于休眠状态导致无法访问磁盘，一种方法是，在win10控制面板的电源选项中关闭快速启动和休眠功能；另外一种方法通过命令来强制挂载ntfs硬盘，具体参考<a href="http://e-mailwu.blog.163.com/blog/static/651040362014316103012706/" target="_blank" rel="external">http://e-mailwu.blog.163.com/blog/static/651040362014316103012706/</a>.</li>
-<li>ubuntu无法识别gpt分区格式，这个存在疑问（ubuntu16.04可以通过efi引导来安装，应该可以识别gpt分区），随着ssd大容量硬盘的使用，分区格式慢慢由mbr格式转成gpt格式，尝试了一些解决方案，例如<a href="http://blog.csdn.net/dzhj11/article/details/12870185" target="_blank" rel="external">http://blog.csdn.net/dzhj11/article/details/12870185</a>，但是并没有解决该问题，下图安装类型依然会被跳过。<br><img src="/2017/04/12/ubuntu/install.png" alt=""></li>
+<li>ubuntu无法识别gpt分区格式，这个存在疑问（ubuntu16.04可以通过efi引导来安装，应该可以识别gpt分区），随着ssd大容量硬盘的使用，分区格式慢慢由mbr格式转成gpt格式，尝试了一些解决方案，例如<a href="http://blog.csdn.net/dzhj11/article/details/12870185" target="_blank" rel="external">http://blog.csdn.net/dzhj11/article/details/12870185</a>，但是并没有解决该问题，下图安装类型依然会被跳过。<br><img src="/2017/04/12/ubuntu/ubuntu.png" alt=""></li>
 <li>进入u盘小系统ubuntu中，终端执行查看分区命令：<br><code>sudo parted /dev/sda print</code><br>结果显示不存在该分区，最后发现硬盘的磁盘不是第一个磁盘sda，而是变成了sdb，终端执行查看sdb分区命令：<br><code>sudo parted /dev/sdb print</code><br>结果显示sdb分区存在问题，是否需要修正，选择修正分区。重新进入ubuntu安装程序，nice，正常进入安装类型选择，选择其他选择进行安装，提示没有定义根文件系统，需要手动创建swap分区，比较麻烦，直接选择第一个安装选项，与当前windows兼容，按引导安装，最后大功告成。</li>
 </ul>
 
