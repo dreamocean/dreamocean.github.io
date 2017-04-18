@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="AI,Book List," />
+  <meta name="keywords" content="OpenCV,MXNet,Qt,cmake," />
 
 
 
@@ -87,24 +87,27 @@
 
 
 
-<meta name="description" content="从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。">
+<meta name="description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人工智能书单">
-<meta property="og:url" content="http://yoursite.com/2017/04/04/AI-Course/index.html">
+<meta property="og:title" content="Ubuntu下OpenCV／MXNet／Qt／python等相应开发环境安装">
+<meta property="og:url" content="http://yoursite.com/2017/04/12/opencv/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc0.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc1.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc2.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc3.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc4.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc5.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc6.png">
-<meta property="og:updated_time" content="2017-04-06T16:32:18.000Z">
+<meta property="og:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/qt.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/piplist.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv0.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv1.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv2.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv3.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv4.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv5.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/cuda.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/mxnet_result.png">
+<meta property="og:updated_time" content="2017-04-18T09:47:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人工智能书单">
-<meta name="twitter:description" content="从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。">
-<meta name="twitter:image" content="http://yoursite.com/2017/04/04/AI-Course/jc0.png">
+<meta name="twitter:title" content="Ubuntu下OpenCV／MXNet／Qt／python等相应开发环境安装">
+<meta name="twitter:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
+<meta name="twitter:image" content="http://yoursite.com/2017/04/12/opencv/qt.png">
 
 
 
@@ -132,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/04/AI-Course/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/12/opencv/"/>
 
 
 
 
 
-  <title> 人工智能书单 | dreamocean </title>
+  <title> Ubuntu下OpenCV／MXNet／Qt／python等相应开发环境安装 | dreamocean </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +280,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/AI-Course/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/opencv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhang Mengyang">
@@ -298,7 +301,7 @@
             
             
               
-                人工智能书单
+                Ubuntu下OpenCV／MXNet／Qt／python等相应开发环境安装
               
             
           </h1>
@@ -313,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T20:02:10+08:00">
-                2017-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T23:45:24+08:00">
+                2017-04-12
               </time>
             
 
@@ -336,8 +339,41 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index">
-                    <span itemprop="name">AI</span>
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/MXNet/" itemprop="url" rel="index">
+                    <span itemprop="name">MXNet</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/MXNet/Qt/" itemprop="url" rel="index">
+                    <span itemprop="name">Qt</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/MXNet/Qt/cmake/" itemprop="url" rel="index">
+                    <span itemprop="name">cmake</span>
                   </a>
                 </span>
 
@@ -353,7 +389,7 @@
 
           
           
-             <span id="/2017/04/04/AI-Course/" class="leancloud_visitors" data-flag-title="人工智能书单">
+             <span id="/2017/04/12/opencv/" class="leancloud_visitors" data-flag-title="Ubuntu下OpenCV／MXNet／Qt／python等相应开发环境安装">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -382,7 +418,21 @@
       
 
       
-        <p>从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。<br><a id="more"></a><br><img src="/2017/04/04/AI-Course/jc0.png" alt=""><br><img src="/2017/04/04/AI-Course/jc1.png" alt=""><br><img src="/2017/04/04/AI-Course/jc2.png" alt=""><br><img src="/2017/04/04/AI-Course/jc3.png" alt=""><br><img src="/2017/04/04/AI-Course/jc4.png" alt=""><br><img src="/2017/04/04/AI-Course/jc5.png" alt=""><br><img src="/2017/04/04/AI-Course/jc6.png" alt=""></p>
+        <p>安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：<br>1、python<br>2、Qt Creator<br>3、OpenCV<br>4、MXNet<br>5、cmake<br>具体安装顺序参与以下流程，避免出现软件依赖的问题：<br><a id="more"></a></p>
+<h4 id="一、系统更新"><a href="#一、系统更新" class="headerlink" title="一、系统更新"></a>一、系统更新</h4><p>安装完Ubuntu后先对系统的的软件包进行更新，不然在安装一些软件过程中会出现一系列的依赖包的问题：<br><code>sudo apt-get update</code><br><code>sudo apt-get upgrade</code><br>同时可以安装好常用程序编译包：<br><code>sudo apt-get install build-essential</code></p>
+<h4 id="二、安装QtCreator"><a href="#二、安装QtCreator" class="headerlink" title="二、安装QtCreator"></a>二、安装QtCreator</h4><p>Qt是一个跨平台的C++图形用户界面应用程序框架，Qt Creator是Qt的一种轻量级开发环境，进入官网下载:<br><img src="/2017/04/12/opencv/qt.png" alt=""><br>直接安装会存在权限问题导致无法安装，这里通过以下命令修改其可执行权限，执行后根据图形化安装界面向导安装即可：<br><code>sudo chmod +x qt-creator-opensource-linux-x86_64-4.2.1.run</code><br><code>sudo ./qt-creator-opensource-linux-x86_64-4.2.1.run</code></p>
+<h4 id="三、安装cmake"><a href="#三、安装cmake" class="headerlink" title="三、安装cmake"></a>三、安装cmake</h4><p>make是一个批量化编译工具，但是它依赖makefile文件，其由cmake生成，而cmake生成makefile文件需要手动编写cmakelist文件，它是cmake依赖的规则文件，具体编译顺序如下：<br><code>源代码--编写cmakelist--使用cmake生成makefile--使用make编译生成可执行程序</code><br>ubuntu安装cmake：<br><code>sudo apt-get install cmake</code></p>
+<h4 id="四、安装Python"><a href="#四、安装Python" class="headerlink" title="四、安装Python"></a>四、安装Python</h4><p>安装的ubuntu自带了python，直接终端输入python查看版本号，这里安装python后面需要的一系列库：<br><code>sudo apt-get install pyton-dev python-setuptools python-numpy python-scipy python-matplotlib python-sklearn</code><br>除了通过linux apt-get常用软件获取工具来安装，还可以通过python自有的pip工具来安装相应的库：<br><code>sudo apt-get install python-pip</code><br><code>pip install -U scikit-learn</code><br>后面MXNet中会requets和cython，这里可以先统一安装：<br><code>sudo apt-get install python-requests</code>或<code>pip install requests</code><br><code>sudo apt-get install cython</code><br>终端输入：<br><code>pip list</code><br>可以列出所有安装好的python包:<br><img src="/2017/04/12/opencv/piplist.png" alt=""></p>
+<h4 id="五、OpenCV的安装"><a href="#五、OpenCV的安装" class="headerlink" title="五、OpenCV的安装"></a>五、OpenCV的安装</h4><p>安装的版本是opencv-2.4.12，毫无疑问先安装所需的依赖包：<br><code>sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</code><br>官网下载相应版本的opencv，解压至特定文件夹，进入该文件夹。<br>终端输入<code>sudo cmake .</code>：<br><img src="/2017/04/12/opencv/opencv0.png" alt=""><br>终端输入<code>sudo make</code>：<br><img src="/2017/04/12/opencv/opencv1.png" alt=""><br>执行安装<code>sudo make install</code><br>配置opencv.conf，加入系统环境变量，两种方式可以选择：   </p>
+<blockquote>
+<p>1、终端命令<br><code>sudo /bin/bash -c &#39;echo &quot;/usr/local/lib&quot; &gt; /etc/ld.so.conf.d/opencv.conf&#39;</code><br>2、通过gedit打开配置文本进行编辑<br><code>sudo gedit /etc/ld.so.conf.d/opencv.conf</code><br>文本最后添加<code>/usr/local/lib</code>    </p>
+</blockquote>
+<p>更新配置<code>sudo ldconfig</code><br>设置PKG_CONFIG_PATH:</p>
+<blockquote>
+<p><code>sudo gedit /etc/bash.bashrc</code><br>加入下面两行:<br>PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig<br>export PKG_CONFIG_PATH</p>
+</blockquote>
+<p>测试安装是否成功：<br>在opencv目录找到<code>samples/c/build_all.sh</code>，运行该文件<br><img src="/2017/04/12/opencv/opencv2.png" alt=""><br>查看可执行文件<br><img src="/2017/04/12/opencv/opencv3.png" alt=""><br>执行find_obj(绿色部分为可执行文件，有些例子无法执行)<br><code>./find_obj</code><br>输出结果：<br><img src="/2017/04/12/opencv/opencv4.png" alt=""><br><img src="/2017/04/12/opencv/opencv5.png" alt=""></p>
+<h4 id="六、MXNet的安装"><a href="#六、MXNet的安装" class="headerlink" title="六、MXNet的安装"></a>六、MXNet的安装</h4><p>进入<a href="https://github.com/dmlc/mxnet/releases" target="_blank" rel="external">https://github.com/dmlc/mxnet/releases</a>下载相应的MXNet，先安装依赖包：<br><code>sudo apt-get install -y libblas-dev libatlas-base-dev</code><br>拷贝mxnet/make/目录下的config.mk到mxnet/目录，这里未配置cuda，仅是cpu版本，如果安装好cuda，则在config.mk进行配置：<br><img src="/2017/04/12/opencv/cuda.png" alt=""><br>进入mxnet目录，执行编译：<br><code>make -j4</code><br>进入<code>mxnet/python</code>目录，执行安装：<br><code>python setup.py install</code><br>进入<code>mxnet/example/image-classification</code>目录，执行如下命令进行测试是否安装成功：<br><code>python train_mnist.py</code><br>结果输出如下，安装成功：<br><img src="/2017/04/12/opencv/mxnet_result.png" alt=""></p>
 
       
     </div>
@@ -430,9 +480,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AI/" rel="tag"># AI</a>
+            <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
           
-            <a href="/tags/Book-List/" rel="tag"># Book List</a>
+            <a href="/tags/MXNet/" rel="tag"># MXNet</a>
+          
+            <a href="/tags/Qt/" rel="tag"># Qt</a>
+          
+            <a href="/tags/cmake/" rel="tag"># cmake</a>
           
         </div>
       
@@ -445,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/03/hexo/" rel="next" title="Github+Hexo+Next搭建个人博客">
-                <i class="fa fa-chevron-left"></i> Github+Hexo+Next搭建个人博客
+              <a href="/2017/04/12/ubuntu/" rel="next" title="windows安装ubuntu双系统详解">
+                <i class="fa fa-chevron-left"></i> windows安装ubuntu双系统详解
               </a>
             
           </div>
@@ -455,8 +509,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/12/ubuntu/" rel="prev" title="windows安装ubuntu双系统详解">
-                windows安装ubuntu双系统详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/17/command/" rel="prev" title="Linux常用命令及SVN等软件安装">
+                Linux常用命令及SVN等软件安装 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -506,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/icon.jpg"
@@ -589,6 +652,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、系统更新"><span class="nav-number">1.</span> <span class="nav-text">一、系统更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、安装QtCreator"><span class="nav-number">2.</span> <span class="nav-text">二、安装QtCreator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、安装cmake"><span class="nav-number">3.</span> <span class="nav-text">三、安装cmake</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、安装Python"><span class="nav-number">4.</span> <span class="nav-text">四、安装Python</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、OpenCV的安装"><span class="nav-number">5.</span> <span class="nav-text">五、OpenCV的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、MXNet的安装"><span class="nav-number">6.</span> <span class="nav-text">六、MXNet的安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
