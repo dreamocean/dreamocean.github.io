@@ -97,7 +97,7 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
 <meta property="og:description" content="总结下Linux下开发使用比较多的工具及命令：
 svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
 rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
-<meta property="og:updated_time" content="2017-04-21T10:05:59.000Z">
+<meta property="og:updated_time" content="2017-04-21T10:09:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令及SVN等软件安装">
 <meta name="twitter:description" content="总结下Linux下开发使用比较多的工具及命令：
@@ -383,7 +383,8 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
         <p>总结下Linux下开发使用比较多的工具及命令：</p>
 <h4 id="svn版本管理"><a href="#svn版本管理" class="headerlink" title="svn版本管理"></a>svn版本管理</h4><h5 id="subversion"><a href="#subversion" class="headerlink" title="subversion"></a>subversion</h5><p>安装命令行svn：<br><code>sudo apt-get install subversion</code><br><code>svn checkout http://xxx.xxx.xxx.xx 本地路径</code><br><code>cd svn文件</code>执行<code>svn update</code></p>
 <h5 id="rapidsvn"><a href="#rapidsvn" class="headerlink" title="rapidsvn"></a>rapidsvn</h5><p>rapidsvn是图形界面，可以在ubuntu软件中心安装，或执行<br><code>sudo apt-get install rapidsvn</code><br>不推荐使用，速度慢，经常崩溃。</p>
-<h5 id="RabbitVCS-SVN"><a href="#RabbitVCS-SVN" class="headerlink" title="RabbitVCS SVN"></a>RabbitVCS SVN</h5><p>与windowns下TortoiseSVN功能和界面基本相同，上手容易，功能齐全，推荐使用，安装方法如下：<br><code>sudo add-apt-repository ppa:rabbitvcs/ppa</code><br>如果第一步没有成功导入密钥key，则执行：<br><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 34EF4A35</code><br>执行更新源操作：<br><code>sudo apt-get update</code><br>安装依赖库：<br><code>sudo apt-get install rabbitvcs-cli  rabbitvcs-core rabbitvcs-gedit rabbitvcs-nautilus3</code><br>安装完成后，如果右键为出现svn选项，执行重启命令：<br><code>nautilus -q</code>或<code>nautilus</code></p>
+<h5 id="RabbitVCS-SVN"><a href="#RabbitVCS-SVN" class="headerlink" title="RabbitVCS SVN"></a>RabbitVCS SVN</h5><a id="more"></a>
+<p>与windowns下TortoiseSVN功能和界面基本相同，上手容易，功能齐全，推荐使用，安装方法如下：<br><code>sudo add-apt-repository ppa:rabbitvcs/ppa</code><br>如果第一步没有成功导入密钥key，则执行：<br><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 34EF4A35</code><br>执行更新源操作：<br><code>sudo apt-get update</code><br>安装依赖库：<br><code>sudo apt-get install rabbitvcs-cli  rabbitvcs-core rabbitvcs-gedit rabbitvcs-nautilus3</code><br>安装完成后，如果右键为出现svn选项，执行重启命令：<br><code>nautilus -q</code>或<code>nautilus</code></p>
 <h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><h5 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h5><blockquote>
 <p><code>sudo rm -rf /xxx</code> —— 删除文件夹<br><em>-r：向下递归删除<br>-f：直接强行删除，且没有任何提示</em><br><code>sudo rm -f /文件名</code> —— 删除文件.     </p>
 </blockquote>
