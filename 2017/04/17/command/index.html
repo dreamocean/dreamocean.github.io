@@ -88,18 +88,21 @@
 
 
 <meta name="description" content="总结下Linux下开发使用比较多的工具及命令：
-svn版本管理">
+svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
+rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令及SVN等软件安装">
 <meta property="og:url" content="http://yoursite.com/2017/04/17/command/index.html">
 <meta property="og:site_name" content="dreamocean">
 <meta property="og:description" content="总结下Linux下开发使用比较多的工具及命令：
-svn版本管理">
-<meta property="og:updated_time" content="2017-04-18T09:51:49.000Z">
+svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
+rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
+<meta property="og:updated_time" content="2017-04-21T10:05:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令及SVN等软件安装">
 <meta name="twitter:description" content="总结下Linux下开发使用比较多的工具及命令：
-svn版本管理">
+svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
+rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
 
 
 
@@ -378,7 +381,34 @@ svn版本管理">
 
       
         <p>总结下Linux下开发使用比较多的工具及命令：</p>
-<h4 id="svn版本管理"><a href="#svn版本管理" class="headerlink" title="svn版本管理"></a>svn版本管理</h4>
+<h4 id="svn版本管理"><a href="#svn版本管理" class="headerlink" title="svn版本管理"></a>svn版本管理</h4><h5 id="subversion"><a href="#subversion" class="headerlink" title="subversion"></a>subversion</h5><p>安装命令行svn：<br><code>sudo apt-get install subversion</code><br><code>svn checkout http://xxx.xxx.xxx.xx 本地路径</code><br><code>cd svn文件</code>执行<code>svn update</code></p>
+<h5 id="rapidsvn"><a href="#rapidsvn" class="headerlink" title="rapidsvn"></a>rapidsvn</h5><p>rapidsvn是图形界面，可以在ubuntu软件中心安装，或执行<br><code>sudo apt-get install rapidsvn</code><br>不推荐使用，速度慢，经常崩溃。</p>
+<h5 id="RabbitVCS-SVN"><a href="#RabbitVCS-SVN" class="headerlink" title="RabbitVCS SVN"></a>RabbitVCS SVN</h5><p>与windowns下TortoiseSVN功能和界面基本相同，上手容易，功能齐全，推荐使用，安装方法如下：<br><code>sudo add-apt-repository ppa:rabbitvcs/ppa</code><br>如果第一步没有成功导入密钥key，则执行：<br><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 34EF4A35</code><br>执行更新源操作：<br><code>sudo apt-get update</code><br>安装依赖库：<br><code>sudo apt-get install rabbitvcs-cli  rabbitvcs-core rabbitvcs-gedit rabbitvcs-nautilus3</code><br>安装完成后，如果右键为出现svn选项，执行重启命令：<br><code>nautilus -q</code>或<code>nautilus</code></p>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><h5 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h5><blockquote>
+<p><code>sudo rm -rf /xxx</code> —— 删除文件夹<br><em>-r：向下递归删除<br>-f：直接强行删除，且没有任何提示</em><br><code>sudo rm -f /文件名</code> —— 删除文件.     </p>
+</blockquote>
+<h5 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h5><blockquote>
+<p><code>cp -r ~/xxx /xxxx</code> ——copy文件或文件夹.<br><code>cp ~/xxx ./</code> —— copy至当前目录.<br><code>cp -r ~/xxx/. ./</code> —— copy xxx目录下所有文件至当前目录</p>
+</blockquote>
+<h5 id="远程服务器命令"><a href="#远程服务器命令" class="headerlink" title="远程服务器命令"></a>远程服务器命令</h5><blockquote>
+<p><code>ssh login_name@192.xxx.xxx.xx</code> —— 登录远程服务器<br><code>scp -r login_name@192.xxx.xxx.xx:~/服务器文件路径 /本地文件路径</code> —— 从远程服务器拷贝至本地<br><code>scp -r /本地文件路径  login_name@192.xxx.xxx.xx:~/服务器文件路径</code> —— 上传本地文件至远程服务器</p>
+</blockquote>
+<h5 id="网络设备相关命令"><a href="#网络设备相关命令" class="headerlink" title="网络设备相关命令"></a>网络设备相关命令</h5><blockquote>
+<p><code>netstat -lntp</code> —— 查看端口使用情况<br><code>ifconfig</code> —— 查看网络设备<br><code>nvidia-smi</code> —— 查看GPU信息</p>
+</blockquote>
+<h5 id="权限设置"><a href="#权限设置" class="headerlink" title="权限设置"></a>权限设置</h5><blockquote>
+<p><code>sudo chmod 777 文件</code> —— 设置任何人都有读、写、运行权限</p>
+</blockquote>
+<h5 id="pip命令"><a href="#pip命令" class="headerlink" title="pip命令"></a>pip命令</h5><blockquote>
+<p><code>pip list</code> —— 查看所有安装的python库<br><code>pip show 包名</code> —— 显示包安装路径<br><code>pip-autoremove 包名</code> —— 移除包</p>
+</blockquote>
+<h5 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h5><blockquote>
+<p><code>dpkg -i xxxx.deb</code> —— 安装deb软件包<br><code>dpkg -P xxxx</code> —— 卸载软件<br><code>dpkg -s xxxx</code> —— 查看软件信息</p>
+</blockquote>
+<h4 id="apt-get命令"><a href="#apt-get命令" class="headerlink" title="apt-get命令"></a>apt-get命令</h4><blockquote>
+<p><code>sudo apt-get update</code> —— 更新软件源<br><code>sudo apt-get upgrade</code> —— 升级已安装的软件<br><code>sudo apt-get -f install</code> —— 解决依赖包的问题<br><code>sudo apt autoremove xxx</code> —— 卸载xxx软件</p>
+</blockquote>
+
       
     </div>
 
@@ -392,6 +422,24 @@ svn版本管理">
     <div>
       
         
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得我的文章对您有用，请随意赞赏</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+     <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.JPG" alt="Zhang Mengyang WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
 
       
     </div>
@@ -429,6 +477,10 @@ svn版本管理">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/18/cuda/" rel="prev" title="ubuntu下cuda的安装">
+                ubuntu下cuda的安装 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -502,7 +554,7 @@ svn版本管理">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -513,7 +565,7 @@ svn版本管理">
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -524,7 +576,7 @@ svn版本管理">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -579,7 +631,7 @@ svn版本管理">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#svn版本管理"><span class="nav-number">1.</span> <span class="nav-text">svn版本管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#svn版本管理"><span class="nav-number">1.</span> <span class="nav-text">svn版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#subversion"><span class="nav-number">1.1.</span> <span class="nav-text">subversion</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rapidsvn"><span class="nav-number">1.2.</span> <span class="nav-text">rapidsvn</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RabbitVCS-SVN"><span class="nav-number">1.3.</span> <span class="nav-text">RabbitVCS SVN</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#delete"><span class="nav-number">2.1.</span> <span class="nav-text">delete</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#copy"><span class="nav-number">2.2.</span> <span class="nav-text">copy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#远程服务器命令"><span class="nav-number">2.3.</span> <span class="nav-text">远程服务器命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网络设备相关命令"><span class="nav-number">2.4.</span> <span class="nav-text">网络设备相关命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#权限设置"><span class="nav-number">2.5.</span> <span class="nav-text">权限设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pip命令"><span class="nav-number">2.6.</span> <span class="nav-text">pip命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dpkg"><span class="nav-number">2.7.</span> <span class="nav-text">dpkg</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apt-get命令"><span class="nav-number">3.</span> <span class="nav-text">apt-get命令</span></a></li></ol></div>
             
 
           </div>
