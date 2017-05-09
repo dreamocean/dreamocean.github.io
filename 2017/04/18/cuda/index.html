@@ -87,16 +87,27 @@
 
 
 
-<meta name="description" content="技术笔记与分享，与君共勉">
+<meta name="description" content="安装NVIDIA驱动进入官网http://www.nvidia.com/Download/index.aspx?lang=en-us查看当前显卡的驱动，执行如下命令进行安装：   
+
+sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get install nvidia-367sudo apt-g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu下cuda的安装">
 <meta property="og:url" content="http://yoursite.com/2017/04/18/cuda/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="技术笔记与分享，与君共勉">
-<meta property="og:updated_time" content="2017-04-18T13:51:30.000Z">
+<meta property="og:description" content="安装NVIDIA驱动进入官网http://www.nvidia.com/Download/index.aspx?lang=en-us查看当前显卡的驱动，执行如下命令进行安装：   
+
+sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get install nvidia-367sudo apt-g">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cuda1.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cuda0.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cuda2.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cuda3.png">
+<meta property="og:updated_time" content="2017-05-09T14:13:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu下cuda的安装">
-<meta name="twitter:description" content="技术笔记与分享，与君共勉">
+<meta name="twitter:description" content="安装NVIDIA驱动进入官网http://www.nvidia.com/Download/index.aspx?lang=en-us查看当前显卡的驱动，执行如下命令进行安装：   
+
+sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get install nvidia-367sudo apt-g">
+<meta name="twitter:image" content="http://yoursite.com/2017/04/18/cuda/cuda1.png">
 
 
 
@@ -374,7 +385,22 @@
       
 
       
-        
+        <h3 id="安装NVIDIA驱动"><a href="#安装NVIDIA驱动" class="headerlink" title="安装NVIDIA驱动"></a>安装NVIDIA驱动</h3><p>进入官网<a href="http://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" rel="external">http://www.nvidia.com/Download/index.aspx?lang=en-us</a>查看当前显卡的驱动，执行如下命令进行安装：   </p>
+<blockquote>
+<p><code>sudo add-apt-repository ppa:graphics-drivers/ppa</code><br><code>sudo apt-get update</code><br><code>sudo apt-get install nvidia-367</code><br><code>sudo apt-get install mesa-common-dev</code><br><code>sudo apt-get install freeglut3-dev</code>      </p>
+</blockquote>
+<p>执行完重启：<code>sudo reboot</code>.<br>输入：<code>nvidia-smi</code>，可以获取如下gpu信息，包括gpu列表和gpu正在执行的进程：<br><img src="/2017/04/18/cuda/cuda1.png" alt=""><br>另外也可以通过命令<code>nvidia-settings</code>查询详细的gpu信息：<br><img src="/2017/04/18/cuda/cuda0.png" alt="">.  </p>
+<h3 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h3><p>CUDA是nvidia推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。CUDA支持C、C++和FORTRAN，所编写出的程序可以在支持CUDA™的处理器上以超高性能运行。<br>进入官网直接下载相应版本的CUDA，并执行安装：<br><img src="/2017/04/18/cuda/cuda2.png" alt=""><br>添加配置：   </p>
+<blockquote>
+<p><code>sudo gedit /etc/profile</code><br>打开‘profile’文件，在末尾添加(不要用空格)<br><code>export PATH=/usr/local/cuda-8.0/bin:$PATH</code><br><code>export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64$LD_LIBRARY_PATH</code>.  </p>
+</blockquote>
+<p>重启电脑<br>执行测试样例：  </p>
+<blockquote>
+<p><code>cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery</code><br><code>sudo make</code><br><code>./deviceQuery</code>    </p>
+</blockquote>
+<p>显示如下信息，cuda安装成功：<br><img src="/2017/04/18/cuda/cuda3.png" alt="">.  </p>
+<h3 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h3><p>安装CUDA后启动不成功，原因是电脑bios开启了安全启动secure boot，关闭secure boot，CUDA启动成功。</p>
+
       
     </div>
 
@@ -491,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/icon.jpg"
@@ -574,6 +609,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NVIDIA驱动"><span class="nav-number">1.</span> <span class="nav-text">安装NVIDIA驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装CUDA"><span class="nav-number">2.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要注意的问题"><span class="nav-number">3.</span> <span class="nav-text">需要注意的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
