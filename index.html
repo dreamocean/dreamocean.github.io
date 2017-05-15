@@ -379,7 +379,7 @@
 
       
         
-          <h3 id="Tornado简介"><a href="#Tornado简介" class="headerlink" title="Tornado简介"></a>Tornado简介</h3><p>Tornado是一种web服务器的开源版本，同时提供web framework的api，可以直接构建自己的web程序。<br>Tornado与目前主流的web框架有着明显的区别：它是非阻塞式服务器，而且速度相当快。得利于其非阻塞的方式和对epoll的运用，Tornado每秒可以处理数以千计的连接，这意味着对于实时Web服务来说，Tornado是一个比较理想的轻量级web框架。Tornado为纯pyhon版本，支持HTTP、FTP、SMTP协议。<br>Tornado是基于ioloop高性能异步框架，可以处理大量的非活跃长连接。使用Tornado可以大大的减少web系统中使用的组件数量，用最少的代码量和极其精简的架构实现你的系统。<br>Tornado是单线程的，Python虽然有多线程，但是Python的解释器有GIL，这点非常影响Tornado利用多核的能力，只能通过多进程来利用多核。既然多进程，一般需要在前端放置nginx或haproxy来做负载均衡的反向代理，或是使用这些应用服务器的wsgi模块来管理进程的生命周期等等。<br></p>
+          <h3 id="Tornado简介"><a href="#Tornado简介" class="headerlink" title="Tornado简介"></a>Tornado简介</h3><p>Tornado是一种web服务器的开源版本，同时提供web framework的api，可以直接构建自己的web程序。<br>Tornado与目前主流的web框架有着明显的区别：它是非阻塞式服务器，而且速度相当快。得利于其非阻塞的方式和对epoll的运用，Tornado每秒可以处理数以千计的连接，这意味着对于实时Web服务来说，Tornado是一个比较理想的轻量级web框架。Tornado为纯pyhon版本，支持HTTP、FTP、SMTP协议。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/15/tornado/#more" rel="contents">
