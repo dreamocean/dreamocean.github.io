@@ -379,21 +379,14 @@
 
       
         
-          
-            <h3 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h3><p>json(JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于ECMAScript规范的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得json成为理想的数据交换语言，易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。<br>json与xml比较：   </p>
-<blockquote>
-<p>json和xml都拥有丰富的解析手段；<br>xml可读性相对json较好；<br>json相对xml而言，数据体积更小；<br>json传输速度远远快于xml；<br>json编解码更容易，xml需要考虑子节点和父节点。</p>
-</blockquote>
-<h3 id="JSON实例"><a href="#JSON实例" class="headerlink" title="JSON实例"></a>JSON实例</h3><p>xml和json都使用结构化方法来标记数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;     </div><div class="line">&lt;country&gt;</div><div class="line">    &lt;name&gt;中国&lt;/name&gt;</div><div class="line">    &lt;province&gt;</div><div class="line">        &lt;name&gt;广东&lt;/name&gt;</div><div class="line">        &lt;cities&gt;</div><div class="line">            &lt;city&gt;广州&lt;/city&gt;</div><div class="line">            &lt;city&gt;深圳&lt;/city&gt;</div><div class="line">        &lt;/cities&gt;</div><div class="line">    &lt;/province&gt;</div><div class="line">    &lt;province&gt;</div><div class="line">        &lt;name&gt;湖北&lt;/name&gt;</div><div class="line">        &lt;cities&gt;</div><div class="line">            &lt;city&gt;武汉&lt;/city&gt;</div><div class="line">        &lt;/cities&gt;</div><div class="line">    &lt;/province&gt;</div><div class="line">&lt;/country&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;name&quot;: &quot;中国&quot;,</div><div class="line">    &quot;province&quot;: </div><div class="line">    [ </div><div class="line">    	 &#123;</div><div class="line">           &quot;name&quot;: &quot;广东&quot;,</div><div class="line">           &quot;cities&quot;: &#123;</div><div class="line">               &quot;city&quot;: [&quot;广州&quot;, &quot;深圳&quot;, &quot;珠海&quot;]</div><div class="line">             &#125;</div><div class="line">        &#125;, </div><div class="line">        &#123;</div><div class="line">           &quot;name&quot;: &quot;湖北&quot;,</div><div class="line">           &quot;cities&quot;: &#123;</div><div class="line">              &quot;city&quot;: [&quot;武汉&quot;]</div><div class="line">             &#125;</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到，由于json所使用的字符要比xml少得多，可以大大得节约传输数据所占用得带宽。</p>
-<h3 id="JSON编解码"><a href="#JSON编解码" class="headerlink" title="JSON编解码"></a>JSON编解码</h3><p>JAVA、Python和C++对于json的处理，都可以通过第三方库来完成，语言本身都不支持。</p>
-<h4 id="json"><a href="#json" class="headerlink" title="json"></a>json</h4><p>python自带的json库，对于简单数据类型（string、unicode、int、float、list、tuple、dict），可以直接处理。<br><img src="/2017/05/16/json/json.png" alt=""><br>python数据编码成json的规则如下：<br><img src="/2017/05/16/json/json1.png" alt=""><br>json数据解码成python的规则如下：<br><img src="/2017/05/16/json/json2.png" alt=""><br>对于中文数据，如果设定dumps(data,ensure_ascii=False)则会保留中文编码，如果设定dumps(data,ensure_ascii=True)则中文转成utf-8格式。</p>
-<h3 id="simplejson"><a href="#simplejson" class="headerlink" title="simplejson"></a>simplejson</h3><p>simplejson为python第三方库，需要另外安装。<br>simplejson可以看作为json的精简一部分，没有json那么多功能。<br>Python自带的json，性能可以接受。simplejson如果没有C扩展加速，效率极其低下。</p>
-<h3 id="rapidjson"><a href="#rapidjson" class="headerlink" title="rapidjson"></a>rapidjson</h3><p>RapidJSON 是一个 C++ 的 JSON 解析器及生成器，被认为目前最快的json解析器，具体文档参考<a href="http://code.tencent.com/rapidjson.html" target="_blank" rel="external">http://code.tencent.com/rapidjson.html</a>.<br>有幸同RapidJSON的作者milo在一个项目组共过事，milo也对各个版本的JSON库做过评测，具体参考<a href="https://www.zhihu.com/question/23654513" target="_blank" rel="external">https://www.zhihu.com/question/23654513</a>. </p>
-
-          
+          <h3 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h3><p>json(JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于ECMAScript规范的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得json成为理想的数据交换语言，易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。<br>json与xml比较：<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/16/json/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
