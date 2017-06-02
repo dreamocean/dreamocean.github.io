@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv_5.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/cuda.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/mxnet_result.png">
-<meta property="og:updated_time" content="2017-05-24T09:34:02.000Z">
+<meta property="og:updated_time" content="2017-06-02T09:36:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下OpenCV／MXNet／Qt／Python等相应开发环境安装">
 <meta name="twitter:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
@@ -432,7 +432,7 @@
 <p><code>sudo gedit /etc/bash.bashrc</code><br>加入下面两行:<br>PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig<br>export PKG_CONFIG_PATH</p>
 </blockquote>
 <p>测试安装是否成功：<br>在opencv目录找到<code>samples/c/build_all.sh</code>，运行该文件<br><img src="/2017/04/12/opencv/opencv_2.png" alt=""><br>查看可执行文件<br><img src="/2017/04/12/opencv/opencv_3.png" alt=""><br>执行find_obj(绿色部分为可执行文件，有些例子无法执行)<br><code>./find_obj</code><br>输出结果：<br><img src="/2017/04/12/opencv/opencv_4.png" alt=""><br><img src="/2017/04/12/opencv/opencv_5.png" alt=""></p>
-<h4 id="六、MXNet的安装"><a href="#六、MXNet的安装" class="headerlink" title="六、MXNet的安装"></a>六、MXNet的安装</h4><p>进入<a href="https://github.com/dmlc/mxnet/releases" target="_blank" rel="external">https://github.com/dmlc/mxnet/releases</a>下载相应的MXNet，先安装依赖包：<br><code>sudo apt-get install -y libblas-dev libatlas-base-dev</code><br>拷贝mxnet/make/目录下的config.mk到mxnet/目录，这里未配置cuda，仅是cpu版本，如果安装好cuda，则在config.mk进行配置：<br><img src="/2017/04/12/opencv/cuda.png" alt=""><br>进入mxnet目录，执行编译：<br><code>make -j4</code><br>进入<code>mxnet/python</code>目录，执行安装：<br><code>python setup.py install</code><br>进入<code>mxnet/example/image-classification</code>目录，执行如下命令进行测试是否安装成功：<br><code>python train_mnist.py</code><br>结果输出如下，安装成功：<br><img src="/2017/04/12/opencv/mxnet_result.png" alt=""><br>安装mxnet python第三方库：<br><code>cd mxnet/python/dist</code><br><code>sudo easy_install mxnet-0.9-py2.7-linux-x86_64.egg</code><br>安装完成后，进入python尝试<code>import mxnet as mx</code>，没有报错，则安装成功，第三方库可以被引用。</p>
+<h4 id="六、MXNet的安装"><a href="#六、MXNet的安装" class="headerlink" title="六、MXNet的安装"></a>六、MXNet的安装</h4><p>进入<a href="https://github.com/dmlc/mxnet/releases" target="_blank" rel="external">https://github.com/dmlc/mxnet/releases</a>下载相应的MXNet，先安装依赖包：<br><code>sudo apt-get install -y libblas-dev libatlas-base-dev</code><br>拷贝mxnet/make/目录下的config.mk到mxnet/目录，这里未配置cuda，仅是cpu版本，如果安装好cuda，则在config.mk进行配置：<br><img src="/2017/04/12/opencv/cuda.png" alt=""><br>进入mxnet目录，执行编译：<br><code>make -j4</code><br>进入<code>mxnet/python</code>目录，执行安装：<br><code>python setup.py install</code><br>进入<code>mxnet/example/image-classification</code>目录，执行如下命令进行测试是否安装成功：<br><code>python train_mnist.py</code><br>结果输出如下，安装成功：<br><img src="/2017/04/12/opencv/mxnet_result.png" alt=""><br>安装mxnet python第三方库：<br><code>cd mxnet/python/dist</code><br><code>sudo easy_install mxnet-0.9-py2.7-linux-x86_64.egg</code><br>安装完成后，进入python尝试<code>import mxnet as mx</code>，没有报错，则安装成功，第三方库可以被引用。<br>Mxnet GPU版本配置参考：<br><a href="https://dreamocean.github.io/2017/04/18/cuda/" target="_blank" rel="external">https://dreamocean.github.io/2017/04/18/cuda/</a></p>
 
       
     </div>
