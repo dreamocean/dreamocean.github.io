@@ -91,7 +91,7 @@
 
 sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get install nvidia-367sudo apt-g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu下cuda和cudnn的安装">
+<meta property="og:title" content="ubuntu下cuda和cudnn的安装及Mnext-GPU版本配置">
 <meta property="og:url" content="http://yoursite.com/2017/04/18/cuda/index.html">
 <meta property="og:site_name" content="dreamocean">
 <meta property="og:description" content="安装NVIDIA驱动进入官网http://www.nvidia.com/Download/index.aspx?lang=en-us查看当前显卡的驱动，执行如下命令进行安装：   
@@ -102,9 +102,10 @@ sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get 
 <meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cuda2.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cuda3.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cudnn.png">
-<meta property="og:updated_time" content="2017-05-16T13:46:04.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/cuda/cudnn1.png">
+<meta property="og:updated_time" content="2017-06-02T09:26:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu下cuda和cudnn的安装">
+<meta name="twitter:title" content="ubuntu下cuda和cudnn的安装及Mnext-GPU版本配置">
 <meta name="twitter:description" content="安装NVIDIA驱动进入官网http://www.nvidia.com/Download/index.aspx?lang=en-us查看当前显卡的驱动，执行如下命令进行安装：   
 
 sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get install nvidia-367sudo apt-g">
@@ -142,7 +143,7 @@ sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get 
 
 
 
-  <title> ubuntu下cuda和cudnn的安装 | dreamocean </title>
+  <title> ubuntu下cuda和cudnn的安装及Mnext-GPU版本配置 | dreamocean </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -302,7 +303,7 @@ sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get 
             
             
               
-                ubuntu下cuda和cudnn的安装
+                ubuntu下cuda和cudnn的安装及Mnext-GPU版本配置
               
             
           </h1>
@@ -368,7 +369,7 @@ sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get 
 
           
           
-             <span id="/2017/04/18/cuda/" class="leancloud_visitors" data-flag-title="ubuntu下cuda和cudnn的安装">
+             <span id="/2017/04/18/cuda/" class="leancloud_visitors" data-flag-title="ubuntu下cuda和cudnn的安装及Mnext-GPU版本配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -429,6 +430,13 @@ sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get 
 <p><code>sudo ldconfig -v</code>        </p>
 </blockquote>
 <p>执行成功！                 </p>
+<h3 id="配置Mxnet-GPU版本"><a href="#配置Mxnet-GPU版本" class="headerlink" title="配置Mxnet GPU版本"></a>配置Mxnet GPU版本</h3><p>修改mxnet/config.mk配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># whether use CUDA during compile</div><div class="line">USE_CUDA = 1</div><div class="line"></div><div class="line"># add the path to CUDA library to link and compile flag</div><div class="line"># if you have already add them to environment variable, leave it as NONE</div><div class="line"># USE_CUDA_PATH = /usr/local/cuda</div><div class="line">USE_CUDA_PATH = /usr/local/cuda</div><div class="line"></div><div class="line"># whether use CUDNN R3 library</div><div class="line">USE_CUDNN = 1</div></pre></td></tr></table></figure>
+<p>重新编译mxnet库文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">make clean //一定要先clean</div><div class="line">make -j4</div></pre></td></tr></table></figure>
+<p>如果mxnet和cudnn版本冲突，如mxnet版本为0.8，安装的cudnn版本为v6，编译报错：<br><img src="/2017/04/18/cuda/cudnn1.png" alt=""><br>编译完成后，安装mxnet python库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//更新替换python内的libmxnet.so</div><div class="line">sudo cp mxnet/lib/libmxnet.so /mxnet/python/mxnet/</div><div class="line">//卸载之前版本python库 </div><div class="line">sudo pip uninstall mxnet </div><div class="line">cd mxnet/python</div><div class="line">sudo python setup.py install</div><div class="line">//一定要替换系统目录下的libmxnet.so</div><div class="line">sudo cp mxnet/lib/libmxnet.so /usr/local/lib/python2.7/dist-packages/mxnet-0.9.4-py2.7-linux-x86_64.egg/mxnet/</div></pre></td></tr></table></figure>
+<p>GPU版本Mxnet配置完成！</p>
 
       
     </div>
@@ -654,7 +662,7 @@ sudo add-apt-repository ppa:graphics-drivers/ppasudo apt-get updatesudo apt-get 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NVIDIA驱动"><span class="nav-number">1.</span> <span class="nav-text">安装NVIDIA驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装CUDA"><span class="nav-number">2.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要注意的问题"><span class="nav-number">3.</span> <span class="nav-text">需要注意的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装cudnn"><span class="nav-number">4.</span> <span class="nav-text">安装cudnn</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NVIDIA驱动"><span class="nav-number">1.</span> <span class="nav-text">安装NVIDIA驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装CUDA"><span class="nav-number">2.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要注意的问题"><span class="nav-number">3.</span> <span class="nav-text">需要注意的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装cudnn"><span class="nav-number">4.</span> <span class="nav-text">安装cudnn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Mxnet-GPU版本"><span class="nav-number">5.</span> <span class="nav-text">配置Mxnet GPU版本</span></a></li></ol></div>
             
 
           </div>
