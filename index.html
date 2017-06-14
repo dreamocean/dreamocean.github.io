@@ -293,7 +293,7 @@
               
                 
                 <a class="post-title-link" href="/2017/06/13/mnist/" itemprop="url">
-                  mnist手写体识别
+                  mnist手写体识别示例及分析(一)
                 </a>
               
             
@@ -349,7 +349,7 @@
 
           
           
-             <span id="/2017/06/13/mnist/" class="leancloud_visitors" data-flag-title="mnist手写体识别">
+             <span id="/2017/06/13/mnist/" class="leancloud_visitors" data-flag-title="mnist手写体识别示例及分析(一)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -379,22 +379,174 @@
 
       
         
-          
-            <p>目前深度学习的训练采用了mxnet框架，接下来会从具体的应用示例出发，详细分析深度学习的具体流程和一些trick，在示例分析中穿插相关概念的介绍。  </p>
-<h3 id="MXNet简介"><a href="#MXNet简介" class="headerlink" title="MXNet简介"></a>MXNet简介</h3><p>mxnet是一个开源的深度学习框架，它可以使你能自行定义、训练、配置和部署深度人工神经网络，并且适用于从云端到移动端诸多不同的设备上。可快速模型训练、灵活支持各种编程模型和语言使得mxnet具有高度的可扩展性。同时，它还允许混合使用命令式与符号式编程以最大化程序的效率和性能。具体mxnet的底层实现以及同caffe、tensorflow、theano框架对比如下：<br><img src="/2017/06/13/mnist/mx0.png" alt=""><br><img src="/2017/06/13/mnist/mx1.png" alt=""><br><em>目前facebook最新发布caffe2同样支持移动端部署</em><br>具体mxnet设计和实现简介可参考官方文档<a href="https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1" target="_blank" rel="external">https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1</a>。</p>
-<h3 id="mnist手写体识别"><a href="#mnist手写体识别" class="headerlink" title="mnist手写体识别"></a>mnist手写体识别</h3><p>接下来详细介绍下基于mxnet框架的mnist手写体识别，事实上在mxnet/example/image-classification/下已经存在了train_mnist.py的样例，但其分散依赖了其他文件，这里在train_mnist.py的基础上进行了重构，具体工程结构如下：<br><img src="/2017/06/13/mnist/mx2.png" alt="">   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">train.py —— 模型训练</div><div class="line">predict.py —— 结果预测</div><div class="line">feature.py —— 输出每层特征</div></pre></td></tr></table></figure>
-<h4 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h4><h5 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h5><p>mnist数据显示如下：<br><img src="/2017/06/13/mnist/mx4.png" alt=""><br>不过官方给出的为二进制数据，具体读取方式如下：     </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_data</span><span class="params">(label, image)</span>:</span></div><div class="line">    <span class="keyword">with</span> gzip.open(os.path.join(<span class="string">'data'</span>,label)) <span class="keyword">as</span> flbl:</div><div class="line">        magic, num = struct.unpack(<span class="string">"&gt;II"</span>, flbl.read(<span class="number">8</span>))</div><div class="line">        label = np.fromstring(flbl.read(), dtype=np.int8)</div><div class="line">    <span class="keyword">with</span> gzip.open(os.path.join(<span class="string">'data'</span>,image), <span class="string">'rb'</span>) <span class="keyword">as</span> fimg:</div><div class="line">        magic, num, rows, cols = struct.unpack(<span class="string">"&gt;IIII"</span>, fimg.read(<span class="number">16</span>))</div><div class="line">        image = np.fromstring(fimg.read(), dtype=np.uint8).reshape(len(label), rows, cols)</div><div class="line">    <span class="keyword">return</span> (label, image)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">to4d</span><span class="params">(img)</span>:</span></div><div class="line">    <span class="comment">#转成4维矩阵（标签个数*图像通道数量*图像宽*图像高)</span></div><div class="line">    <span class="keyword">return</span> img.reshape(img.shape[<span class="number">0</span>], <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>).astype(np.float32)/<span class="number">255</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_mnist_iter</span><span class="params">(args, kv)</span>:</span></div><div class="line">    (train_lbl, train_img) = read_data(<span class="string">'train-labels-idx1-ubyte.gz'</span>, <span class="string">'train-images-idx3-ubyte.gz'</span>)</div><div class="line">    (val_lbl, val_img) = read_data(<span class="string">'t10k-labels-idx1-ubyte.gz'</span>, <span class="string">'t10k-images-idx3-ubyte.gz'</span>)</div><div class="line">    <span class="comment">#输出训练数据和验证数据大小</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"val_label_len:%d val_img_data_len:%d train_label_len:%d train_img_data_len:%d"</span>%(len(val_lbl),len(val_img),len(train_lbl),len(train_img))   </div><div class="line">    <span class="comment">#构建数据迭代器，为神经网络提供数据                           </span></div><div class="line">    train = mx.io.NDArrayIter(</div><div class="line">        data         = to4d(train_img), </div><div class="line">        label        = train_lbl, </div><div class="line">        batch_size   = args.batch_size, </div><div class="line">        shuffle      = <span class="keyword">True</span></div><div class="line">    )</div><div class="line">    val = mx.io.NDArrayIter(</div><div class="line">        data         = to4d(val_img), </div><div class="line">        label        = val_lbl, </div><div class="line">        batch_size   = args.batch_size</div><div class="line">    )</div><div class="line">    <span class="keyword">return</span> (train, val)</div></pre></td></tr></table></figure>
-<p>训练数据、验证数据和测试数据的划分方式：   </p>
-<ul>
-<li>像sklearn一样，提供一个将数据集切分成训练集和测试集的函数（默认是把数据集的75%作为训练集，把数据集的25%作为测试集）；</li>
-<li>在机器学习领域中，一般需要将样本分成独立的三部分训练集（train set），验证集（validation set ) 和测试集（test set）。其中训练集用于模型构建，验证集用来辅助模型构建，如进一步网络调参，而测试集用于评估模型的准确率，绝对不允许用于模型构建过程，否则会导致过渡拟合。一个典型的划分是训练集占总样本的50%，而其它各占25%，三部分都是从样本中随机抽取；</li>
-<li>当样本总量少的时候，上面的划分就不合适了。常用的是留少部分做测试集，然后对其余N个样本采用K折交叉验证法（一般取十折交叉验证），具体流程为：将样本打乱，然后均匀分成K份，轮流选择其中K－1份训练，剩余的一份做验证，计算预测误差平方和，最后把K次的预测误差平方和再做平均作为选择最优模型结构的依据，特别的K取N时，就是留一法（leave one out）。</li>
-</ul>
-<h5 id="构建网络模型"><a href="#构建网络模型" class="headerlink" title="构建网络模型"></a>构建网络模型</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#a simple multilayer perceptron</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_symbol</span><span class="params">(num_classes=<span class="number">10</span>, **kwargs)</span>:</span></div><div class="line">    data = mx.symbol.Variable(<span class="string">'data'</span>)</div><div class="line">    data = mx.sym.Flatten(data=data)</div><div class="line">    fc1  = mx.symbol.FullyConnected(data = data, name=<span class="string">'fc1'</span>, num_hidden=<span class="number">128</span>)</div><div class="line">    act1 = mx.symbol.Activation(data = fc1, name=<span class="string">'relu1'</span>, act_type=<span class="string">"relu"</span>)</div><div class="line">    fc2  = mx.symbol.FullyConnected(data = act1, name = <span class="string">'fc2'</span>, num_hidden = <span class="number">64</span>)</div><div class="line">    act2 = mx.symbol.Activation(data = fc2, name=<span class="string">'relu2'</span>, act_type=<span class="string">"relu"</span>)</div><div class="line">    fc3  = mx.symbol.FullyConnected(data = act2, name=<span class="string">'fc3'</span>, num_hidden=num_classes)</div><div class="line">    mlp  = mx.symbol.SoftmaxOutput(data = fc3, name = <span class="string">'softmax'</span>)</div><div class="line">    shape = &#123;<span class="string">"data"</span>:(<span class="number">64</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>)&#125;</div><div class="line">    mx.viz.plot_network(symbol=mlp, shape=shape)</div><div class="line">    <span class="keyword">return</span> mlp</div></pre></td></tr></table></figure>
+          <p>目前深度学习的训练采用了mxnet框架，接下来会从具体的应用示例出发，详细分析深度学习的具体流程和一些trick，在示例分析中穿插相关概念的介绍。  </p>
+<h3 id="一、MXNet简介"><a href="#一、MXNet简介" class="headerlink" title="一、MXNet简介"></a>一、MXNet简介</h3><p>mxnet是一个开源的深度学习框架，它可以使你能自行定义、训练、配置和部署深度人工神经网络，并且适用于从云端到移动端诸多不同的设备上。可快速模型训练、灵活支持各种编程模型和语言使得mxnet具有高度的可扩展性。同时，它还允许混合使用命令式与符号式编程以最大化程序的效率和性能。具体mxnet的底层实现以及同caffe、tensorflow、theano框架对比如下：<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/13/mnist/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/12/sgd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MengyangZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dreamocean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/12/sgd/" itemprop="url">
+                  深度学习中基于梯度的优化方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-12T16:48:31+08:00">
+                2017-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">deep learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/06/12/sgd/" class="leancloud_visitors" data-flag-title="深度学习中基于梯度的优化方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>梯度下降法（Gradient Descent）是一个广泛被用来最小化模型误差的参数优化算法，它未必是最优的计算权重参数的方法，但是作为一种简单快速的方法，常常被使用。<br>对于训练得到的模型，如:<br>$$ h(x) = {w_1x_1 + w_2x_2 … + w_nx_n + b } = {W^TX+b} $$<br>我们会定义一个loss function来评估该模型的好坏，如：</p>
+<p>$$ J(W) = {\sum_{i}^n (h(x^{(i)}) - y^{(i)})^2 \over2} $$<br>优化的目标就是使得J(W)达到最小值。<br>梯度下降法流程如下：<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/12/sgd/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1680,166 +1832,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/ubuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MengyangZhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/icon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="dreamocean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/12/ubuntu/" itemprop="url">
-                  windows安装ubuntu双系统详解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T17:25:16+08:00">
-                2017-04-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/04/12/ubuntu/" class="leancloud_visitors" data-flag-title="windows安装ubuntu双系统详解">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这几天折腾了下ubuntu的安装，尝试了几种方式的安装并将遇到的问题列出来，以供大家参考。</p>
-<h4 id="一、制作u盘启动盘"><a href="#一、制作u盘启动盘" class="headerlink" title="一、制作u盘启动盘"></a>一、制作u盘启动盘</h4><p>可以使用常用的镜像制作工具来制作启动盘，例如UltraISO，具体的教程参考<a href="http://blog.csdn.net/zjx2014430/article/details/49303785">http://blog.csdn.net/zjx2014430/article/details/49303785</a></p>
-<h4 id="二、win7-ubuntu"><a href="#二、win7-ubuntu" class="headerlink" title="二、win7+ubuntu"></a>二、win7+ubuntu</h4><p>在thinkpad笔记本的win7系统上安装ubuntu双系统：<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/12/ubuntu/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1889,7 +1881,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1911,7 +1903,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2240,6 +2232,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
