@@ -98,7 +98,7 @@ $$ J(W) = {\sum">
 <meta property="og:image" content="http://yoursite.com/2017/06/12/sgd/gd.png">
 <meta property="og:image" content="http://yoursite.com/2017/06/12/sgd/lr.png">
 <meta property="og:image" content="http://yoursite.com/2017/06/12/sgd/mom.png">
-<meta property="og:updated_time" content="2017-06-14T16:11:09.000Z">
+<meta property="og:updated_time" content="2017-06-16T03:12:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习中基于梯度的优化方法">
 <meta name="twitter:description" content="梯度下降法（Gradient Descent）是一个广泛被用来最小化模型误差的参数优化算法，它未必是最优的计算权重参数的方法，但是作为一种简单快速的方法，常常被使用。对于训练得到的模型，如:$$ h(x) = {w_1x_1 + w_2x_2 … + w_nx_n + b } = {W^TX+b} $$我们会定义一个loss function来评估该模型的好坏，如：
@@ -391,7 +391,7 @@ $$ J(W) = {\sum">
 <li><strong>随机梯度下降法SGD</strong><br>随机梯度下降法（Stochastic Gradient Descent）通过每个样本来迭代更新一次，如果样本量很大的情况（例如十几万），那么可能只用其中几万条或者几千条的样本，就已经迭代到最优解了，对比上面BDG迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次。但是，SGD伴随的一个问题是噪音较BGD要多，使得SGD并不是每次迭代都向着整体最优化方向。这种每次只使用单个样本的优化算法有时被称为在(on-line)算法。<br>优点：训练速度快。<br>缺点：准确度下降，并不一定收敛到全局最优。</li>
 <li><strong>小批量梯度下降法MBGD</strong><br>小批量梯度下降法（Mini-batch Gradient Descent）在上面两张方式中取了一个折衷，在每次更新参数时使用batch_size个样本，即保证了算法的训练过程比较快，也保证最终参数训练的准确率。</li>
 </ul>
-<p>大部分深度学习算法都是基于小批量梯度下降法算法求解的，现在通常将它们简单地称为随机梯度下降法方法。</p>
+<p><strong>大部分深度学习算法都是基于小批量梯度下降法算法求解的，现在通常将它们简单地称为随机梯度下降法方法</strong>。<br>随机梯度下降的核心是：梯度是期望，期望可使用小规模的样本近似估计。具体而言，在算法的每一步，我们从训练集中均匀抽出一小批量(minibatch)样本m′，大小从一到几百。重要的是，当训练集大小m增长时，m′通常是固定的。我们可能在拟合几十亿的样本时，每次更新计算只用到几百个样本。</p>
 <h4 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h4><p>为了能够使得梯度下降法有较好的性能，我们需要把学习率的值设定在合适的范围内。学习率决定了参数移动到最优值的速度快慢。如果学习率过大，很可能会越过最优值，出现超调现象，即在极值点两端不断发散，或是剧烈震荡，总之随着迭代次数增大loss没有减小的趋势；反而如果学习率过小，优化的效率可能过低，长时间算法无法收敛，无法快速地找到好的下降的方向，随着迭代次数增大loss基本不变，所以学习率对于算法性能的表现至关重要。<br><img src="/2017/06/12/sgd/lr.png" alt=""><br>常用的学习率调整有以下两种方式：</p>
 <ul>
 <li>基于经验的手动调整。 通过尝试不同的固定学习率，如0.1, 0.01, 0.001等，观察迭代次数和loss的变化关系，找到loss下降最快关系对应的学习率。</li>
@@ -399,6 +399,16 @@ $$ J(W) = {\sum">
 </ul>
 <p>目前，最流行并且使用很高的优化算法包括 SGD、具动量的 SGD、RMSProp、 具动量的 RMSProp、AdaDelta 和 Adam。</p>
 <h4 id="动量"><a href="#动量" class="headerlink" title="动量"></a>动量</h4><p>虽然随机梯度下降仍然是非常受欢迎的优化方法，但其学习过程有时会很慢。动量方法旨在加速学习，特别是处理高曲率、小但一致的梯度，或是带噪声的梯度。动量算法积累了之前梯度指数级衰减的移动平均，并且继续沿该方向移动。动量的效果如下图所示：<br><img src="/2017/06/12/sgd/mom.png" alt=""><br>如果动量算法总是观测到梯度g，那么它会在方向 −g 上不停加速，直到达到最终速度，其中步长大小为:<br>$$ {\epsilon{||g||}\over(1-\alpha)} $$<br>例如，${\alpha = 0.9}$对应着最大速度10倍于梯度下降算法。在实践中，${\alpha}$的一般取值为0.5、0.9和0.99。和学习率一样，${\alpha}$也会随着时间不断调整。一般初始值是一个较小的值，随后会慢慢变大。随着时间推移调整没${\alpha}$有收缩${\epsilon}$重要。</p>
+<h4 id="Batch-Size"><a href="#Batch-Size" class="headerlink" title="Batch_Size"></a>Batch_Size</h4><pre><code>在合理范围内，增大Batch_Size 有何好处：
+1、内存利用率提高了，矩阵乘法的并行化效率提高。
+2、跑完一次epoch（全数据集）所需的迭代次数减少，对于相同数据量的处理速度进一步加快。
+3、在一定范围内，一般来说Batch_Size越大，其确定的下降方向越准，引起训练震荡越小。
+
+盲目增大 Batch_Size 有何坏处：
+1、内存利用率提高了，但是内存容量可能撑不住了。
+2、跑完一次epoch（全数据集）所需的迭代次数减少，要想达到相同的精度，其所花费的时间大大增加了，从而对参数的修正也就显得更加缓慢。
+3、Batch_Size增大到一定程度，其确定的下降方向已经基本不再变化。
+</code></pre><p>如上所述，当Batch_Size增大到某个值时，算法可以在时间和最终收敛精度上达到最优。</p>
 
       
     </div>
@@ -624,7 +634,7 @@ $$ J(W) = {\sum">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#学习率"><span class="nav-number">1.</span> <span class="nav-text">学习率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动量"><span class="nav-number">2.</span> <span class="nav-text">动量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#学习率"><span class="nav-number">1.</span> <span class="nav-text">学习率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动量"><span class="nav-number">2.</span> <span class="nav-text">动量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Batch-Size"><span class="nav-number">3.</span> <span class="nav-text">Batch_Size</span></a></li></ol></div>
             
 
           </div>
