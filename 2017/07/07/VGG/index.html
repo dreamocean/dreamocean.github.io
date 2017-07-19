@@ -87,16 +87,34 @@
 
 
 
-<meta name="description" content="技术笔记与分享，与君共勉">
+<meta name="description" content="各个比较成熟的卷积神经网络模型出现的时间点如下：   
+
+Lenet，1985年Alexnet，2012年GoogleNet，2014年VGG，2014年    
+
+LeNet1985年，Rumelhart和Hinton等人提出了后向传播（Back Propagation，BP）算法，使得神经网络的训练变得简单可行。1989年，LeCun利用BP算法来训练多层神经网络用于识别手写邮政编码，这个工作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习LeNet/AlexNet/VGG网络">
 <meta property="og:url" content="http://yoursite.com/2017/07/07/VGG/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="技术笔记与分享，与君共勉">
-<meta property="og:updated_time" content="2017-07-18T10:00:18.000Z">
+<meta property="og:description" content="各个比较成熟的卷积神经网络模型出现的时间点如下：   
+
+Lenet，1985年Alexnet，2012年GoogleNet，2014年VGG，2014年    
+
+LeNet1985年，Rumelhart和Hinton等人提出了后向传播（Back Propagation，BP）算法，使得神经网络的训练变得简单可行。1989年，LeCun利用BP算法来训练多层神经网络用于识别手写邮政编码，这个工作">
+<meta property="og:image" content="http://yoursite.com/2017/07/07/VGG/0.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/07/VGG/1.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/07/VGG/2.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/07/VGG/3.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/07/VGG/4.png">
+<meta property="og:updated_time" content="2017-07-19T07:50:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习LeNet/AlexNet/VGG网络">
-<meta name="twitter:description" content="技术笔记与分享，与君共勉">
+<meta name="twitter:description" content="各个比较成熟的卷积神经网络模型出现的时间点如下：   
+
+Lenet，1985年Alexnet，2012年GoogleNet，2014年VGG，2014年    
+
+LeNet1985年，Rumelhart和Hinton等人提出了后向传播（Back Propagation，BP）算法，使得神经网络的训练变得简单可行。1989年，LeCun利用BP算法来训练多层神经网络用于识别手写邮政编码，这个工作">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/07/VGG/0.png">
 
 
 
@@ -352,7 +370,52 @@
       
 
       
-        
+        <p>各个比较成熟的卷积神经网络模型出现的时间点如下：   </p>
+<blockquote>
+<p>Lenet，1985年<br>Alexnet，2012年<br>GoogleNet，2014年<br>VGG，2014年    </p>
+</blockquote>
+<h3 id="LeNet"><a href="#LeNet" class="headerlink" title="LeNet"></a>LeNet</h3><p>1985年，Rumelhart和Hinton等人提出了后向传播（Back Propagation，BP）算法，使得神经网络的训练变得简单可行。1989年，LeCun利用BP算法来训练多层神经网络用于识别手写邮政编码，这个工作就是CNN的开山之作，参考论文《Backpropagation applied to handwritten zip code recognition》，网络中多处用到了5*5的卷积核，但在文章中LeCun只是说把5*5的相邻区域作为感受野，并未提及卷积或卷积神经网络。<br><a id="more"></a><br>1998年的LeNet5标注着CNN的真正面世，参考文章《Gradient-based learning applied to document recognition》，但是这个模型在后来的一段时间并未能火起来，主要原因是费机器（当时没有GPU），而且其他的算法（如SVM）也能达到类似的效果甚至超过。<br>LeNet主要是用于识别10个手写数字的，当然，只要稍加改造也能用在ImageNet数据集上，但效果较差。具体案例分析参考之前写的文章<a href="https://dreamocean.github.io/2017/06/20/mnist-cnn/" target="_blank" rel="external">CNN手写体识别示例及分析</a>。</p>
+<h3 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h3><p>2012年，Hinton的学生Alex Krizhevsky在寝室用GPU死磕了一个Deep Learning模型，一举摘下了视觉领域竞赛ILSVRC 2012的桂冠，在百万量级的ImageNet数据集合上，效果大幅度超过传统的方法，从传统的70%多提升到80%多，这个Deep Learning模型就是后来大名鼎鼎的AlexNet模型。<br>从此，Deep Learning一发不可收拾，ILSVRC每年都不断被Deep Learning刷榜，如下图所示，随着模型变得越来越深，Top-5的错误率也越来越低，目前降到了3.5%附近，而在同样的ImageNet数据集合上，人眼的辨识错误率大概在5.1%，也就是目前的Deep Learning模型的识别能力已经超过了人眼，而下图这些模型，也是Deep Learning视觉发展的里程碑式代表：<br><img src="/2017/07/07/VGG/0.png" alt=""><br>AlexNet网络结构如下：<br><img src="/2017/07/07/VGG/1.png" alt=""><br>AlexNet 之所以能够成功，深度学习之所以能够重回历史舞台，原因在于：</p>
+<blockquote>
+<p>非线性激活函数：ReLU<br>防止过拟合的方法：Dropout，Data augmentation<br>大数据训练：百万级ImageNet图像数据，Deep Learning领域应该感谢李飞飞团队搞出来如此大的标注数据集合ImageNet；<br>其他：GPU实现，LRN归一化层的使用</p>
+</blockquote>
+<p>下面介绍AlexNet相比传统的CNN做的一些重要改动。</p>
+<h4 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h4><p>有一种观点认为神经网络是靠数据喂出来的，若增加训练数据，则能够提升算法的准确率，因为这样可以避免过拟合，而避免了过拟合你就可以增大你的网络结构了。当训练数据有限的时候，可以通过一些变换来从已有的训练数据集中生成一些新的数据，来扩大训练数据的size。<br>其中，最简单、通用的图像数据变形的方式:</p>
+<blockquote>
+<p>1、从原始图像（256,256）中，随机的crop出一些图像（224,224）——【平移变换，crop】<br>2、水平翻转图像 ——【反射变换，flip】<br>3、给图像增加一些随机的光照 —— 光照、彩色变换，color jittering】  </p>
+</blockquote>
+<p>AlexNet训练的时候，在data augmentation上处理的很好： </p>
+<blockquote>
+<p>1、随机crop。训练时候，对于256＊256的图片进行随机crop到224＊224，然后允许水平翻转，那么相当与将样本倍增到((256-224)^2)*2=2048。<br>2、测试时候，对左上、右上、左下、右下、中间做了5次crop，然后翻转，共10个crop，之后对结果求平均。作者说，不做随机crop，大网络基本都过拟合(under substantial overfitting)。<br>3、对RGB空间做PCA，然后对主成分做一个(0, 0.1)的高斯扰动。结果让错误率又下降了1%。</p>
+</blockquote>
+<h4 id="ReLU-激活函数"><a href="#ReLU-激活函数" class="headerlink" title="ReLU 激活函数"></a>ReLU 激活函数</h4><p>Sigmoid是常用的非线性的激活函数，它能够把输入的连续实值“压缩”到0和1之间。特别的，如果是非常大的负数，那么输出就是0；如果是非常大的正数，输出就是1。但是它有一些致命的缺点：</p>
+<blockquote>
+<p>1、Sigmoids saturate and kill gradients。sigmoid 有一个非常致命的缺点，当输入非常大或者非常小的时候，会有饱和现象，这些神经元的梯度是接近于0的。如果你的初始值很大的话，梯度在反向传播的时候因为需要乘上一个sigmoid的导数，所以会使得梯度越来越小，这会导致网络变的很难学习。<br>2、Sigmoid的output不是0均值。这是不可取的，因为这会导致后一层的神经元将得到上一层输出的非0均值的信号作为输入。产生的一个结果就是：如果数据进入神经元的时候是正的，那么w计算出的梯度也会始终都是正的。当然了，如果你是按batch去训练，那么那个batch可能得到不同的信号，所以这个问题还是可以缓解一下的。因此，非0均值这个问题虽然会产生一些不好的影响，不过跟上面提到的kill gradients问题相比还是要好很多的。</p>
+</blockquote>
+<p>Alex用ReLU代替了Sigmoid，好处有：   </p>
+<blockquote>
+<p>1、ReLU本质上是分段线性模型，前向计算非常简单，无需指数之类操作；<br>2、ReLU的偏导也很简单，反向传播梯度，无需指数或者除法之类操作；<br>3、ReLU不容易发生梯度发散问题，Tanh和Sigmoid激活函数在两端的时候导数容易趋近于零，多级连乘后梯度更加约等于0；<br>4、ReLU关闭了右边，从而会使得很多的隐层输出为0，即网络变得稀疏，起到了类似L1的正则化作用，可以在一定程度上缓解过拟合。   </p>
+</blockquote>
+<p>当然，ReLU也是有缺点的，比如左边全部关了很容易导致某些隐藏节点永无翻身之日，所以后来又出现pReLU、random ReLU等改进，而且ReLU会很容易改变数据的分布，因此ReLU后加Batch Normalization也是常用的改进的方法。</p>
+<p><img src="/2017/07/07/VGG/2.png" alt=""></p>
+<h4 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h4><p>结合预先训练好的许多不同模型，来进行预测是一种非常成功的减少测试误差的方式。但因为每个模型的训练都需要花了好几天时间，因此这种做法对于大型神经网络来说太过昂贵。<br>然而，AlexNet提出了一个非常有效的模型组合版本，它在训练中只需要花费两倍于单模型的时间。这种技术叫做Dropout，它做的就是以0.5的概率，将每个隐层神经元的输出设置为零。以这种方式dropped out的神经元既不参与前向传播，也不参与反向传播。<br>所以每次输入一个样本，就相当于该神经网络就尝试了一个新的结构，但是所有这些结构之间共享权重。因为神经元不能依赖于其他特定神经元而存在，所以这种技术降低了神经元复杂的互适应关系。<br>正因如此，网络需要被迫学习更为鲁棒的特征，这些特征在结合其他神经元的一些不同随机子集时有用。在测试时，我们将所有神经元的输出都仅仅只乘以0.5，对于获取指数级dropout网络产生的预测分布的几何平均值，这是一个合理的近似方法。</p>
+<h4 id="多GPU训练"><a href="#多GPU训练" class="headerlink" title="多GPU训练"></a>多GPU训练</h4><p>目前的GPU特别适合跨GPU并行化，因为它们能够直接从另一个GPU的内存中读出和写入，不需要通过主机内存。   </p>
+<blockquote>
+<p>他们采用的并行方案是：在每个GPU中放置一半核（或神经元），还有一个额外的技巧：GPU间的通讯只在某些层进行。      </p>
+</blockquote>
+<h4 id="Local-Response-Normalization"><a href="#Local-Response-Normalization" class="headerlink" title="Local Response Normalization"></a>Local Response Normalization</h4><p>是局部响应归一化，简称LRN，实际就是利用临近的数据做归一化，本质上，这个层也是为了防止激活函数的饱和的。从功能上说，跟ReLU是重复的。不过作者说，从试验结果看，LRN操作可以提高网络的泛化能力，将错误率降低了大约1个百分点。</p>
+<p>总结而言：<strong>AlexNet优势在于：网络增大（5个卷积层+3个全连接层+1个softmax层），同时解决过拟合（dropout，data augmentation，LRN），并且利用多GPU加速计算。</strong></p>
+<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG有很多个版本，也是比较稳定和经典的model。它的特点也是连续conv多，计算量巨大（比前面几个都大很多）。具体的model结构可以参考<a href="https://arxiv.org/pdf/1409.1556.pdf" target="_blank" rel="external">VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION</a>，这里给一个简图，基本上组成构建就是前面alexnet用到的。<br><img src="/2017/07/07/VGG/3.png" alt=""><br>与AlexNet相同点为：  </p>
+<blockquote>
+<p>1、最后三层FC层(Fully Connected全连接层）结构相同。<br>2、都分成五层（组）。<br>3、每层和每层之间用pooling层分开。</p>
+</blockquote>
+<p>不同点为：    </p>
+<blockquote>
+<p>1.AlexNet每层仅仅含有一个Convolution层，filter的大小7x7（很大）；而VGG每层含有多个(2~4)个Convolution层，filter的大小是3x3（最小）。很明显，VGG是在模仿Alex的结构，然而它通过降低filter的大小，增加层数来达到同样的效果。GoogLeNet Inception-v2后面也参考了VGG网络这种结构。<br>2.AlexNet的Channel明显小于VGG。猜测VGG的之所以能够达到更高的精准性，源自于更多的Channel数。而由于filter size的减小，channel可以大幅度增加，更多的信息可以被提取。  </p>
+</blockquote>
+<p>VGG的结构图如下：<br><img src="/2017/07/07/VGG/4.png" alt=""></p>
+<p>参考文章：<br><a href="https://arxiv.org/pdf/1409.1556.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1409.1556.pdf</a><br><a href="http://www.cnblogs.com/52machinelearning/p/5821591.html" target="_blank" rel="external">http://www.cnblogs.com/52machinelearning/p/5821591.html</a><br><a href="http://m.blog.csdn.net/cyh24/article/details/51440344" target="_blank" rel="external">http://m.blog.csdn.net/cyh24/article/details/51440344</a></p>
+
       
     </div>
 
@@ -473,8 +536,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/icon.jpg"
@@ -556,6 +628,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet"><span class="nav-number">1.</span> <span class="nav-text">LeNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AlexNet"><span class="nav-number">2.</span> <span class="nav-text">AlexNet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Augmentation"><span class="nav-number">2.1.</span> <span class="nav-text">Data Augmentation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReLU-激活函数"><span class="nav-number">2.2.</span> <span class="nav-text">ReLU 激活函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dropout"><span class="nav-number">2.3.</span> <span class="nav-text">Dropout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多GPU训练"><span class="nav-number">2.4.</span> <span class="nav-text">多GPU训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Local-Response-Normalization"><span class="nav-number">2.5.</span> <span class="nav-text">Local Response Normalization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VGG"><span class="nav-number">3.</span> <span class="nav-text">VGG</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
