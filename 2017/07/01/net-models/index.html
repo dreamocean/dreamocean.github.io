@@ -97,6 +97,7 @@ InceptionV1Inception结构的主要思路是怎样用密">
 InceptionV1Inception结构的主要思路是怎样用密">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/0.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/11.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/3.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/4.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/5.png">
@@ -104,7 +105,7 @@ InceptionV1Inception结构的主要思路是怎样用密">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/7.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/9.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/10.png">
-<meta property="og:updated_time" content="2017-07-18T09:52:09.000Z">
+<meta property="og:updated_time" content="2017-07-19T02:07:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习GoogLeNet Inception网络">
 <meta name="twitter:description" content="GoogLeNetGoogLeNet最早是谷歌团队为了参加ILSVRC 2014比赛而提出的，具体实验结果在论文《Going deeper with convolutions》中，链接为https://arxiv.org/pdf/1409.4842.pdf，下面将详细解析GoogLeNet的Inception系列网络及其相关的变种。
@@ -378,7 +379,7 @@ InceptionV1Inception结构的主要思路是怎样用密">
 <blockquote>
 <p>1、显然GoogLeNet采用了模块化的结构，方便增添和修改；<br>2、网络最后采用了average pooling来代替全连接层，想法来自NIN,事实证明可以将TOP1 accuracy提高0.6%。但是，实际在最后还是加了一个全连接层，主要是为了方便以后大家finetune；<br>3、虽然移除了全连接，但是网络中依然使用了Dropout；<br>4、为了避免梯度消失，网络额外增加了2个辅助的softmax用于向前传导梯度。文章中说这两个辅助的分类器的loss应该加一个衰减系数，但看caffe中的model也没有加任何衰减。此外，实际测试的时候，这两个额外的softmax会被去掉。   </p>
 </blockquote>
-<p>GoogLeNet是谷歌团队为了参加ILSVRC 2014比赛而精心准备的，为了达到最佳的性能，除了使用上述的网络结构外，还做了大量的辅助工作：包括训练多个model求平均、裁剪不同尺度的图像做多次验证等等。详细的这些可以参看论文的实验部分。本文的主要想法其实是想通过构建密集的块结构来近似最优的稀疏结构，从而达到提高性能而又不大量增加计算量的目的。GoogleNet的caffemodel大小约50M，但性能却很优异。   </p>
+<p>这个网络的计算量如下图，可以看到参数总量并不大，但是计算次数是非常大：<br><img src="/2017/07/01/net-models/11.png" alt=""><br>GoogLeNet是谷歌团队为了参加ILSVRC 2014比赛而精心准备的，为了达到最佳的性能，除了使用上述的网络结构外，还做了大量的辅助工作：包括训练多个model求平均、裁剪不同尺度的图像做多次验证等等。详细的这些可以参看论文的实验部分。本文的主要想法其实是想通过构建密集的块结构来近似最优的稀疏结构，从而达到提高性能而又不大量增加计算量的目的。GoogleNet的caffemodel大小约50M，但性能却很优异。   </p>
 <h4 id="InceptionV2-V3"><a href="#InceptionV2-V3" class="headerlink" title="InceptionV2/V3"></a>InceptionV2/V3</h4><p>GoogLeNet凭借其优秀的表现，得到了很多研究人员的学习和使用，因此Google团队又对其进行了进一步发掘改进，产生了升级版本的GoogLeNet，记为V2，文章为：《Rethinking the Inception Architecture for Computer Vision》，具体链接<a href="https://arxiv.org/abs/1512.00567" target="_blank" rel="external">https://arxiv.org/abs/1512.00567</a>。<br>14年以来，构建更深的网络逐渐成为主流，但是模型的变大也使计算效率越来越低。这里，文章试图找到一种方法在扩大网络的同时又尽可能地发挥计算性能。<br>首先，GoogLeNet V1出现的同期，性能与之接近的大概只有VGGNet了，并且二者在图像分类之外的很多领域都得到了成功的应用。但是相比之下，GoogLeNet的计算效率明显高于VGGNet，大约只有500万参数，只相当于Alexnet的1/12(GoogLeNet的caffemodel大约50M，VGGNet的caffemodel则要超过600M)。<br>GoogLeNet的表现很好，但是，如果想要通过简单地放大Inception结构来构建更大的网络，则会立即提高计算消耗。此外，在V1版本中，文章也没给出有关构建Inception结构注意事项的清晰描述。因此，在文章中作者首先给出了一些已经被证明有效的用于放大网络的通用准则和优化方法。这些准则和方法适用但不局限于Inception结构。<br>下面的准则来源于大量的实验，因此包含一定的推测，但实际证明基本都是有效的。</p>
 <blockquote>
 <p>1、避免表达瓶颈，特别是在网络靠前的地方。信息流前向传播过程中显然不能经过高度压缩的层，即表达瓶颈。从input到output，feature map的宽和高基本都会逐渐变小，但是不能一下子就变得很小。比如你上来就来个kernel=7, stride=5，这样显然不合适。另外输出的维度channel，一般来说会逐渐增多(每层的num_output)，否则网络会很难训练。（特征维度并不代表信息的多少，只是作为一种估计的手段）<br>2、高维特征更易处理。高维特征更易区分，会加快训练。<br>3、可以在低维嵌入上进行空间汇聚而无需担心丢失很多信息。比如在进行3x3卷积之前，可以对输入先进行降维而不会产生严重的后果。假设信息可以被简单压缩，那么训练就会加快。<br>4、平衡网络的宽度与深度。</p>
@@ -474,8 +475,8 @@ InceptionV1Inception结构的主要思路是怎样用密">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/14/cifar10/" rel="prev" title="cifar10">
-                cifar10 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/07/VGG/" rel="prev" title="深度学习LeNet/AlexNet/VGG网络">
+                深度学习LeNet/AlexNet/VGG网络 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,7 +551,7 @@ InceptionV1Inception结构的主要思路是怎样用密">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
