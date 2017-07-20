@@ -293,7 +293,7 @@
               
                 
                 <a class="post-title-link" href="/2017/07/15/res/" itemprop="url">
-                  深度学习ResNet/ResNext网络
+                  深度学习ResNet/ResNeXt网络
                 </a>
               
             
@@ -327,7 +327,7 @@
 
           
           
-             <span id="/2017/07/15/res/" class="leancloud_visitors" data-flag-title="深度学习ResNet/ResNext网络">
+             <span id="/2017/07/15/res/" class="leancloud_visitors" data-flag-title="深度学习ResNet/ResNeXt网络">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,9 +357,14 @@
 
       
         
-          
-            
-          
+          <h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>ResNet——MSRA何凯明团队的Residual Networks，在2015年ImageNet上大放异彩，在ImageNet的classification、detection、localization以及COCO的detection和segmentation上均斩获了第一名的成绩，而且<a href="https://arxiv.org/pdf/1512.03385.pdf">Deep Residual Learning for Image Recognition</a>也获得了CVPR2016的best paper，实在是实至名归。<br>ResNet最根本的动机就是解决所谓的“退化”问题，即当模型的层次加深时，错误率却提高了，如下图：<br><img src="/2017/07/15/res/0.png" alt=""><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/15/res/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -622,7 +627,8 @@
           <p>各个比较成熟的卷积神经网络模型出现的时间点如下：   </p>
 <blockquote>
 <p>Lenet，1985年<br>Alexnet，2012年<br>GoogleNet，2014年<br>VGG，2014年<br>Deep Residual Learning，2015年</p>
-<h3 id="LeNet"><a href="#LeNet" class="headerlink" title="LeNet"></a>LeNet</h3><p>1985年，Rumelhart和Hinton等人提出了后向传播（Back Propagation，BP）算法，使得神经网络的训练变得简单可行。1989年，LeCun利用BP算法来训练多层神经网络用于识别手写邮政编码，这个工作就是CNN的开山之作，参考论文《Backpropagation applied to handwritten zip code recognition》，网络中多处用到了5*5的卷积核，但在文章中LeCun只是说把5*5的相邻区域作为感受野，并未提及卷积或卷积神经网络。<br></p></blockquote>
+</blockquote>
+<h3 id="LeNet"><a href="#LeNet" class="headerlink" title="LeNet"></a>LeNet</h3><p>1985年，Rumelhart和Hinton等人提出了后向传播（Back Propagation，BP）算法，使得神经网络的训练变得简单可行。1989年，LeCun利用BP算法来训练多层神经网络用于识别手写邮政编码，这个工作就是CNN的开山之作，参考论文《Backpropagation applied to handwritten zip code recognition》，网络中多处用到了5*5的卷积核，但在文章中LeCun只是说把5*5的相邻区域作为感受野，并未提及卷积或卷积神经网络。<br>1998年的LeNet5标注着CNN的真正面世，参考文章《Gradient-based learning applied to document recognition》，但是这个模型在后来的一段时间并未能火起来，主要原因是费机器（当时没有GPU），而且其他的算法（如SVM）也能达到类似的效果甚至超过。<br>LeNet主要是用于识别10个手写数字的，当然，只要稍加改造也能用在ImageNet数据集上，但效果较差。具体案例分析参考之前写的文章<a href="https://dreamocean.github.io/2017/06/20/mnist-cnn/">CNN手写体识别示例及分析</a>。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/07/07/VGG/#more" rel="contents">
@@ -759,7 +765,7 @@
       
         
           <h3 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h3><p>GoogLeNet最早是谷歌团队为了参加ILSVRC 2014比赛而提出的，具体实验结果在论文《Going deeper with convolutions》中，链接为<a href="https://arxiv.org/pdf/1409.4842.pdf">https://arxiv.org/pdf/1409.4842.pdf</a>，下面将详细解析GoogLeNet的Inception系列网络及其相关的变种。</p>
-<h4 id="InceptionV1"><a href="#InceptionV1" class="headerlink" title="InceptionV1"></a>InceptionV1</h4><p>Inception结构的主要思路是怎样用密集成分来近似最优的局部稀疏结构。<br>深度学习以及神经网络快速发展，人们不再只关注更给力的硬件、更大的数据集、更大的模型，而是更在意新的idea、新的算法以及模型的改进。一般来说，提升网络性能最直接的办法就是增加网络深度和宽度，这也就意味着巨量的参数。但是，巨量参数容易产生过拟合也会大大增加计算量。<br></p>
+<h4 id="InceptionV1"><a href="#InceptionV1" class="headerlink" title="InceptionV1"></a>InceptionV1</h4><p>Inception结构的主要思路是怎样用密集成分来近似最优的局部稀疏结构。<br>深度学习以及神经网络快速发展，人们不再只关注更给力的硬件、更大的数据集、更大的模型，而是更在意新的idea、新的算法以及模型的改进。一般来说，提升网络性能最直接的办法就是增加网络深度和宽度，这也就意味着巨量的参数。但是，巨量参数容易产生过拟合也会大大增加计算量。<br>论文认为解决上述两个缺点的根本方法是将全连接甚至一般的卷积都转化为稀疏连接。一方面现实生物神经系统的连接也是稀疏的，另一方面有文献表明：对于大规模稀疏的神经网络，可以通过分析激活值的统计特性和对高度相关的输出进行聚类来逐层构建出一个最优网络。这点表明臃肿的稀疏网络可能被不失性能地简化。<br>早些的时候，为了打破网络对称性和提高学习能力，传统的网络都使用了随机稀疏连接。但是，计算机软硬件对非均匀稀疏数据的计算效率很差，所以在AlexNet中又重新启用了全连接层，目的是为了更好地优化并行运算。<br>所以，现在的问题是有没有一种方法，既能保持网络结构的稀疏性，又能利用密集矩阵的高计算性能。大量的文献表明可以将稀疏矩阵聚类为较为密集的子矩阵来提高计算性能，据此论文提出了名为Inception的结构来实现此目的。<br>作者提出了如下的Inception结构：<br><img src="/2017/07/01/net-models/0.png" alt=""><br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/07/01/net-models/#more" rel="contents">
@@ -896,7 +902,7 @@
       
         
           <p>这里将详细分析深度学习领域一个里程碑之作-CNN(卷积神经网络)，并以上篇文章的手写体识别来做示例。</p>
-<h3 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h3><p>卷积神经网络是一种专门用来处理具有类似网格结构的数据的 神经网络，如图像数据，注意之前的全连接层在训练时只是将图像转换为向量，而忽略了像素在水平和垂直维度上的空间信息，卷积层的作用就是通过使用一个更结构化的权重W来克服这一缺点。<br>比较好的示例图如下：<br></p>
+<h3 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h3><p>卷积神经网络是一种专门用来处理具有类似网格结构的数据的 神经网络，如图像数据，注意之前的全连接层在训练时只是将图像转换为向量，而忽略了像素在水平和垂直维度上的空间信息，卷积层的作用就是通过使用一个更结构化的权重W来克服这一缺点。<br>比较好的示例图如下：<br><img src="/2017/06/20/mnist-cnn/cnn0.jpg" alt=""><br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/06/20/mnist-cnn/#more" rel="contents">
@@ -1055,7 +1061,7 @@
       
         
           <p>目前深度学习的训练采用了mxnet框架，接下来会从具体的应用示例出发，详细分析深度学习的具体流程和一些trick，在示例分析中穿插相关概念的介绍。  </p>
-<h3 id="MXNet简介"><a href="#MXNet简介" class="headerlink" title="MXNet简介"></a>MXNet简介</h3><p>mxnet是一个开源的深度学习框架，它可以使你能自行定义、训练、配置和部署深度人工神经网络，并且适用于从云端到移动端诸多不同的设备上。可快速模型训练、灵活支持各种编程模型和语言使得mxnet具有高度的可扩展性。同时，它还允许混合使用命令式与符号式编程以最大化程序的效率和性能。具体mxnet的底层实现以及同caffe、tensorflow、theano框架对比如下：<br></p>
+<h3 id="MXNet简介"><a href="#MXNet简介" class="headerlink" title="MXNet简介"></a>MXNet简介</h3><p>mxnet是一个开源的深度学习框架，它可以使你能自行定义、训练、配置和部署深度人工神经网络，并且适用于从云端到移动端诸多不同的设备上。可快速模型训练、灵活支持各种编程模型和语言使得mxnet具有高度的可扩展性。同时，它还允许混合使用命令式与符号式编程以最大化程序的效率和性能。具体mxnet的底层实现以及同caffe、tensorflow、theano框架对比如下：<br><img src="/2017/06/13/mnist/mx0_1.png" alt=""><br><img src="/2017/06/13/mnist/mx1.png" alt=""><br>目前facebook最新发布caffe2同样支持移动端部署，具体mxnet设计和实现简介可参考官方文档<a href="https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1">https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1</a>。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/06/13/mnist/#more" rel="contents">
@@ -1214,7 +1220,9 @@
       
         
           <p>梯度下降法（Gradient Descent）是一个广泛被用来最小化模型误差的参数优化算法，它未必是最优的计算权重参数的方法，但是作为一种简单快速的方法，常常被使用。<br>对于训练得到的模型，如:<br>$$ h(x) = {w_1x_1 + w_2x_2 … + w_nx_n + b } = {W^TX+b} $$<br>我们会定义一个loss function来评估该模型的好坏，如：</p>
-<p>$$ J(W) = {\sum_{i}^n (h(x^{(i)}) - y^{(i)})^2 \over2} $$<br>优化的目标就是使得J(W)达到最小值。<br>梯度下降法流程如下：<br></p>
+<p>$$ J(W) = {\sum_{i}^n (h(x^{(i)}) - y^{(i)})^2 \over2} $$<br>优化的目标就是使得J(W)达到最小值。<br>梯度下降法流程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、首先对权重W赋值，这个值可以是随机的，也可以让W是一个全零的向量。</div><div class="line">2、改变权重W的值，使得J(W)按梯度下降的方向进行减少。</div></pre></td></tr></table></figure>
+<p><img src="/2017/06/12/sgd/gd.png" alt=""><br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/06/12/sgd/#more" rel="contents">
@@ -1350,7 +1358,38 @@
 
       
         
-          <p>主要尝试了基于python第三方库Beautiful Soup来做网站新闻的爬取，Beautiful Soup提供了一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能，自动将输入文档转换为Unicode编码，输出文档转换为utf-8编码。<br>Beautiful Soup已成为和lxml、html6lib一样出色的python解释器，为用户灵活地提供不同的解析策略或强劲的速度。<br>安装命令：<code>pip install beautifulsoup4</code><br>Beautiful Soup除了支持Python标准库中的HTML解析器，还支持一些第三方的解析器，各个解释器比较如下：<br></p>
+          <p>主要尝试了基于python第三方库Beautiful Soup来做网站新闻的爬取，Beautiful Soup提供了一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能，自动将输入文档转换为Unicode编码，输出文档转换为utf-8编码。<br>Beautiful Soup已成为和lxml、html6lib一样出色的python解释器，为用户灵活地提供不同的解析策略或强劲的速度。<br>安装命令：<code>pip install beautifulsoup4</code><br>Beautiful Soup除了支持Python标准库中的HTML解析器，还支持一些第三方的解析器，各个解释器比较如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">解析器</th>
+<th style="text-align:center">调用方法</th>
+<th style="text-align:right">优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Python标准库</td>
+<td style="text-align:center">BeautifulSoup(html, “html.parser”)</td>
+<td style="text-align:right">内置标准库，执行速度适中，文档容错能力强；Python 2.7.3／3.2.2前的版本中文档容错能力差</td>
+</tr>
+<tr>
+<td style="text-align:left">lxml HTML 解析器</td>
+<td style="text-align:center">BeautifulSoup(html, “lxml”)</td>
+<td style="text-align:right">速度快，文档容错能力强；需要安装第三方库</td>
+</tr>
+<tr>
+<td style="text-align:left">lxml XML 解析器</td>
+<td style="text-align:center">BeautifulSoup(markup, “xml”)</td>
+<td style="text-align:right">速度快，唯一支持XML的解析器</td>
+</tr>
+<tr>
+<td style="text-align:left">html5lib</td>
+<td style="text-align:center">BeautifulSoup(html, “html5lib”)</td>
+<td style="text-align:right">最好的容错性，以浏览器的方式解析文档，生成HTML5格式的文档；速度慢</td>
+</tr>
+</tbody>
+</table>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/23/webspride/#more" rel="contents">
@@ -1490,7 +1529,16 @@
 <ul>
 <li>进程有独立的地址空间或内存空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响；    </li>
 <li>进程具有独立的数据空间，要进行数据的传递只能通过通信的方式进行(信号量、消息队列、共享内存、管道、文件、套接字)；     </li>
-<li><p>对于服务器应用而言稳定性是最重要的，而多进程会比较容易实现这一点。一方面，当单个服务开启多个进程时，可以将前端的业务请求分流到不同的进程，提高业务并发数量；另一方面，在主进程里开启一个附属进程(如python里的os.system()方法)，当主进程崩溃时，附属进程同样可以继续提供服务；</p></li></ul>
+<li>对于服务器应用而言稳定性是最重要的，而多进程会比较容易实现这一点。一方面，当单个服务开启多个进程时，可以将前端的业务请求分流到不同的进程，提高业务并发数量；另一方面，在主进程里开启一个附属进程(如python里的os.system()方法)，当主进程崩溃时，附属进程同样可以继续提供服务；</li>
+</ul>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>线程是进程的一个执行流，是CPU调度和分派的基本单位，它是比进程更小的能独立运行的基本单位。同一进程间的线程可共享的资源：  </p>
+<ul>
+<li>堆。堆是在进程空间中开辟出来的，所以它是理所当然地被共享的；   </li>
+<li>全局变量。它是与具体某一函数无关的，所以也与特定线程无关，因此也是共享的；   </li>
+<li>静态变量。对于线程内局部静态变量来说，其存放位置和全局变量一样，存于堆中开辟的.bss和.data段，是共享的；    </li>
+<li>文件等公用资源。使用这些公共资源的线程必须同步，几种同步资源的方式，包括信号、临界区、事件和互斥。    </li>
+</ul>
+<p>线程间非共享资源：<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/22/mutpleProcess/#more" rel="contents">
@@ -1626,7 +1674,11 @@
 
       
         
-          <h3 id="protobuf简介"><a href="#protobuf简介" class="headerlink" title="protobuf简介"></a>protobuf简介</h3><p>protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。<br></p>
+          <h3 id="protobuf简介"><a href="#protobuf简介" class="headerlink" title="protobuf简介"></a>protobuf简介</h3><p>protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。</p>
+<h3 id="与json比较"><a href="#与json比较" class="headerlink" title="与json比较"></a>与json比较</h3><ul>
+<li>protobuf采用二进制数据传输，只传输数据本身，不会传输数据的格式(如何属性的名称)。虽然json数据大小会小于xml，但是还是基于纯文本形式，传输时会把数据的组织格式也进行传输。一条消息数据，protobuf序列化后的大小是json的10分之一，xml格式的20分之一，是二进制序列化的10分之一，总体看来protobuf的优势还是很明显的。   </li>
+<li>protobuf只要开发人员定义好消息格式，就可以通过命令生成相关语言(java、c++、python等)的类，项目之间调用生成的类就可以完成序列化和反序列化的工作。而json不同语言需要引用不同的json库(如python的json、c++的rapidjson)，不同的json库的解析效率也会存在很大区别。    </li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/21/protobuf/#more" rel="contents">

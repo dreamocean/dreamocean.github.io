@@ -87,16 +87,19 @@
 
 
 
-<meta name="description" content="protobuf简介protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。">
+<meta name="description" content="protobuf简介protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。
+与">
 <meta property="og:type" content="article">
 <meta property="og:title" content="protobuf详解">
 <meta property="og:url" content="http://yoursite.com/2017/05/21/protobuf/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="protobuf简介protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。">
-<meta property="og:updated_time" content="2017-05-21T13:37:16.000Z">
+<meta property="og:description" content="protobuf简介protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。
+与">
+<meta property="og:updated_time" content="2017-07-20T10:22:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="protobuf详解">
-<meta name="twitter:description" content="protobuf简介protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。">
+<meta name="twitter:description" content="protobuf简介protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。
+与">
 
 
 
@@ -352,11 +355,12 @@
       
 
       
-        <h3 id="protobuf简介"><a href="#protobuf简介" class="headerlink" title="protobuf简介"></a>protobuf简介</h3><p>protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。<br><a id="more"></a></p>
+        <h3 id="protobuf简介"><a href="#protobuf简介" class="headerlink" title="protobuf简介"></a>protobuf简介</h3><p>protobuf(Protocol Buffer)是google的一个开源序列化框架，类似于xml、json数据文本交换格式。开发人员需要自己定义结构化的消息格式(proto文件)，然后通过protobuf自带的protoc命令来将proto协议文件转换成对应语言的类文件，可以支持php、Java、c++、python语言，我们可以在工程里直接使用生成的类文件来做数据交互。</p>
 <h3 id="与json比较"><a href="#与json比较" class="headerlink" title="与json比较"></a>与json比较</h3><ul>
 <li>protobuf采用二进制数据传输，只传输数据本身，不会传输数据的格式(如何属性的名称)。虽然json数据大小会小于xml，但是还是基于纯文本形式，传输时会把数据的组织格式也进行传输。一条消息数据，protobuf序列化后的大小是json的10分之一，xml格式的20分之一，是二进制序列化的10分之一，总体看来protobuf的优势还是很明显的。   </li>
 <li>protobuf只要开发人员定义好消息格式，就可以通过命令生成相关语言(java、c++、python等)的类，项目之间调用生成的类就可以完成序列化和反序列化的工作。而json不同语言需要引用不同的json库(如python的json、c++的rapidjson)，不同的json库的解析效率也会存在很大区别。    </li>
 </ul>
+<a id="more"></a>
 <h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ul>
 <li>下载protobuf库<a href="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a></li>
 <li><p>编写数据结构信息proto文件</p>

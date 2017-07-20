@@ -102,7 +102,7 @@ MXNet简介mxnet是一个开源的深度学习框架，它可以使你能自行�
 <meta property="og:image" content="http://yoursite.com/2017/06/13/mnist/mx6.png">
 <meta property="og:image" content="http://yoursite.com/2017/06/13/mnist/mx7.png">
 <meta property="og:image" content="http://yoursite.com/2017/06/13/mnist/mx8.png">
-<meta property="og:updated_time" content="2017-06-16T06:48:05.000Z">
+<meta property="og:updated_time" content="2017-07-20T10:07:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MLP手写体识别示例及分析">
 <meta name="twitter:description" content="目前深度学习的训练采用了mxnet框架，接下来会从具体的应用示例出发，详细分析深度学习的具体流程和一些trick，在示例分析中穿插相关概念的介绍。  
@@ -386,7 +386,7 @@ MXNet简介mxnet是一个开源的深度学习框架，它可以使你能自行�
 
       
         <p>目前深度学习的训练采用了mxnet框架，接下来会从具体的应用示例出发，详细分析深度学习的具体流程和一些trick，在示例分析中穿插相关概念的介绍。  </p>
-<h3 id="MXNet简介"><a href="#MXNet简介" class="headerlink" title="MXNet简介"></a>MXNet简介</h3><p>mxnet是一个开源的深度学习框架，它可以使你能自行定义、训练、配置和部署深度人工神经网络，并且适用于从云端到移动端诸多不同的设备上。可快速模型训练、灵活支持各种编程模型和语言使得mxnet具有高度的可扩展性。同时，它还允许混合使用命令式与符号式编程以最大化程序的效率和性能。具体mxnet的底层实现以及同caffe、tensorflow、theano框架对比如下：<br><a id="more"></a><br><img src="/2017/06/13/mnist/mx0_1.png" alt=""><br><img src="/2017/06/13/mnist/mx1.png" alt=""><br>目前facebook最新发布caffe2同样支持移动端部署，具体mxnet设计和实现简介可参考官方文档<a href="https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1" target="_blank" rel="external">https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1</a>。</p>
+<h3 id="MXNet简介"><a href="#MXNet简介" class="headerlink" title="MXNet简介"></a>MXNet简介</h3><p>mxnet是一个开源的深度学习框架，它可以使你能自行定义、训练、配置和部署深度人工神经网络，并且适用于从云端到移动端诸多不同的设备上。可快速模型训练、灵活支持各种编程模型和语言使得mxnet具有高度的可扩展性。同时，它还允许混合使用命令式与符号式编程以最大化程序的效率和性能。具体mxnet的底层实现以及同caffe、tensorflow、theano框架对比如下：<br><img src="/2017/06/13/mnist/mx0_1.png" alt=""><br><img src="/2017/06/13/mnist/mx1.png" alt=""><br>目前facebook最新发布caffe2同样支持移动端部署，具体mxnet设计和实现简介可参考官方文档<a href="https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1" target="_blank" rel="external">https://github.com/dmlc/mxnet/issues/797?url_type=39&amp;object_type=webpage&amp;pos=1</a>。<br><a id="more"></a>  </p>
 <h3 id="MLP手写体识别示例分析"><a href="#MLP手写体识别示例分析" class="headerlink" title="MLP手写体识别示例分析"></a>MLP手写体识别示例分析</h3><p>接下来详细介绍下基于mxnet框架的mnist手写体识别，事实上在mxnet/example/image-classification/下已经存在了train_mnist.py的样例，但其分散依赖了其他文件，这里在train_mnist.py的基础上进行了重构，具体github地址为<a href="https://github.com/dreamocean/mnist" target="_blank" rel="external">https://github.com/dreamocean/mnist</a>，工程结构如下：<br><img src="/2017/06/13/mnist/mx2.png" alt="">   </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">train.py —— 模型训练</div><div class="line">predict.py —— 结果预测</div><div class="line">feature.py —— 输出每层特征</div></pre></td></tr></table></figure>
 <h4 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h4><h5 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h5><p>mnist数据显示如下：<br><img src="/2017/06/13/mnist/mx4.png" alt=""><br>不过官方给出的为二进制数据，具体读取方式如下：     </p>

@@ -87,12 +87,14 @@
 
 
 
-<meta name="description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
+<meta name="description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：
+一、系统更新安装完Ubuntu后先对系统的的软件包进行更新，不然在安装一些软件过程中会出现一系列的依赖包的问题：sudo apt-get updatesudo ap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu下OpenCV／MXNet／Qt／Python等相应开发环境安装">
 <meta property="og:url" content="http://yoursite.com/2017/04/12/opencv/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
+<meta property="og:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：
+一、系统更新安装完Ubuntu后先对系统的的软件包进行更新，不然在安装一些软件过程中会出现一系列的依赖包的问题：sudo apt-get updatesudo ap">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/Qtcreator.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/list.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv_0.png">
@@ -103,10 +105,11 @@
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/opencv_5.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/cuda.png">
 <meta property="og:image" content="http://yoursite.com/2017/04/12/opencv/mxnet_result.png">
-<meta property="og:updated_time" content="2017-06-02T09:36:21.000Z">
+<meta property="og:updated_time" content="2017-07-20T10:21:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下OpenCV／MXNet／Qt／Python等相应开发环境安装">
-<meta name="twitter:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：">
+<meta name="twitter:description" content="安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：1、python2、Qt Creator3、OpenCV4、MXNet5、cmake具体安装顺序参与以下流程，避免出现软件依赖的问题：
+一、系统更新安装完Ubuntu后先对系统的的软件包进行更新，不然在安装一些软件过程中会出现一系列的依赖包的问题：sudo apt-get updatesudo ap">
 <meta name="twitter:image" content="http://yoursite.com/2017/04/12/opencv/Qtcreator.png">
 
 
@@ -418,9 +421,9 @@
       
 
       
-        <p>安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：<br>1、python<br>2、Qt Creator<br>3、OpenCV<br>4、MXNet<br>5、cmake<br>具体安装顺序参与以下流程，避免出现软件依赖的问题：<br><a id="more"></a></p>
+        <p>安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：<br>1、python<br>2、Qt Creator<br>3、OpenCV<br>4、MXNet<br>5、cmake<br>具体安装顺序参与以下流程，避免出现软件依赖的问题：</p>
 <h4 id="一、系统更新"><a href="#一、系统更新" class="headerlink" title="一、系统更新"></a>一、系统更新</h4><p>安装完Ubuntu后先对系统的的软件包进行更新，不然在安装一些软件过程中会出现一系列的依赖包的问题：<br><code>sudo apt-get update</code><br><code>sudo apt-get upgrade</code><br>同时可以安装好常用程序编译包：<br><code>sudo apt-get install build-essential</code></p>
-<h4 id="二、安装QtCreator"><a href="#二、安装QtCreator" class="headerlink" title="二、安装QtCreator"></a>二、安装QtCreator</h4><p>Qt是一个跨平台的C++图形用户界面应用程序框架，Qt Creator是Qt的一种轻量级开发环境，进入官网下载:<br><img src="/2017/04/12/opencv/Qtcreator.png" alt=""><br>直接安装会存在权限问题导致无法安装，这里通过以下命令修改其可执行权限，执行后根据图形化安装界面向导安装即可：<br><code>sudo chmod +x qt-creator-opensource-linux-x86_64-4.2.1.run</code><br><code>sudo ./qt-creator-opensource-linux-x86_64-4.2.1.run</code></p>
+<h4 id="二、安装QtCreator"><a href="#二、安装QtCreator" class="headerlink" title="二、安装QtCreator"></a>二、安装QtCreator</h4><p>Qt是一个跨平台的C++图形用户界面应用程序框架，Qt Creator是Qt的一种轻量级开发环境，进入官网下载:<br><a id="more"></a><br><img src="/2017/04/12/opencv/Qtcreator.png" alt=""><br>直接安装会存在权限问题导致无法安装，这里通过以下命令修改其可执行权限，执行后根据图形化安装界面向导安装即可：<br><code>sudo chmod +x qt-creator-opensource-linux-x86_64-4.2.1.run</code><br><code>sudo ./qt-creator-opensource-linux-x86_64-4.2.1.run</code></p>
 <h4 id="三、安装cmake"><a href="#三、安装cmake" class="headerlink" title="三、安装cmake"></a>三、安装cmake</h4><p>make是一个批量化编译工具，但是它依赖makefile文件，其由cmake生成，而cmake生成makefile文件需要手动编写cmakelist文件，它是cmake依赖的规则文件，具体编译顺序如下：<br><code>源代码--编写cmakelist--使用cmake生成makefile--使用make编译生成可执行程序</code><br>ubuntu安装cmake：<br><code>sudo apt-get install cmake</code></p>
 <h4 id="四、安装Python"><a href="#四、安装Python" class="headerlink" title="四、安装Python"></a>四、安装Python</h4><p>安装的ubuntu自带了python，直接终端输入python查看版本号，这里安装python后面需要的一系列库：<br><code>sudo apt-get install pyton-dev python-setuptools python-numpy python-scipy python-matplotlib python-sklearn</code><br>除了通过linux apt-get常用软件获取工具来安装，还可以通过python自有的pip工具来安装相应的库：<br><code>sudo apt-get install python-pip</code><br><code>pip install -U scikit-learn</code><br>后面MXNet中会requets和cython，这里可以先统一安装：<br><code>sudo apt-get install python-requests</code>或<code>pip install requests</code><br><code>sudo apt-get install cython</code><br>终端输入：<br><code>pip list</code><br>可以列出所有安装好的python包:<br><img src="/2017/04/12/opencv/list.png" alt=""></p>
 <h4 id="五、OpenCV的安装"><a href="#五、OpenCV的安装" class="headerlink" title="五、OpenCV的安装"></a>五、OpenCV的安装</h4><p>安装的版本是opencv-2.4.12，毫无疑问先安装所需的依赖包：<br><code>sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</code><br>官网下载相应版本的opencv，解压至特定文件夹，进入该文件夹。<br>终端输入<code>sudo cmake .</code>：<br><img src="/2017/04/12/opencv/opencv_0.png" alt=""><br>终端输入<code>sudo make</code>：<br><img src="/2017/04/12/opencv/opencv_1.png" alt=""><br>执行安装<code>sudo make install</code><br>配置opencv.conf，加入系统环境变量，两种方式可以选择：   </p>

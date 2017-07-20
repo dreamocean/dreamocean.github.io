@@ -105,7 +105,7 @@ InceptionV1Inception结构的主要思路是怎样用密">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/7.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/9.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/01/net-models/10.png">
-<meta property="og:updated_time" content="2017-07-19T02:07:51.000Z">
+<meta property="og:updated_time" content="2017-07-20T10:05:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习GoogLeNet Inception网络">
 <meta name="twitter:description" content="GoogLeNetGoogLeNet最早是谷歌团队为了参加ILSVRC 2014比赛而提出的，具体实验结果在论文《Going deeper with convolutions》中，链接为https://arxiv.org/pdf/1409.4842.pdf，下面将详细解析GoogLeNet的Inception系列网络及其相关的变种。
@@ -367,7 +367,7 @@ InceptionV1Inception结构的主要思路是怎样用密">
 
       
         <h3 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h3><p>GoogLeNet最早是谷歌团队为了参加ILSVRC 2014比赛而提出的，具体实验结果在论文《Going deeper with convolutions》中，链接为<a href="https://arxiv.org/pdf/1409.4842.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1409.4842.pdf</a>，下面将详细解析GoogLeNet的Inception系列网络及其相关的变种。</p>
-<h4 id="InceptionV1"><a href="#InceptionV1" class="headerlink" title="InceptionV1"></a>InceptionV1</h4><p>Inception结构的主要思路是怎样用密集成分来近似最优的局部稀疏结构。<br>深度学习以及神经网络快速发展，人们不再只关注更给力的硬件、更大的数据集、更大的模型，而是更在意新的idea、新的算法以及模型的改进。一般来说，提升网络性能最直接的办法就是增加网络深度和宽度，这也就意味着巨量的参数。但是，巨量参数容易产生过拟合也会大大增加计算量。<br><a id="more"></a><br>论文认为解决上述两个缺点的根本方法是将全连接甚至一般的卷积都转化为稀疏连接。一方面现实生物神经系统的连接也是稀疏的，另一方面有文献表明：对于大规模稀疏的神经网络，可以通过分析激活值的统计特性和对高度相关的输出进行聚类来逐层构建出一个最优网络。这点表明臃肿的稀疏网络可能被不失性能地简化。<br>早些的时候，为了打破网络对称性和提高学习能力，传统的网络都使用了随机稀疏连接。但是，计算机软硬件对非均匀稀疏数据的计算效率很差，所以在AlexNet中又重新启用了全连接层，目的是为了更好地优化并行运算。<br>所以，现在的问题是有没有一种方法，既能保持网络结构的稀疏性，又能利用密集矩阵的高计算性能。大量的文献表明可以将稀疏矩阵聚类为较为密集的子矩阵来提高计算性能，据此论文提出了名为Inception的结构来实现此目的。<br>作者提出了如下的Inception结构：<br><img src="/2017/07/01/net-models/0.png" alt=""><br>对于最先提出的左图结构而言： </p>
+<h4 id="InceptionV1"><a href="#InceptionV1" class="headerlink" title="InceptionV1"></a>InceptionV1</h4><p>Inception结构的主要思路是怎样用密集成分来近似最优的局部稀疏结构。<br>深度学习以及神经网络快速发展，人们不再只关注更给力的硬件、更大的数据集、更大的模型，而是更在意新的idea、新的算法以及模型的改进。一般来说，提升网络性能最直接的办法就是增加网络深度和宽度，这也就意味着巨量的参数。但是，巨量参数容易产生过拟合也会大大增加计算量。<br>论文认为解决上述两个缺点的根本方法是将全连接甚至一般的卷积都转化为稀疏连接。一方面现实生物神经系统的连接也是稀疏的，另一方面有文献表明：对于大规模稀疏的神经网络，可以通过分析激活值的统计特性和对高度相关的输出进行聚类来逐层构建出一个最优网络。这点表明臃肿的稀疏网络可能被不失性能地简化。<br>早些的时候，为了打破网络对称性和提高学习能力，传统的网络都使用了随机稀疏连接。但是，计算机软硬件对非均匀稀疏数据的计算效率很差，所以在AlexNet中又重新启用了全连接层，目的是为了更好地优化并行运算。<br>所以，现在的问题是有没有一种方法，既能保持网络结构的稀疏性，又能利用密集矩阵的高计算性能。大量的文献表明可以将稀疏矩阵聚类为较为密集的子矩阵来提高计算性能，据此论文提出了名为Inception的结构来实现此目的。<br>作者提出了如下的Inception结构：<br><img src="/2017/07/01/net-models/0.png" alt=""><br><a id="more"></a><br>对于最先提出的左图结构而言： </p>
 <blockquote>
 <p>1、采用不同大小的卷积核意味着不同大小的感受野，最后拼接意味着不同尺度特征的融合；<br>2、之所以卷积核大小采用1、3和5，主要是为了方便对齐。设定卷积步长stride=1之后，只要分别设定pad=0、1、2，那么卷积之后便可以得到相同维度的特征，然后这些特征就可以直接拼接在一起了；<br>3、文章说很多地方都表明pooling挺有效，所以Inception里面也嵌入了。<br>4、网络越到后面，特征越抽象，而且每个特征所涉及的感受野也更大了，因此随着层数的增加，3x3和5x5卷积的比例也要增加。</p>
 </blockquote>

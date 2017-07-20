@@ -98,7 +98,7 @@ $$ J(W) = {\sum">
 <meta property="og:image" content="http://yoursite.com/2017/06/12/sgd/gd.png">
 <meta property="og:image" content="http://yoursite.com/2017/06/12/sgd/lr.png">
 <meta property="og:image" content="http://yoursite.com/2017/06/12/sgd/mom.png">
-<meta property="og:updated_time" content="2017-06-16T07:07:08.000Z">
+<meta property="og:updated_time" content="2017-07-20T10:12:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习中基于梯度的优化方法">
 <meta name="twitter:description" content="梯度下降法（Gradient Descent）是一个广泛被用来最小化模型误差的参数优化算法，它未必是最优的计算权重参数的方法，但是作为一种简单快速的方法，常常被使用。对于训练得到的模型，如:$$ h(x) = {w_1x_1 + w_2x_2 … + w_nx_n + b } = {W^TX+b} $$我们会定义一个loss function来评估该模型的好坏，如：
@@ -382,9 +382,9 @@ $$ J(W) = {\sum">
 
       
         <p>梯度下降法（Gradient Descent）是一个广泛被用来最小化模型误差的参数优化算法，它未必是最优的计算权重参数的方法，但是作为一种简单快速的方法，常常被使用。<br>对于训练得到的模型，如:<br>$$ h(x) = {w_1x_1 + w_2x_2 … + w_nx_n + b } = {W^TX+b} $$<br>我们会定义一个loss function来评估该模型的好坏，如：</p>
-<p>$$ J(W) = {\sum_{i}^n (h(x^{(i)}) - y^{(i)})^2 \over2} $$<br>优化的目标就是使得J(W)达到最小值。<br>梯度下降法流程如下：<br><a id="more"></a></p>
+<p>$$ J(W) = {\sum_{i}^n (h(x^{(i)}) - y^{(i)})^2 \over2} $$<br>优化的目标就是使得J(W)达到最小值。<br>梯度下降法流程如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、首先对权重W赋值，这个值可以是随机的，也可以让W是一个全零的向量。</div><div class="line">2、改变权重W的值，使得J(W)按梯度下降的方向进行减少。</div></pre></td></tr></table></figure>
-<p><img src="/2017/06/12/sgd/gd.png" alt=""><br>如上图所示，每次梯度变化如下：<br>$$ W_i = {W_i - \epsilon \frac{\partial J(W)}{\partial W}} = {W_i - \epsilon(h(x)-y)x^{(i)}} $$<br>用更简单的数学语言描述：</p>
+<p><img src="/2017/06/12/sgd/gd.png" alt=""><br><a id="more"></a><br>如上图所示，每次梯度变化如下：<br>$$ W_i = {W_i - \epsilon \frac{\partial J(W)}{\partial W}} = {W_i - \epsilon(h(x)-y)x^{(i)}} $$<br>用更简单的数学语言描述：</p>
 <p>$$ W = {W - \epsilon \nabla J} = {W - \epsilon \nabla<br>\left| \begin{array}{ccc}\frac{\partial J}{\partial W_0}\<br>… \<br>\frac{\partial J}{\partial W_n}\end{array} \right|} $$<br>其中 ε 为<strong>学习率</strong>(learning rate)，是一个确定步长大小的正标量。<br>另外，梯度是有方向的，对于一个向量W，每一维分量$W_i$都可以求出一个梯度的方向，我们就可以找到一个整体的方向，在变化的时候，我们就朝着下降最多的方向进行变化就可以达到一个最小点。<br>当存在多个局部最小值点或平坦区域时，优化算法可能无法收敛到全局最小点。但在深度学习的背景下，即使找到的解不是真正最小的，但只要它们对应于代价函数显著低的值，我们通常就能接受这样的解。<br>常用的梯度下降法还具体包含有三种不同的形式，它们也各自有着不同的优缺点：   </p>
 <ul>
 <li><strong>批量梯度下降法BGD</strong><br>批量梯度下降法（Batch Gradient Descent）是梯度下降法最原始的形式，它的具<br>体思路是在更新每一参数时都使用所有的样本来进行更新，它得到的是一个全局最优解，但是每迭代一步，都要用到训练集所有的数据。<br>优点：全局最优解，迭代的次数相对较少。<br>缺点：当样本数目很多时，训练过程会很慢。</li>

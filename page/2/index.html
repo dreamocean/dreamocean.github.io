@@ -379,7 +379,10 @@
 
       
         
-          <h3 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h3><p>json(JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于ECMAScript规范的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得json成为理想的数据交换语言，易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。<br>json与xml比较：<br></p>
+          <h3 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h3><p>json(JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于ECMAScript规范的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得json成为理想的数据交换语言，易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。<br>json与xml比较：   </p>
+<blockquote>
+<p>json和xml都拥有丰富的解析手段；<br>xml可读性相对json较好；<br>json相对xml而言，数据体积更小；<br>json传输速度远远快于xml；<br>json编解码更容易，xml需要考虑子节点和父节点。</p>
+</blockquote>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/04/json/#more" rel="contents">
@@ -537,7 +540,7 @@
 
       
         
-          <h3 id="Tornado简介"><a href="#Tornado简介" class="headerlink" title="Tornado简介"></a>Tornado简介</h3><p>Tornado是一种web服务器的开源版本，同时提供web framework的api，可以直接构建自己的web程序。<br>Tornado与目前主流的web框架有着明显的区别：它是非阻塞式服务器，而且速度相当快。得利于其非阻塞的方式和对epoll的运用，Tornado每秒可以处理数以千计的连接，这意味着对于实时Web服务来说，Tornado是一个比较理想的轻量级web框架。Tornado为纯pyhon版本，支持HTTP、FTP、SMTP协议。<br></p>
+          <h3 id="Tornado简介"><a href="#Tornado简介" class="headerlink" title="Tornado简介"></a>Tornado简介</h3><p>Tornado是一种web服务器的开源版本，同时提供web framework的api，可以直接构建自己的web程序。<br>Tornado与目前主流的web框架有着明显的区别：它是非阻塞式服务器，而且速度相当快。得利于其非阻塞的方式和对epoll的运用，Tornado每秒可以处理数以千计的连接，这意味着对于实时Web服务来说，Tornado是一个比较理想的轻量级web框架。Tornado为纯pyhon版本，支持HTTP、FTP、SMTP协议。<br>Tornado是基于ioloop高性能异步框架，可以处理大量的非活跃长连接。使用Tornado可以大大的减少web系统中使用的组件数量，用最少的代码量和极其精简的架构实现你的系统。<br>Tornado是单线程的，Python虽然有多线程，但是Python的解释器有GIL，这点非常影响Tornado利用多核的能力，只能通过多进程来利用多核。既然多进程，一般需要在前端放置nginx或haproxy来做负载均衡的反向代理，或是使用这些应用服务器的wsgi模块来管理进程的生命周期等等。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/23/tornado/#more" rel="contents">
@@ -710,7 +713,7 @@
 <blockquote>
 <p><code>sudo add-apt-repository ppa:graphics-drivers/ppa</code><br><code>sudo apt-get update</code><br><code>sudo apt-get install nvidia-367</code><br><code>sudo apt-get install mesa-common-dev</code><br><code>sudo apt-get install freeglut3-dev</code>      </p>
 </blockquote>
-<p>执行完重启：<code>sudo reboot</code>.<br></p>
+<p>执行完重启：<code>sudo reboot</code>.<br>输入：<code>nvidia-smi</code>，可以获取如下gpu信息，包括gpu列表和gpu正在执行的进程：<br><img src="/2017/04/18/cuda/cuda1.png" alt=""><br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/18/cuda/#more" rel="contents">
@@ -1062,7 +1065,9 @@
 
       
         
-          <p>安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：<br>1、python<br>2、Qt Creator<br>3、OpenCV<br>4、MXNet<br>5、cmake<br>具体安装顺序参与以下流程，避免出现软件依赖的问题：<br></p>
+          <p>安装好ubuntu系统后，需要搭建人工智能的相应地开发环境，这里介绍以下几个IDE或者对应库的安装：<br>1、python<br>2、Qt Creator<br>3、OpenCV<br>4、MXNet<br>5、cmake<br>具体安装顺序参与以下流程，避免出现软件依赖的问题：</p>
+<h4 id="一、系统更新"><a href="#一、系统更新" class="headerlink" title="一、系统更新"></a>一、系统更新</h4><p>安装完Ubuntu后先对系统的的软件包进行更新，不然在安装一些软件过程中会出现一系列的依赖包的问题：<br><code>sudo apt-get update</code><br><code>sudo apt-get upgrade</code><br>同时可以安装好常用程序编译包：<br><code>sudo apt-get install build-essential</code></p>
+<h4 id="二、安装QtCreator"><a href="#二、安装QtCreator" class="headerlink" title="二、安装QtCreator"></a>二、安装QtCreator</h4><p>Qt是一个跨平台的C++图形用户界面应用程序框架，Qt Creator是Qt的一种轻量级开发环境，进入官网下载:<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/12/opencv/#more" rel="contents">
@@ -1560,7 +1565,9 @@
 
       
         
-          <h4 id="一、配置环境"><a href="#一、配置环境" class="headerlink" title="一、配置环境"></a>一、配置环境</h4><h5 id="建立Github页面仓库"><a href="#建立Github页面仓库" class="headerlink" title="建立Github页面仓库"></a>建立Github页面仓库</h5><p>进入<a href="https://github.com">https://github.com</a>官网进行注册，建立github页面仓库，名称为：<code>yourname.github.io</code><br><img src="/2017/04/03/hexo/github.png" alt=""><br></p>
+          <h4 id="一、配置环境"><a href="#一、配置环境" class="headerlink" title="一、配置环境"></a>一、配置环境</h4><h5 id="建立Github页面仓库"><a href="#建立Github页面仓库" class="headerlink" title="建立Github页面仓库"></a>建立Github页面仓库</h5><p>进入<a href="https://github.com">https://github.com</a>官网进行注册，建立github页面仓库，名称为：<code>yourname.github.io</code><br><img src="/2017/04/03/hexo/github.png" alt=""></p>
+<h5 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h5><p>进入官网<a href="https://nodejs.org">https://nodejs.org</a>下载，默认安装。</p>
+<h5 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h5><p>Mac系统自带Git命令，其他系统可以从<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>下载客户端。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/03/hexo/#more" rel="contents">
