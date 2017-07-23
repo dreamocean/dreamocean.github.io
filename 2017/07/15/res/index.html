@@ -103,7 +103,11 @@
 <meta property="og:image" content="http://yoursite.com/2017/07/15/res/7.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/15/res/8.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/15/res/9.png">
-<meta property="og:updated_time" content="2017-07-20T10:02:49.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/07/15/res/10.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/15/res/11.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/15/res/12.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/15/res/13.png">
+<meta property="og:updated_time" content="2017-07-23T13:19:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习ResNet/ResNeXt网络">
 <meta name="twitter:description" content="ResNetResNet——MSRA何凯明团队的Residual Networks，在2015年ImageNet上大放异彩，在ImageNet的classification、detection、localization以及COCO的detection和segmentation上均斩获了第一名的成绩，而且Deep Residual Learning for Image Recognition也获得了">
@@ -377,6 +381,23 @@
 <blockquote>
 <p>1、ResNeXt 与 ResNet 在相同参数个数情况下，训练时前者错误率更低，但下降速度差不多；<br>2、相同参数情况下，增加 cardinality 比增加深度（depth）和广度（width）几个数更加有效；<br>3、101层的ResNeXt比200层的ResNet更好；<br>4、几种模型，ResNeXt准确率最高。</p>
 </blockquote>
+<h3 id="wide-ResNet-ResNeXt"><a href="#wide-ResNet-ResNeXt" class="headerlink" title="wide ResNet/ResNeXt"></a>wide ResNet/ResNeXt</h3><p>网络不断向更深发展，但是有时候为了得到少量的精度增加，却需要将网络层数翻倍，也会减少特征的重用，降低训练速度。作者从宽度的角度，提出了wide residual network，16层的WRN表现就比之前的ResNet效果要好，具体论文参考<a href="http://xueshu.baidu.com/s?wd=paperuri%3A%28e8800db9aa7491f724aaab959db7d412%29&amp;filter=sc_long_sign&amp;tn=SE_xueshusource_2kduw22v&amp;sc_vurl=http%3A%2F%2Farxiv.org%2Fabs%2F1605.07146&amp;ie=utf-8&amp;sc_us=2110714351349073942" target="_blank" rel="external">Wide Residual Networks</a>。<br><img src="/2017/07/15/res/10.png" alt=""><br>上图中a，b是kaiming提出的两种方法，b计算更节省，但是作者想看宽度的影响所以采用了a。作者提出增加residual block的三种简单途径： </p>
+<blockquote>
+<ol>
+<li>更多卷积层； </li>
+<li>加宽（more feature planes）； </li>
+<li>增加卷积层的滤波器的大小（filter sizes）； </li>
+</ol>
+</blockquote>
+<p>作者说小的滤波器更高效，所以不准备使用超过3x3的卷积核，提出了宽度放大倍数k和卷积层数l，作者的结构：<br><img src="/2017/07/15/res/11.png" alt=""><br>作者发现，参数会随着深度的增加成线性增长，但是随着宽度却是平方增大。虽然参数会增多，但是卷积运算更适合gpu。 参数的增多需要正则化（regularization）来减少过拟合，何凯明等人使用了batch normalization，可是这种方法需要heavy augmentation，作者使用了dropout。<br><img src="/2017/07/15/res/12.png" alt=""><br>WRN40-4与ResNet1001结果相似，参数数量相似，但是前者训练快8倍。总结如下： </p>
+<blockquote>
+<ol>
+<li>宽度的增加提高了性能；</li>
+<li>增加深度和宽度都有好处，直到参数太大，正则化不够； </li>
+<li>相同参数时，宽度比深度好训练；  </li>
+</ol>
+</blockquote>
+<p>dropout的影响如下：<br><img src="/2017/07/15/res/13.png" alt=""><br>对于参数较少的16-4得到的结果反而差了。</p>
 <p>参考文章：<br><a href="http://www.vccoo.com/v/1807u1?source=rss" target="_blank" rel="external">http://www.vccoo.com/v/1807u1?source=rss</a><br><a href="http://www.cnblogs.com/lillylin/p/6799173.html" target="_blank" rel="external">http://www.cnblogs.com/lillylin/p/6799173.html</a><br><a href="http://blog.csdn.net/xuanwu_yan/article/details/53455260?winzoom=1" target="_blank" rel="external">http://blog.csdn.net/xuanwu_yan/article/details/53455260?winzoom=1</a> </p>
 
       
@@ -447,6 +468,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/20/model-compair/" rel="prev" title="各深度学习模型比较分析">
+                各深度学习模型比较分析 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -520,7 +545,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -597,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">1.</span> <span class="nav-text">ResNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNeXt"><span class="nav-number">2.</span> <span class="nav-text">ResNeXt</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">1.</span> <span class="nav-text">ResNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNeXt"><span class="nav-number">2.</span> <span class="nav-text">ResNeXt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wide-ResNet-ResNeXt"><span class="nav-number">3.</span> <span class="nav-text">wide ResNet/ResNeXt</span></a></li></ol></div>
             
 
           </div>
