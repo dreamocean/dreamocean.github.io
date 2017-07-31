@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="AI,Book List," />
+  <meta name="keywords" content="deeplearning," />
 
 
 
@@ -87,25 +87,22 @@
 
 
 
-<meta name="description" content="从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。">
+<meta name="description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人工智能书单">
-<meta property="og:url" content="http://yoursite.com/2017/04/04/AI-Course/index.html">
+<meta property="og:title" content="评价指标FRR/FAR/ROC/ACC解析">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/index/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc0.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc1.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc2.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc3.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc4.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc5.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc6.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/04/AI-Course/jc7.png">
-<meta property="og:updated_time" content="2017-06-13T02:50:46.000Z">
+<meta property="og:description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/index/0.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/index/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/index/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/index/4.gif">
+<meta property="og:image" content="http://yoursite.com/2017/07/28/index/5.png">
+<meta property="og:updated_time" content="2017-07-31T03:58:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人工智能书单">
-<meta name="twitter:description" content="从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。">
-<meta name="twitter:image" content="http://yoursite.com/2017/04/04/AI-Course/jc0.png">
+<meta name="twitter:title" content="评价指标FRR/FAR/ROC/ACC解析">
+<meta name="twitter:description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/28/index/0.jpg">
 
 
 
@@ -133,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/04/AI-Course/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/28/index/"/>
 
 
 
 
 
-  <title> 人工智能书单 | dreamocean </title>
+  <title> 评价指标FRR/FAR/ROC/ACC解析 | dreamocean </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -278,7 +275,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/04/AI-Course/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MengyangZhang">
@@ -299,7 +296,7 @@
             
             
               
-                人工智能书单
+                评价指标FRR/FAR/ROC/ACC解析
               
             
           </h1>
@@ -314,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T20:02:10+08:00">
-                2017-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T16:12:32+08:00">
+                2017-07-28
               </time>
             
 
@@ -325,28 +322,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index">
-                    <span itemprop="name">AI</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -354,7 +329,7 @@
 
           
           
-             <span id="/2017/04/04/AI-Course/" class="leancloud_visitors" data-flag-title="人工智能书单">
+             <span id="/2017/07/28/index/" class="leancloud_visitors" data-flag-title="评价指标FRR/FAR/ROC/ACC解析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,7 +358,39 @@
       
 
       
-        <p>从近两年开始，人工智能越来越贴近我们的生活，无论是之前的alphaGO，还是在持续发酵的无人驾驶，AI正在互联网和传统领域爆发惊人的魅力，尤其是深度学习的广泛运用，使得之前很多无法解决的问题得以解决。根据数据来源不同，AI大致可以分为计算机视觉相关应用、语音识别和自然语言处理几个方向，这里列出一些自己认为比较好的基础教程，可以对AI有个比较好的入门和认识，后续也会持续更新。<br><a id="more"></a><br><img src="/2017/04/04/AI-Course/jc0.png" alt=""><br><img src="/2017/04/04/AI-Course/jc1.png" alt=""><br><img src="/2017/04/04/AI-Course/jc2.png" alt=""><br><img src="/2017/04/04/AI-Course/jc3.png" alt=""><br><img src="/2017/04/04/AI-Course/jc4.png" alt=""><br><img src="/2017/04/04/AI-Course/jc5.png" alt=""><br><img src="/2017/04/04/AI-Course/jc6.png" alt=""><br>另外deeplearning三大元老之一的Yoshua Bengio也编写了dl的教程，虽然未出版，但已经在网上发布了<a href="http://www.deeplearningbook.org" target="_blank" rel="external">http://www.deeplearningbook.org</a>，基本上可以作为官方指导教程了。<br><img src="/2017/04/04/AI-Course/jc7.png" alt=""><br>国内的研究人员也翻译了中文版，可以在<a href="https://github.com/exacity/deeplearningbook-chinese" target="_blank" rel="external">https://github.com/exacity/deeplearningbook-chinese</a>上下载pdf版本。</p>
+        <h3 id="各指标计算规则"><a href="#各指标计算规则" class="headerlink" title="各指标计算规则"></a>各指标计算规则</h3><p>考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类则为假负类（False negative），漏报。具体如下表所示：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">actual\pediction</th>
+<th style="text-align:center">positive</th>
+<th style="text-align:center">negative</th>
+<th style="text-align:center">rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">positive</td>
+<td style="text-align:center">TP</td>
+<td style="text-align:center">FN</td>
+<td style="text-align:center">TPR=TP/(TP+FN)</td>
+</tr>
+<tr>
+<td style="text-align:center">negative</td>
+<td style="text-align:center">FP</td>
+<td style="text-align:center">TN</td>
+<td style="text-align:center">FPR=FP/(FP+TN)</td>
+</tr>
+</tbody>
+</table>
+<p>TPR为命中率；<br>FPR=FAR=FMR为误识率；<br>FRR=FNMR=(1-TPR)为拒识率；<br>ACC=(TP+TN)/(TP+FN+FP+TN)，为判对准确率；<br>在有些文献中将误识率表达为FMR（False match rate），以及将拒识率表达为FNMR（False non-match rate)。   </p>
+<h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><a id="more"></a>  
+<p>在一个二分类模型中，对于所得到的连续结果，假设已确定一个阀值，比如说0.6，大于这个值的实例划归为正类，小于这个值则划到负类中。如果减小阀值，减到0.5，固然能识别出更多的正类，也就是提高了识别出的正例占所有正例的比类，即TPR，但同时也将更多的负实例当作了正实例，即提高了FPR。为了形象化这一变化，在此引入ROC，ROC曲线可以用于评价一个分类器。<br>ROC曲线（Receiver Operator characteristic Curve）是一种已经被广泛接受的系统匹配算法测试指标，它是匹配分数阈值、误识率以及拒识率之间的一种关系。它反映了识别算法在不同阈值上，拒识率和误识率的平衡关系。<br>下图给出了ROC曲线，其中横坐标是误识率，纵坐标是命中率，等错误率（EER Equal-Error Rate）是命中率和误识率的一个平衡点，等错误率能够取到的值越低，表示算法的性能越好：<br><img src="/2017/07/28/index/0.jpg" alt=""><br><em>理想情况下，TPR应该接近1，FPR应该接近0。ROC曲线上的每一个点对应于一threshold，对于一个分类器，每个threshold下会有一个TPR和FPR。比如Threshold最大时，TP=FP=0，对应于原点；Threshold最小时，TN=FN=0，对应于右上角的点(1,1)。</em>     </p>
+<p>FAR-FRR曲线，或FMR-FNMR曲线大致示意如下：<br><img src="/2017/07/28/index/3.jpg" alt=""> </p>
+<p>阈值与各指标的关系如下：<br><img src="/2017/07/28/index/1.jpg" alt=""><br><em>随着阈值threshold增加，TP和FP都减小，TPR和FPR也减小，ROC点向左下移动。</em>   </p>
+<h3 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h3><p>AUC（Area Under Curve）被定义为ROC曲线下的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围在0.5和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。</p>
+<h3 id="EER"><a href="#EER" class="headerlink" title="EER"></a>EER</h3><p>EER（Equal Error Rate）是相等错误率的意思，也就是把FAR、FRR两个参数统一为一个参数，来衡量指纹算法的整体性能。<br>FAR和FRR是同一个算法系统的两个参数，把它放在同一个坐标中，如下图所示，FAR是随阈值增大而减小的，FRR是随阈值增大而增大的。因此它们一定有交点。这个点是在某个阈值下的FAR与FRR等值的点。习惯上用这一点的值来衡量算法的综合性能。对于一个更优的算法，希望在相同阈值情况下，FAR和FRR都越小越好。<br><img src="/2017/07/28/index/4.gif" alt=""><br>把FAR和FRR曲线都向下平移，同时相交点ERR也向下平移，所以EER值越小的时候，表示算法的整体性能越高。<br>由于当FRR与FAR相交时对应的阈值都很小，也就是说此时的相似度阈值连30%都不到。实际使用中的阈值至少设在80%以上，所以EER值并不被用在大众化场合来描述算法的性能，只是在竞赛排名中使用。</p>
+<h3 id="CMC曲线"><a href="#CMC曲线" class="headerlink" title="CMC曲线"></a>CMC曲线</h3><p>CMC曲线就是算一种top-k的击中概率，主要用闭集测试。比如有n个注册样本，现在想测试性能，测试样本依次和n个注册样本算取一个距离，然后排序，看类类样本位于前top-k，最后统计得到CMC曲线，示意图如下，横坐标为topK中的K值，纵坐标为命中率：<br><img src="/2017/07/28/index/5.png" alt=""> </p>
 
       
     </div>
@@ -431,9 +438,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AI/" rel="tag"># AI</a>
-          
-            <a href="/tags/Book-List/" rel="tag"># Book List</a>
+            <a href="/tags/deeplearning/" rel="tag"># deeplearning</a>
           
         </div>
       
@@ -446,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/03/hexo/" rel="next" title="Github+Hexo+Next搭建个人博客">
-                <i class="fa fa-chevron-left"></i> Github+Hexo+Next搭建个人博客
+              <a href="/2017/07/20/model-compair/" rel="next" title="各深度学习模型比较分析">
+                <i class="fa fa-chevron-left"></i> 各深度学习模型比较分析
               </a>
             
           </div>
@@ -455,10 +460,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/12/ubuntu/" rel="prev" title="windows安装ubuntu双系统详解">
-                windows安装ubuntu双系统详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,8 +508,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/icon.jpg"
@@ -590,6 +600,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#各指标计算规则"><span class="nav-number">1.</span> <span class="nav-text">各指标计算规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC曲线"><span class="nav-number">2.</span> <span class="nav-text">ROC曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AUC"><span class="nav-number">3.</span> <span class="nav-text">AUC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EER"><span class="nav-number">4.</span> <span class="nav-text">EER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMC曲线"><span class="nav-number">5.</span> <span class="nav-text">CMC曲线</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
