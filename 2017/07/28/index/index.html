@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/07/28/index/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/07/28/index/4.gif">
 <meta property="og:image" content="http://yoursite.com/2017/07/28/index/5.png">
-<meta property="og:updated_time" content="2017-07-31T03:58:59.000Z">
+<meta property="og:updated_time" content="2017-07-31T09:05:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="评价指标FRR/FAR/ROC/ACC解析">
 <meta name="twitter:description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
@@ -383,7 +383,7 @@
 </tr>
 </tbody>
 </table>
-<p>TPR为命中率；<br>FPR=FAR=FMR为误识率；<br>FRR=FNMR=(1-TPR)为拒识率；<br>ACC=(TP+TN)/(TP+FN+FP+TN)，为判对准确率；<br>在有些文献中将误识率表达为FMR（False match rate），以及将拒识率表达为FNMR（False non-match rate)。   </p>
+<p>TPR为命中率；<br>FPR=FAR=FMR为误识率；<br>FRR=FNMR=(1-TPR)为识拒率；<br>ACC=(TP+TN)/(TP+FN+FP+TN)，为判对准确率；<br>在有些文献中将误识率表达为FMR（False match rate），以及将拒识率表达为FNMR（False non-match rate)。   </p>
 <h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><a id="more"></a>  
 <p>在一个二分类模型中，对于所得到的连续结果，假设已确定一个阀值，比如说0.6，大于这个值的实例划归为正类，小于这个值则划到负类中。如果减小阀值，减到0.5，固然能识别出更多的正类，也就是提高了识别出的正例占所有正例的比类，即TPR，但同时也将更多的负实例当作了正实例，即提高了FPR。为了形象化这一变化，在此引入ROC，ROC曲线可以用于评价一个分类器。<br>ROC曲线（Receiver Operator characteristic Curve）是一种已经被广泛接受的系统匹配算法测试指标，它是匹配分数阈值、误识率以及拒识率之间的一种关系。它反映了识别算法在不同阈值上，拒识率和误识率的平衡关系。<br>下图给出了ROC曲线，其中横坐标是误识率，纵坐标是命中率，等错误率（EER Equal-Error Rate）是命中率和误识率的一个平衡点，等错误率能够取到的值越低，表示算法的性能越好：<br><img src="/2017/07/28/index/0.jpg" alt=""><br><em>理想情况下，TPR应该接近1，FPR应该接近0。ROC曲线上的每一个点对应于一threshold，对于一个分类器，每个threshold下会有一个TPR和FPR。比如Threshold最大时，TP=FP=0，对应于原点；Threshold最小时，TN=FN=0，对应于右上角的点(1,1)。</em>     </p>
 <p>FAR-FRR曲线，或FMR-FNMR曲线大致示意如下：<br><img src="/2017/07/28/index/3.jpg" alt=""> </p>
@@ -461,6 +461,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/07/31/harr/" rel="prev" title="人脸检测之Haar">
+                人脸检测之Haar <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -533,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -544,7 +548,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -555,7 +559,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
