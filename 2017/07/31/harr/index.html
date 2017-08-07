@@ -87,28 +87,28 @@
 
 
 
-<meta name="description" content="人脸检测属于计算机视觉的范畴，早期人们的主要研究方向是人脸识别，即根据人脸来识别人物的身份，后来在复杂背景下的人脸检测需求越来越大，人脸检测也逐渐作为一个单独的研究方向发展起来。目前的人脸检测方法主要有两大类：基于知识和基于统计。
+<meta name="description" content="目前的人脸检测方法主要有两大类：基于知识和基于统计。
 
-基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘">
+基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘、纹理特性、颜色特征。基于统计的方法：将人脸看作一个整体的模式（二维像素矩阵），从统计的观点通过大量人脸图像样本构造人脸模式空间，根据相似度量来判断人脸是否存在，如主成分分析与特">
 <meta property="og:type" content="article">
 <meta property="og:title" content="人脸检测之Haar">
 <meta property="og:url" content="http://yoursite.com/2017/07/31/harr/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="人脸检测属于计算机视觉的范畴，早期人们的主要研究方向是人脸识别，即根据人脸来识别人物的身份，后来在复杂背景下的人脸检测需求越来越大，人脸检测也逐渐作为一个单独的研究方向发展起来。目前的人脸检测方法主要有两大类：基于知识和基于统计。
+<meta property="og:description" content="目前的人脸检测方法主要有两大类：基于知识和基于统计。
 
-基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘">
+基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘、纹理特性、颜色特征。基于统计的方法：将人脸看作一个整体的模式（二维像素矩阵），从统计的观点通过大量人脸图像样本构造人脸模式空间，根据相似度量来判断人脸是否存在，如主成分分析与特">
 <meta property="og:image" content="http://yoursite.com/2017/07/31/harr/0.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/07/31/harr/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/07/31/harr/2.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/07/31/harr/3.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/31/harr/4.png">
 <meta property="og:image" content="http://yoursite.com/2017/07/31/harr/5.png">
-<meta property="og:updated_time" content="2017-08-07T07:03:31.000Z">
+<meta property="og:updated_time" content="2017-08-07T07:06:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人脸检测之Haar">
-<meta name="twitter:description" content="人脸检测属于计算机视觉的范畴，早期人们的主要研究方向是人脸识别，即根据人脸来识别人物的身份，后来在复杂背景下的人脸检测需求越来越大，人脸检测也逐渐作为一个单独的研究方向发展起来。目前的人脸检测方法主要有两大类：基于知识和基于统计。
+<meta name="twitter:description" content="目前的人脸检测方法主要有两大类：基于知识和基于统计。
 
-基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘">
+基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘、纹理特性、颜色特征。基于统计的方法：将人脸看作一个整体的模式（二维像素矩阵），从统计的观点通过大量人脸图像样本构造人脸模式空间，根据相似度量来判断人脸是否存在，如主成分分析与特">
 <meta name="twitter:image" content="http://yoursite.com/2017/07/31/harr/0.jpg">
 
 
@@ -387,12 +387,11 @@
       
 
       
-        <p>人脸检测属于计算机视觉的范畴，早期人们的主要研究方向是人脸识别，即根据人脸来识别人物的身份，后来在复杂背景下的人脸检测需求越来越大，人脸检测也逐渐作为一个单独的研究方向发展起来。目前的人脸检测方法主要有两大类：基于知识和基于统计。</p>
+        <p>目前的人脸检测方法主要有两大类：基于知识和基于统计。</p>
 <blockquote>
-<p>基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘、纹理特性、颜色特征。    </p>
-<p>基于统计的方法：将人脸看作一个整体的模式（二维像素矩阵），从统计的观点通过大量人脸图像样本构造人脸模式空间，根据相似度量来判断人脸是否存在，如主成分分析与特征脸、神经网络方法、支持向量机、隐马尔可夫模型、Adaboost算法。</p>
+<p>基于知识的方法：主要利用先验知识将人脸看作器官特征的组合，根据眼睛、眉毛、嘴巴、鼻子等器官的特征以及相互之间的几何位置关系来检测人脸，如模板匹配、人脸特征、形状与边缘、纹理特性、颜色特征。<br>基于统计的方法：将人脸看作一个整体的模式（二维像素矩阵），从统计的观点通过大量人脸图像样本构造人脸模式空间，根据相似度量来判断人脸是否存在，如主成分分析与特征脸、神经网络方法、支持向量机、隐马尔可夫模型、Adaboost算法。</p>
 </blockquote>
-<p>这里主要介绍OpenCV内部集成的基于Haar特征与Adaboost的人脸检测算法haarcascade。OpenCV安装目录中的\data\haarcascades目录下的haarcascade_frontalface_alt.xml与haarcascade_frontalface_alt2.xml都是用来检测人脸的Haar分类器，其中包含了描述人脸的Haar特征值。这个haarcascades目录下还有人的全身，眼睛，嘴唇的Haar分类器。xml文件结构如下：<br><a id="more"></a><br><img src="/2017/07/31/harr/0.jpg" alt=""></p>
+<p>这里主要介绍OpenCV内部集成的基于Haar特征与Adaboost的人脸检测算法haarcascade。OpenCV安装目录中的\data\haarcascades目录下的haarcascade_frontalface_alt.xml与haarcascade_frontalface_alt2.xml都是用来检测人脸的Haar分类器，其中包含了描述人脸的Haar特征值。这个haarcascades目录下还有人的全身，眼睛，嘴唇的Haar分类器。xml文件结构如下：<br><img src="/2017/07/31/harr/0.jpg" alt=""><br><a id="more"></a> </p>
 <h3 id="Haar特征"><a href="#Haar特征" class="headerlink" title="Haar特征"></a>Haar特征</h3><p>什么是特征?<br>我们可以在如下情景中来描述，假设在人脸检测时我们需要有这么一个子窗口在待检测的图片窗口中不断的移位滑动，子窗口每到一个位置，就会计算出该区域的特征，然后用我们训练好的级联分类器对该特征进行筛选，一旦该特征通过了所有强分类器的筛选，则判定该区域为人脸。<br>那么这个特征如何表示呢？<br>Viola等人提出的Haar-like特征如下：<br><img src="/2017/07/31/harr/1.jpg" alt=""><br>Lienhart等人提出的扩展Haar-like特征如下：<br><img src="/2017/07/31/harr/2.jpg" alt=""><br>将矩形白色区域的像素和减去黑色区域的像素和，得到的值我们暂且称之为人脸特征值，以区分人脸和非人脸。为了增加区分度，可以通过boost手段对多个矩形特征计算得到一个区分度更大的特征值。</p>
 <h3 id="Adaboost"><a href="#Adaboost" class="headerlink" title="Adaboost"></a>Adaboost</h3><p>基于PAC学习模型的理论分析，Valiant提出了Boosting算法，Boosting算法涉及到两个重要的概念就是弱学习和强学习：</p>
 <blockquote>
