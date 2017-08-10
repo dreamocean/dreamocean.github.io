@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ubuntu," />
+  <meta name="keywords" content="face detect," />
 
 
 
@@ -87,22 +87,26 @@
 
 
 
-<meta name="description" content="总结下Linux下开发使用比较多的工具及命令：
-svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
-rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
+<meta name="description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux常用命令及SVN等软件安装">
-<meta property="og:url" content="http://yoursite.com/2017/04/17/command/index.html">
+<meta property="og:title" content="人脸检测之MTCNN">
+<meta property="og:url" content="http://yoursite.com/2017/08/10/mtcnn/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="总结下Linux下开发使用比较多的工具及命令：
-svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
-rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
-<meta property="og:updated_time" content="2017-07-17T02:43:31.000Z">
+<meta property="og:description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/0.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/2.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/4.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/timg11.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/timg0.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/chip_1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/chip_0.png">
+<meta property="og:updated_time" content="2017-08-10T09:07:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux常用命令及SVN等软件安装">
-<meta name="twitter:description" content="总结下Linux下开发使用比较多的工具及命令：
-svn版本管理subversion安装命令行svn：sudo apt-get install subversionsvn checkout http://xxx.xxx.xxx.xx 本地路径cd svn文件执行svn update
-rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行sudo apt-get insta">
+<meta name="twitter:title" content="人脸检测之MTCNN">
+<meta name="twitter:description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/10/mtcnn/0.jpg">
 
 
 
@@ -130,13 +134,13 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/17/command/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/10/mtcnn/"/>
 
 
 
 
 
-  <title> Linux常用命令及SVN等软件安装 | dreamocean </title>
+  <title> 人脸检测之MTCNN | dreamocean </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +279,7 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/17/command/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/mtcnn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MengyangZhang">
@@ -296,7 +300,7 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
             
             
               
-                Linux常用命令及SVN等软件安装
+                人脸检测之MTCNN
               
             
           </h1>
@@ -311,8 +315,8 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-17T10:19:43+08:00">
-                2017-04-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T14:46:01+08:00">
+                2017-08-10
               </time>
             
 
@@ -334,8 +338,8 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/face-detect/" itemprop="url" rel="index">
+                    <span itemprop="name">face detect</span>
                   </a>
                 </span>
 
@@ -351,7 +355,7 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
 
           
           
-             <span id="/2017/04/17/command/" class="leancloud_visitors" data-flag-title="Linux常用命令及SVN等软件安装">
+             <span id="/2017/08/10/mtcnn/" class="leancloud_visitors" data-flag-title="人脸检测之MTCNN">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -380,57 +384,33 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
       
 
       
-        <p>总结下Linux下开发使用比较多的工具及命令：</p>
-<h4 id="svn版本管理"><a href="#svn版本管理" class="headerlink" title="svn版本管理"></a>svn版本管理</h4><h5 id="subversion"><a href="#subversion" class="headerlink" title="subversion"></a>subversion</h5><p>安装命令行svn：<br><code>sudo apt-get install subversion</code><br><code>svn checkout http://xxx.xxx.xxx.xx 本地路径</code><br><code>cd svn文件</code>执行<code>svn update</code></p>
-<h5 id="rapidsvn"><a href="#rapidsvn" class="headerlink" title="rapidsvn"></a>rapidsvn</h5><p>rapidsvn是图形界面，可以在ubuntu软件中心安装，或执行<br><code>sudo apt-get install rapidsvn</code><br>不推荐使用，速度慢，经常崩溃。</p>
-<h5 id="RabbitVCS-SVN"><a href="#RabbitVCS-SVN" class="headerlink" title="RabbitVCS SVN"></a>RabbitVCS SVN</h5><a id="more"></a>
-<p>与windowns下TortoiseSVN功能和界面基本相同，上手容易，功能齐全，推荐使用，安装方法如下：<br><code>sudo add-apt-repository ppa:rabbitvcs/ppa</code><br>如果第一步没有成功导入密钥key，则执行：<br><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 34EF4A35</code><br>执行更新源操作：<br><code>sudo apt-get update</code><br>安装依赖库：<br><code>sudo apt-get install rabbitvcs-cli  rabbitvcs-core rabbitvcs-gedit rabbitvcs-nautilus3</code><br>安装完成后，如果右键为出现svn选项，执行重启命令：<br><code>nautilus -q</code>或<code>nautilus</code></p>
-<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><h5 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h5><blockquote>
-<p><code>sudo rm -rf /xxx</code> —— 删除文件夹<br><em>-r：向下递归删除<br>-f：直接强行删除，且没有任何提示</em><br><code>sudo rm -f /文件名</code> —— 删除文件.     </p>
+        <h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><p>基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文<a href="https://arxiv.org/pdf/1604.02878v1.pdf" target="_blank" rel="external">Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks</a>，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从粗到细的处理，具体流程如下：   </p>
+<blockquote>
+<p>数据与处理：为应对目标多尺度问题，将原始图像resize到不同尺寸，构建图像金字塔，作为三阶级联架构的输入。<br>第一阶段，通过一个浅层的CNN快速生成候选窗口。该阶段是一个全部由卷积层组成的CNN，取名P-Net，获取候选人脸窗口以及人脸框回归向量。基于人脸框回归向量对候选窗口进行校正，之后采用非极大值抑制NMS合并高重叠率的候选窗口。<br>第二阶段，通过一个更复杂的CNN否决大量非人脸窗口从而精化人脸窗口。第一阶段输出的候选窗口作为R-Net的输入，R-Net能够进一步筛除大量错误的候选窗口，再利用人脸框回归向量对候选窗口做校正，并执行NMS。<br>第三阶段，该层比R-Net层又多了一层卷积层，进一步精化结果并输出5个人脸特征点。<br>与第二阶段相似，但这一阶段用更多的监督来识别人脸区域，而且网络能够输出五个人脸特征点位置坐标。</p>
 </blockquote>
-<h5 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h5><blockquote>
-<p><code>cp -r ~/xxx /xxxx</code> ——copy文件或文件夹.<br><code>cp ~/xxx ./</code> —— copy至当前目录.<br><code>cp -r ~/xxx/. ./</code> —— copy xxx目录下所有文件至当前目录</p>
+<p>示意图和各层网络结构如下：<br><a id="more"></a><br><img src="/2017/08/10/mtcnn/0.jpg" alt=""><br><img src="/2017/08/10/mtcnn/1.png" alt=""></p>
+<h3 id="网络训练"><a href="#网络训练" class="headerlink" title="网络训练"></a>网络训练</h3><p>整个的训练学习过程就是最小化下面这个函数，其中，N为训练样本数量，aj表示任务的重要性，bj为样本标签，Lj为上面的损失函数：<br><img src="/2017/08/10/mtcnn/2.png" alt=""><br>训练需要注意的点：  </p>
+<blockquote>
+<p>(1) 文中训练使用了在线困难样本生成(Online Hard sample mining)策略，即在一个batch中只选择loss占前70%的样本进行BP。也就是说抛弃了一些对强化分类没有多大作用的简单样本。文中表示，通过实验表明这样做能够进一步提升精度。<br>(2) 不同阶段，classifier、boundingbox regression和landmarks detection在计算Loss时的权重是不一样的；<br>(3) 训练数据共4类，比例3:1:1:2，分别是negative，IOU<0.3; positive，iou="">0.65; part face，0.4</0.3;></p>
 </blockquote>
-<h5 id="远程服务器命令"><a href="#远程服务器命令" class="headerlink" title="远程服务器命令"></a>远程服务器命令</h5><blockquote>
-<p><code>ssh login_name@192.xxx.xxx.xx</code> —— 登录远程服务器<br><code>scp -r login_name@192.xxx.xxx.xx:~/服务器文件路径 /本地文件路径</code> —— 从远程服务器拷贝至本地<br><code>scp -r /本地文件路径  login_name@192.xxx.xxx.xx:~/服务器文件路径</code> —— 上传本地文件至远程服务器<br><code>sshfs login_name@192.xxx.xxx.xx:~/服务器文件路径 /本地文件路径</code> —— 把远程主机的文件系统映射到本地的目录中<br><code>rdesktop 192.xxx.xxx.xx</code> —— linux远程登录windows服务器</p>
-</blockquote>
-<h5 id="网络设备相关命令"><a href="#网络设备相关命令" class="headerlink" title="网络设备相关命令"></a>网络设备相关命令</h5><blockquote>
-<p><code>netstat -lntp</code> —— 查看端口使用情况<br><code>ifconfig</code> —— 查看网络设备<br><code>nvidia-smi</code> —— 查看GPU信息     </p>
-</blockquote>
-<h5 id="权限设置"><a href="#权限设置" class="headerlink" title="权限设置"></a>权限设置</h5><blockquote>
-<p><code>sudo chmod 777 文件</code> —— 设置任何人都有读、写、运行权限</p>
-</blockquote>
-<h5 id="pip命令"><a href="#pip命令" class="headerlink" title="pip命令"></a>pip命令</h5><blockquote>
-<p><code>pip list</code> —— 查看所有安装的python库<br><code>pip show 包名</code> —— 显示包安装路径<br><code>pip-autoremove 包名</code> —— 移除包<br><code>sudo pip install numpy --upgrade --ignore-installed numpy</code> ——升级包</p>
-</blockquote>
-<h5 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h5><blockquote>
-<p><code>dpkg -i xxxx.deb</code> —— 安装deb软件包<br><code>dpkg -P xxxx</code> —— 卸载软件<br><code>dpkg -s xxxx</code> —— 查看软件信息</p>
-</blockquote>
-<h4 id="apt-get命令"><a href="#apt-get命令" class="headerlink" title="apt-get命令"></a>apt-get命令</h4><blockquote>
-<p><code>sudo apt-get update</code> —— 更新软件源<br><code>sudo apt-get upgrade</code> —— 升级已安装的软件<br><code>sudo apt-get -f install</code> —— 解决依赖包的问题<br><code>sudo apt autoremove xxx</code> —— 卸载xxx软件</p>
-</blockquote>
-<h4 id="进程相关命令"><a href="#进程相关命令" class="headerlink" title="进程相关命令"></a>进程相关命令</h4><blockquote>
-<p><code>ps aux</code> —— 显示所有进程<br><code>ps aux | grep xxx</code> —— 显示xxx相关进程<br><code>pgrep xxx</code> —— 查找xxx进程<br><code>kill -9 进程号</code> —— 杀掉某个进程<br><code>pstree -p 进程号</code> —— 显示进程线程<br><code>ps -Lf 进程号</code> —— 显示进程线程</p>
-</blockquote>
-<h4 id="du-su命令"><a href="#du-su命令" class="headerlink" title="du/su命令"></a>du/su命令</h4><blockquote>
-<p><code>su - xxx</code> —— 切换成xxx用户<br><code>du -h --max-depth=1</code>     —— 查看当前目录下所有文件大小<br><code>ll -h</code> —— 查看目录下非目录文件大小<br><code>df -hl</code> —— 查看系统磁盘占用情况   </p>
-</blockquote>
-<h4 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h4><blockquote>
-<p><code>tar -xzvf xxxx.tgz</code> —— 解压tgz文件<br><code>tar -xzvf xxx.zip.gz xxx</code> —— 压缩xxx至zip.gz</p>
-<h4 id="nohup命令"><a href="#nohup命令" class="headerlink" title="nohup命令"></a>nohup命令</h4><p><code>nohup python xxx.py &amp;</code> —— 后台执行，log默认追加到nohup.out<br><code>tail -f nohup.out</code> —— 终端查看结尾日志<br><code>nohup python xxx.py &gt; myout.out 2&gt;&amp;1 &amp;</code> —— 后台执行，log指定追加到myout.out</p>
-</blockquote>
-<h4 id="vim命令"><a href="#vim命令" class="headerlink" title="vim命令"></a>vim命令</h4><blockquote>
-<p><code>:%s/xxxx//gn</code> —— vim下统计显示xxx的个数</p>
-</blockquote>
-<h4 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h4><blockquote>
-<p><code>find . -name &#39;*xxx*&#39;</code> —— 当前目录查找包含xxx字段的文件</p>
-</blockquote>
-<h4 id="mount命令"><a href="#mount命令" class="headerlink" title="mount命令"></a>mount命令</h4><blockquote>
-<p><code>mount /dev/cdrom /xxx/</code> —— 将cdrom设备挂在到xxx目录，从xxx中读取设备内容</p>
-</blockquote>
-<h4 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h4><blockquote>
-<p><code>ls -l|grep &quot;^-&quot;| wc -l</code> —— 查看当前目录下的文件数量（不包含子目录中的文件)<br><code>ls -lR|grep &quot;^-&quot;| wc -l</code> —— 查看当前目录下的文件数量（包含子目录中的文件)<br><code>ls -l|grep &quot;^d&quot;| wc -l</code> —— 查看当前目录下的文件夹目录个数（不包含子目录中的目录）<br><code>ls -lR xxxx*/|grep &quot;^-&quot;| wc -l</code> —— 查询当前路径下的指定前缀名的目录下的所有文件数量     </p>
-</blockquote>
+<p>最终算法在FDDB表现如下：<br><img src="/2017/08/10/mtcnn/3.jpg" alt=""><br>对齐效果如下：<br><img src="/2017/08/10/mtcnn/4.png" alt=""><br>我们可以看到mtcnn相对其他算法性能上有明显的提升。</p>
+<h3 id="工程代码"><a href="#工程代码" class="headerlink" title="工程代码"></a>工程代码</h3><p>工程地址：<a href="https://github.com/dreamocean/mtcnn" target="_blank" rel="external">https://github.com/dreamocean/mtcnn</a>     </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</div><div class="line"><span class="keyword">from</span> mtcnn_detector <span class="keyword">import</span> MtcnnDetector</div><div class="line"><span class="keyword">import</span> cv2</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">detector = MtcnnDetector(model_folder=<span class="string">'model'</span>, ctx=mx.cpu(<span class="number">0</span>), num_worker = <span class="number">4</span> , accurate_landmark = <span class="keyword">False</span>)</div><div class="line">img = cv2.imread(<span class="string">'timg0.jpg'</span>)</div><div class="line"><span class="comment"># run detector</span></div><div class="line">results = detector.detect_face(img)</div><div class="line"><span class="keyword">if</span> results <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">    total_boxes = results[<span class="number">0</span>]</div><div class="line">    points = results[<span class="number">1</span>]</div><div class="line">    <span class="comment"># extract aligned face chips</span></div><div class="line">    chips = detector.extract_image_chips(img, points, <span class="number">144</span>, <span class="number">0.37</span>)</div><div class="line">    <span class="keyword">for</span> i, chip <span class="keyword">in</span> enumerate(chips):</div><div class="line">        <span class="comment">#cv2.imshow('chip_'+str(i), chip)</span></div><div class="line">        cv2.imwrite(<span class="string">'chip_'</span>+str(i)+<span class="string">'.png'</span>, chip)</div><div class="line">    draw = img.copy()</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> total_boxes:</div><div class="line">        cv2.rectangle(draw, (int(b[<span class="number">0</span>]), int(b[<span class="number">1</span>])), (int(b[<span class="number">2</span>]), int(b[<span class="number">3</span>])), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</div><div class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> points:</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div><div class="line">            cv2.circle(draw, (p[i], p[i + <span class="number">5</span>]), <span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</div><div class="line">    cv2.imwrite(<span class="string">'timg0.png'</span>, draw)</div><div class="line">    cv2.imshow(<span class="string">"detection result"</span>, draw)</div><div class="line">    cv2.waitKey(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>人脸对齐输出如下：<br><img src="/2017/08/10/mtcnn/timg11.png" alt=""><br><img src="/2017/08/10/mtcnn/timg0.png" alt=""><br>人脸仿射变换对正如下：   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">face1</th>
+<th style="text-align:center">face2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2017/08/10/mtcnn/chip_1.png" alt=""></td>
+<td style="text-align:center"><img src="/2017/08/10/mtcnn/chip_0.png" alt=""></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -478,7 +458,7 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
       
         <div class="post-tags">
           
-            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+            <a href="/tags/face-detect/" rel="tag"># face detect</a>
           
         </div>
       
@@ -491,8 +471,8 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/12/opencv/" rel="next" title="Ubuntu下OpenCV／MXNet／Qt／Python等相应开发环境安装">
-                <i class="fa fa-chevron-left"></i> Ubuntu下OpenCV／MXNet／Qt／Python等相应开发环境安装
+              <a href="/2017/08/03/sdm/" rel="next" title="人脸检测之SDM">
+                <i class="fa fa-chevron-left"></i> 人脸检测之SDM
               </a>
             
           </div>
@@ -500,10 +480,6 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/18/cuda/" rel="prev" title="ubuntu下cuda和cudnn的安装及mxnet-GPU版本配置">
-                ubuntu下cuda和cudnn的安装及mxnet-GPU版本配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,7 +630,7 @@ rapidsvnrapidsvn是图形界面，可以在ubuntu软件中心安装，或执行s
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#svn版本管理"><span class="nav-number">1.</span> <span class="nav-text">svn版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#subversion"><span class="nav-number">1.1.</span> <span class="nav-text">subversion</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rapidsvn"><span class="nav-number">1.2.</span> <span class="nav-text">rapidsvn</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RabbitVCS-SVN"><span class="nav-number">1.3.</span> <span class="nav-text">RabbitVCS SVN</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#delete"><span class="nav-number">2.1.</span> <span class="nav-text">delete</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#copy"><span class="nav-number">2.2.</span> <span class="nav-text">copy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#远程服务器命令"><span class="nav-number">2.3.</span> <span class="nav-text">远程服务器命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网络设备相关命令"><span class="nav-number">2.4.</span> <span class="nav-text">网络设备相关命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#权限设置"><span class="nav-number">2.5.</span> <span class="nav-text">权限设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pip命令"><span class="nav-number">2.6.</span> <span class="nav-text">pip命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dpkg"><span class="nav-number">2.7.</span> <span class="nav-text">dpkg</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apt-get命令"><span class="nav-number">3.</span> <span class="nav-text">apt-get命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程相关命令"><span class="nav-number">4.</span> <span class="nav-text">进程相关命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#du-su命令"><span class="nav-number">5.</span> <span class="nav-text">du/su命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压缩"><span class="nav-number">6.</span> <span class="nav-text">解压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nohup命令"><span class="nav-number">7.</span> <span class="nav-text">nohup命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vim命令"><span class="nav-number">8.</span> <span class="nav-text">vim命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find命令"><span class="nav-number">9.</span> <span class="nav-text">find命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mount命令"><span class="nav-number">10.</span> <span class="nav-text">mount命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ls命令"><span class="nav-number">11.</span> <span class="nav-text">ls命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络训练"><span class="nav-number">2.</span> <span class="nav-text">网络训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程代码"><span class="nav-number">3.</span> <span class="nav-text">工程代码</span></a></li></ol></div>
             
 
           </div>
