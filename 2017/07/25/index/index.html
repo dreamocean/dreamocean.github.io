@@ -87,23 +87,22 @@
 
 
 
-<meta name="description" content="深度神经网络自出现以来，已经成为计算机视觉领域一项举足轻重的技术。其中，ImageNet 图像分类竞赛极大地推动着这项新技术的发展。这里将对各个深度学习模型进行比较分析，具体参考论文AN ANALYSIS OF DEEP NEURAL NETWORK MODELS FOR PRACTICAL APPLICATIONS。论文综合分析了实际应用中的几项重要指标：准确度、内存占用、参数、操作时间、操作次">
+<meta name="description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="各深度学习模型比较分析">
-<meta property="og:url" content="http://yoursite.com/2017/07/20/model-compair/index.html">
+<meta property="og:title" content="评价指标FRR/FAR/ROC/ACC解析">
+<meta property="og:url" content="http://yoursite.com/2017/07/25/index/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="深度神经网络自出现以来，已经成为计算机视觉领域一项举足轻重的技术。其中，ImageNet 图像分类竞赛极大地推动着这项新技术的发展。这里将对各个深度学习模型进行比较分析，具体参考论文AN ANALYSIS OF DEEP NEURAL NETWORK MODELS FOR PRACTICAL APPLICATIONS。论文综合分析了实际应用中的几项重要指标：准确度、内存占用、参数、操作时间、操作次">
-<meta property="og:image" content="http://yoursite.com/2017/07/20/model-compair/0.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/20/model-compair/2.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/20/model-compair/3.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/20/model-compair/4.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/20/model-compair/6.png">
-<meta property="og:image" content="http://yoursite.com/2017/07/20/model-compair/7.png">
-<meta property="og:updated_time" content="2017-07-23T13:21:27.000Z">
+<meta property="og:description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
+<meta property="og:image" content="http://yoursite.com/2017/07/25/index/0.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/25/index/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/25/index/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/25/index/4.gif">
+<meta property="og:image" content="http://yoursite.com/2017/07/25/index/5.png">
+<meta property="og:updated_time" content="2017-08-10T03:07:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="各深度学习模型比较分析">
-<meta name="twitter:description" content="深度神经网络自出现以来，已经成为计算机视觉领域一项举足轻重的技术。其中，ImageNet 图像分类竞赛极大地推动着这项新技术的发展。这里将对各个深度学习模型进行比较分析，具体参考论文AN ANALYSIS OF DEEP NEURAL NETWORK MODELS FOR PRACTICAL APPLICATIONS。论文综合分析了实际应用中的几项重要指标：准确度、内存占用、参数、操作时间、操作次">
-<meta name="twitter:image" content="http://yoursite.com/2017/07/20/model-compair/0.png">
+<meta name="twitter:title" content="评价指标FRR/FAR/ROC/ACC解析">
+<meta name="twitter:description" content="各指标计算规则考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/25/index/0.jpg">
 
 
 
@@ -131,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/20/model-compair/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/25/index/"/>
 
 
 
 
 
-  <title> 各深度学习模型比较分析 | dreamocean </title>
+  <title> 评价指标FRR/FAR/ROC/ACC解析 | dreamocean </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +275,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/model-compair/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/25/index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MengyangZhang">
@@ -297,7 +296,7 @@
             
             
               
-                各深度学习模型比较分析
+                评价指标FRR/FAR/ROC/ACC解析
               
             
           </h1>
@@ -312,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T13:45:06+08:00">
-                2017-07-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-25T16:12:32+08:00">
+                2017-07-25
               </time>
             
 
@@ -323,28 +322,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">deep learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -352,7 +329,7 @@
 
           
           
-             <span id="/2017/07/20/model-compair/" class="leancloud_visitors" data-flag-title="各深度学习模型比较分析">
+             <span id="/2017/07/25/index/" class="leancloud_visitors" data-flag-title="评价指标FRR/FAR/ROC/ACC解析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,24 +358,39 @@
       
 
       
-        <p>深度神经网络自出现以来，已经成为计算机视觉领域一项举足轻重的技术。其中，ImageNet 图像分类竞赛极大地推动着这项新技术的发展。这里将对各个深度学习模型进行比较分析，具体参考论文<a href="https://arxiv.org/pdf/1605.07678v3.pdf" target="_blank" rel="external">AN ANALYSIS OF DEEP NEURAL NETWORK MODELS FOR PRACTICAL APPLICATIONS</a>。<br>论文综合分析了实际应用中的几项重要指标：准确度、内存占用、参数、操作时间、操作次数、推理时间、功耗，并得出了以下几项主要研究结论：</p>
-<blockquote>
-<p>功耗与批量大小、体系结构无关；<br>准确度与推理时间呈双曲线关系；<br>能量限制是最大可达准确度和模式复杂度的上限；<br>操作次数可以有效评估推理时间。   </p>
-</blockquote>
-<p>自从2012年的 ImageNet 竞赛上，Alexnet取得突破发展，成为第一个应用深度神经网络的应用，其他关于DNN的更复杂的应用也陆续出现。<br>图像处理软件分类挑战赛的终极目标是，在考虑实际推理时间的情况下，提高多层分类框架的准确度。为了达到这个目标，就要解决以下三方面的问题。<a id="more"></a><br>&gt;<br>第一，一般情况下，我们会在每个验证图像的多个类似实例中运行一个给定模型的多个训练实例。这种方法叫做模型平均或DNN集成，可以极大提高推理所需的计算量，以获得published准确度。<br>第二，不同研究报告中对验证图像做的预估模型（集合）的操作次数不一样，模型选择会受到影响，因此不同的抽样方法（以及取样集合的大小不同）得出的报告准确度结果就会有所偏差。<br>第三，加速推理过程是模型实际应用的关键，影响着资源利用、功耗以及推理延迟等因素，而目前尚无方法使推理时间缩短。 </p>
-<p>论文对过去4年图像处理软件分类挑战赛上出现的不同种类的先进的DNN架构进行了对比，从计算需要和准确度两个角度做分析，主要比较这些架构与资源利用实际部署相关的多个指标，即准确度、内存占用、参数、操作时间、操作次数、推理时间、功耗。     </p>
-<h3 id="评价方法"><a href="#评价方法" class="headerlink" title="评价方法"></a>评价方法</h3><p>由于不同的抽样方法得出的模型质量结论也不一样，比如，VGG-16和GoogleNet的central-crop误差分别是8.7%和10.07%，表明VGG-16性能优于googleNet，而用10-crop抽样，则误差分别是9.33%和9.15%，VGG-16又比GoogleNet差了。于是，论文决定对所有网络重新评估，使用单个central-crop抽样方法。<br><img src="/2017/07/20/model-compair/0.png" alt=""><br><em>上图中不同的配色方案表示不同的架构和作者。注意，同组网络共享相同的色相，比如所有的ResNet系列都是用粉色系表示的。</em>   </p>
-<h3 id="具体结果"><a href="#具体结果" class="headerlink" title="具体结果"></a>具体结果</h3><p>论文比较了以下DDN：</p>
-<blockquote>
-<p>AlexNet (Krizhevsky et al., 2012)；<br>batch normalised AlexNet (Zagoruyko, 2016)；batch normalised Network In Network (NIN) (Lin et al., 2013)；<br>ENet (Paszke et al., 2016) for ImageNet (Culurciello, 2016)；<br>GoogLeNet (Szegedy et al., 2014)；<br>VGG-16 and -19 (Simonyan &amp; Zisserman, 2014)；<br>ResNet-18, -34, -50, -101 and -152 (He et al., 2015)；<br>Inception-v3 (Szegedy et al., 2015) 以及 Inception-v4 (Szegedy et al., 2016)。 </p>
-</blockquote>
-<h4 id="准确率"><a href="#准确率" class="headerlink" title="准确率"></a>准确率</h4><p>最新的ResNet和Inception架构相比其他架构准确率至少高7%；上图2则提供了各网络更详细的准确率值，将计算成本和网络参数的数量可视化呈现。首先非常明显的是，VGG不管从计算需求还是参数数量方面来说，都是迄今为止最昂贵的架构，尽管它已经被广泛应用于许多应用程序。VGG的16层和19层的实现实际上与其他所有网络都是隔绝的。其他的架构形成了一条斜线，到Inception和ResNet时，这条线开始变平缓。这表明这些模型在该数据集上到达一个拐点。在这个拐点上，计算成本（复杂性）开始超过准确率上的好处。   </p>
-<h4 id="时间和功耗"><a href="#时间和功耗" class="headerlink" title="时间和功耗"></a>时间和功耗</h4><p><img src="/2017/07/20/model-compair/2.png" alt=""><br>上图3显示了各架构在每个图像上的推理时间，作为一个图像批大小（从1到64）函数。我们注意到VGG处理一张图像所需时间约1/5秒，这使它在NVIDIA TX1上实时应用的可能性较小。AlexNet的批大小从1到64的变化中，处理速度提升了3倍，这是由于它的完全连接层的弱优化，这个发现令人惊讶。</p>
-<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p><img src="/2017/07/20/model-compair/3.png" alt=""><br>由上图5可见，最初最大系统内存使用情况是不变的，随着批大小增加，内存消耗增大。这是由于网络模型的初始内存分配以及批处理时的内存需求随着图像数量的增加而成比例地增加。<br>由上图6可见，对规模小于 100 MB的网络，初始内存分配不会小于 200 MB，而且随后呈现为一条斜率为1.3的线性函数。</p>
-<h4 id="运算量"><a href="#运算量" class="headerlink" title="运算量"></a>运算量</h4><p><img src="/2017/07/20/model-compair/4.png" alt=""><br>分析发现，对批大小为16的图像，每个图像的运算量和推理时间之间存在线性关系。因此，在设计网络时，可以控制运算量，以使处理速度保持在实时应用或资源有限的应用的可接受范围内。</p>
-<h4 id="准确率和吞吐量"><a href="#准确率和吞吐量" class="headerlink" title="准确率和吞吐量"></a>准确率和吞吐量</h4><p><img src="/2017/07/20/model-compair/6.png" alt=""><br>从上图显示，在单位时间里，准确率和推理数量之间存在非平凡的线性上限。对于给定的帧速率，可以实现的最大准确率与帧速率本身形成线性比例。此外，选定一个推理时间，可以得出资源充分利用条件下理论上的最大准确率。由于功耗固定，我们甚至可以进一步得出能耗限制下的最大准确率，这可以作为需要在嵌入式系统上运行的网络的基本设计因素。</p>
-<h4 id="参数使用"><a href="#参数使用" class="headerlink" title="参数使用"></a>参数使用</h4><p><img src="/2017/07/20/model-compair/7.png" alt=""><br>我们已经知道，DNN在利用全部学习能力（参数数量/自由度）方面非常低效。Han et al., 2015的研究利用DNN的这个缺陷，使用权重剪枝（weights pruning）、量化（quantisation）和变长编码（variable-length symbol encoding）将网络规模减小了50倍。值得注意的是，使用更高效的架构能够产生更紧凑的呈现。如上图所示，虽然VGG 比AlexNet的准确率更高，但其信息密度不如AlexNet。这意味着在VGG架构中引入的自由度带来的准确率上的提高不大。    </p>
-<p>文章参考：<br><a href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&amp;mid=2651994642&amp;idx=2&amp;sn=09c22e900e2f00f995bac83e674f7192&amp;chksm=f1214ee3c656c7f5ec991df11fb08203f349cd9addeaddb2d7166e864459854fa5b0a2671235&amp;mpshare=1&amp;scene=1&amp;srcid=0313wzSHmFcxWVWok4C2h7CN#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&amp;mid=2651994642&amp;idx=2&amp;sn=09c22e900e2f00f995bac83e674f7192&amp;chksm=f1214ee3c656c7f5ec991df11fb08203f349cd9addeaddb2d7166e864459854fa5b0a2671235&amp;mpshare=1&amp;scene=1&amp;srcid=0313wzSHmFcxWVWok4C2h7CN#rd</a></p>
+        <h3 id="各指标计算规则"><a href="#各指标计算规则" class="headerlink" title="各指标计算规则"></a>各指标计算规则</h3><p>考虑一个二分问题，如人脸验证，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：如果一个实例是正类并且也被预测成正类，即为真正类（True positive），如果实例是负类被预测成正类，称之为假正类（False positive），误报。相应地，如果实例是负类被预测成负类，称之为真负类（True negative），正类被预测成负类则为假负类（False negative），漏报。具体如下表所示：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">actual\pediction</th>
+<th style="text-align:center">positive</th>
+<th style="text-align:center">negative</th>
+<th style="text-align:center">rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">positive</td>
+<td style="text-align:center">TP</td>
+<td style="text-align:center">FN</td>
+<td style="text-align:center">TPR=TP/(TP+FN)</td>
+</tr>
+<tr>
+<td style="text-align:center">negative</td>
+<td style="text-align:center">FP</td>
+<td style="text-align:center">TN</td>
+<td style="text-align:center">FPR=FP/(FP+TN)</td>
+</tr>
+</tbody>
+</table>
+<p>TPR为命中率；<br>FPR=FAR=FMR为误识率；<br>FRR=FNMR=(1-TPR)为识拒率；<br>ACC=(TP+TN)/(TP+FN+FP+TN)，为判对准确率；<br>在有些文献中将误识率表达为FMR（False match rate），以及将拒识率表达为FNMR（False non-match rate)。   </p>
+<h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><a id="more"></a>  
+<p>在一个二分类模型中，对于所得到的连续结果，假设已确定一个阀值，比如说0.6，大于这个值的实例划归为正类，小于这个值则划到负类中。如果减小阀值，减到0.5，固然能识别出更多的正类，也就是提高了识别出的正例占所有正例的比类，即TPR，但同时也将更多的负实例当作了正实例，即提高了FPR。为了形象化这一变化，在此引入ROC，ROC曲线可以用于评价一个分类器。<br>ROC曲线（Receiver Operator characteristic Curve）是一种已经被广泛接受的系统匹配算法测试指标，它是匹配分数阈值、误识率以及拒识率之间的一种关系。它反映了识别算法在不同阈值上，拒识率和误识率的平衡关系。<br>下图给出了ROC曲线，其中横坐标是误识率，纵坐标是命中率，等错误率（EER Equal-Error Rate）是命中率和误识率的一个平衡点，等错误率能够取到的值越低，表示算法的性能越好：<br><img src="/2017/07/25/index/0.jpg" alt=""><br><em>理想情况下，TPR应该接近1，FPR应该接近0。ROC曲线上的每一个点对应于一threshold，对于一个分类器，每个threshold下会有一个TPR和FPR。比如Threshold最大时，TP=FP=0，对应于原点；Threshold最小时，TN=FN=0，对应于右上角的点(1,1)。</em>     </p>
+<p>FAR-FRR曲线，或FMR-FNMR曲线大致示意如下：<br><img src="/2017/07/25/index/3.jpg" alt=""> </p>
+<p>阈值与各指标的关系如下：<br><img src="/2017/07/25/index/1.jpg" alt=""><br><em>随着阈值threshold增加，TP和FP都减小，TPR和FPR也减小，ROC点向左下移动。</em>   </p>
+<h3 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h3><p>AUC（Area Under Curve）被定义为ROC曲线下的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围在0.5和1之间。使用AUC值作为评价标准是因为很多时候ROC曲线并不能清晰的说明哪个分类器的效果更好，而作为一个数值，对应AUC更大的分类器效果更好。</p>
+<h3 id="EER"><a href="#EER" class="headerlink" title="EER"></a>EER</h3><p>EER（Equal Error Rate）是相等错误率的意思，也就是把FAR、FRR两个参数统一为一个参数，来衡量指纹算法的整体性能。<br>FAR和FRR是同一个算法系统的两个参数，把它放在同一个坐标中，如下图所示，FAR是随阈值增大而减小的，FRR是随阈值增大而增大的。因此它们一定有交点。这个点是在某个阈值下的FAR与FRR等值的点。习惯上用这一点的值来衡量算法的综合性能。对于一个更优的算法，希望在相同阈值情况下，FAR和FRR都越小越好。<br><img src="/2017/07/25/index/4.gif" alt=""><br>把FAR和FRR曲线都向下平移，同时相交点ERR也向下平移，所以EER值越小的时候，表示算法的整体性能越高。<br>由于当FRR与FAR相交时对应的阈值都很小，也就是说此时的相似度阈值连30%都不到。实际使用中的阈值至少设在80%以上，所以EER值并不被用在大众化场合来描述算法的性能，只是在竞赛排名中使用。</p>
+<h3 id="CMC曲线"><a href="#CMC曲线" class="headerlink" title="CMC曲线"></a>CMC曲线</h3><p>CMC曲线就是算一种top-k的击中概率，主要用闭集测试。比如有n个注册样本，现在想测试性能，测试样本依次和n个注册样本算取一个距离，然后排序，看类类样本位于前top-k，最后统计得到CMC曲线，示意图如下，横坐标为topK中的K值，纵坐标为命中率：<br><img src="/2017/07/25/index/5.png" alt=""> </p>
 
       
     </div>
@@ -459,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/15/res/" rel="next" title="深度学习ResNet/ResNeXt网络">
-                <i class="fa fa-chevron-left"></i> 深度学习ResNet/ResNeXt网络
+              <a href="/2017/07/20/model-compair/" rel="next" title="各深度学习模型比较分析">
+                <i class="fa fa-chevron-left"></i> 各深度学习模型比较分析
               </a>
             
           </div>
@@ -469,8 +461,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/25/index/" rel="prev" title="评价指标FRR/FAR/ROC/ACC解析">
-                评价指标FRR/FAR/ROC/ACC解析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/30/harr/" rel="prev" title="人脸检测之Haar">
+                人脸检测之Haar <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -622,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#评价方法"><span class="nav-number">1.</span> <span class="nav-text">评价方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体结果"><span class="nav-number">2.</span> <span class="nav-text">具体结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准确率"><span class="nav-number">2.1.</span> <span class="nav-text">准确率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间和功耗"><span class="nav-number">2.2.</span> <span class="nav-text">时间和功耗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存"><span class="nav-number">2.3.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算量"><span class="nav-number">2.4.</span> <span class="nav-text">运算量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准确率和吞吐量"><span class="nav-number">2.5.</span> <span class="nav-text">准确率和吞吐量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数使用"><span class="nav-number">2.6.</span> <span class="nav-text">参数使用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#各指标计算规则"><span class="nav-number">1.</span> <span class="nav-text">各指标计算规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC曲线"><span class="nav-number">2.</span> <span class="nav-text">ROC曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AUC"><span class="nav-number">3.</span> <span class="nav-text">AUC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EER"><span class="nav-number">4.</span> <span class="nav-text">EER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMC曲线"><span class="nav-number">5.</span> <span class="nav-text">CMC曲线</span></a></li></ol></div>
             
 
           </div>
