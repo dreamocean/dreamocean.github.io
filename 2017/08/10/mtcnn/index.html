@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/timg0.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/chip_1.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/10/mtcnn/chip_0.png">
-<meta property="og:updated_time" content="2017-08-10T09:07:05.000Z">
+<meta property="og:updated_time" content="2017-08-10T09:11:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人脸检测之MTCNN">
 <meta name="twitter:description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
@@ -391,10 +391,10 @@
 <p>示意图和各层网络结构如下：<br><a id="more"></a><br><img src="/2017/08/10/mtcnn/0.jpg" alt=""><br><img src="/2017/08/10/mtcnn/1.png" alt=""></p>
 <h3 id="网络训练"><a href="#网络训练" class="headerlink" title="网络训练"></a>网络训练</h3><p>整个的训练学习过程就是最小化下面这个函数，其中，N为训练样本数量，aj表示任务的重要性，bj为样本标签，Lj为上面的损失函数：<br><img src="/2017/08/10/mtcnn/2.png" alt=""><br>训练需要注意的点：  </p>
 <blockquote>
-<p>(1) 文中训练使用了在线困难样本生成(Online Hard sample mining)策略，即在一个batch中只选择loss占前70%的样本进行BP。也就是说抛弃了一些对强化分类没有多大作用的简单样本。文中表示，通过实验表明这样做能够进一步提升精度。<br>(2) 不同阶段，classifier、boundingbox regression和landmarks detection在计算Loss时的权重是不一样的；<br>(3) 训练数据共4类，比例3:1:1:2，分别是negative，IOU<0.3; positive，iou="">0.65; part face，0.4</0.3;></p>
+<p>(1) 文中训练使用了在线困难样本生成(Online Hard sample mining)策略，即在一个batch中只选择loss占前70%的样本进行BP。也就是说抛弃了一些对强化分类没有多大作用的简单样本。文中表示，通过实验表明这样做能够进一步提升精度。<br>(2) 不同阶段，classifier、boundingbox regression和landmarks detection在计算Loss时的权重是不一样的；<br>(3) 训练数据共4类，比例3:1:1:2，分别是negative，IOU<0.3； positive，iou="">0.65；part face，0.4。</0.3；></p>
 </blockquote>
 <p>最终算法在FDDB表现如下：<br><img src="/2017/08/10/mtcnn/3.jpg" alt=""><br>对齐效果如下：<br><img src="/2017/08/10/mtcnn/4.png" alt=""><br>我们可以看到mtcnn相对其他算法性能上有明显的提升。</p>
-<h3 id="工程代码"><a href="#工程代码" class="headerlink" title="工程代码"></a>工程代码</h3><p>工程地址：<a href="https://github.com/dreamocean/mtcnn" target="_blank" rel="external">https://github.com/dreamocean/mtcnn</a>     </p>
+<h3 id="工程示例"><a href="#工程示例" class="headerlink" title="工程示例"></a>工程示例</h3><p>工程地址：<a href="https://github.com/dreamocean/mtcnn" target="_blank" rel="external">https://github.com/dreamocean/mtcnn</a>     </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</div><div class="line"><span class="keyword">from</span> mtcnn_detector <span class="keyword">import</span> MtcnnDetector</div><div class="line"><span class="keyword">import</span> cv2</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">detector = MtcnnDetector(model_folder=<span class="string">'model'</span>, ctx=mx.cpu(<span class="number">0</span>), num_worker = <span class="number">4</span> , accurate_landmark = <span class="keyword">False</span>)</div><div class="line">img = cv2.imread(<span class="string">'timg0.jpg'</span>)</div><div class="line"><span class="comment"># run detector</span></div><div class="line">results = detector.detect_face(img)</div><div class="line"><span class="keyword">if</span> results <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">    total_boxes = results[<span class="number">0</span>]</div><div class="line">    points = results[<span class="number">1</span>]</div><div class="line">    <span class="comment"># extract aligned face chips</span></div><div class="line">    chips = detector.extract_image_chips(img, points, <span class="number">144</span>, <span class="number">0.37</span>)</div><div class="line">    <span class="keyword">for</span> i, chip <span class="keyword">in</span> enumerate(chips):</div><div class="line">        <span class="comment">#cv2.imshow('chip_'+str(i), chip)</span></div><div class="line">        cv2.imwrite(<span class="string">'chip_'</span>+str(i)+<span class="string">'.png'</span>, chip)</div><div class="line">    draw = img.copy()</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> total_boxes:</div><div class="line">        cv2.rectangle(draw, (int(b[<span class="number">0</span>]), int(b[<span class="number">1</span>])), (int(b[<span class="number">2</span>]), int(b[<span class="number">3</span>])), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</div><div class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> points:</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div><div class="line">            cv2.circle(draw, (p[i], p[i + <span class="number">5</span>]), <span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</div><div class="line">    cv2.imwrite(<span class="string">'timg0.png'</span>, draw)</div><div class="line">    cv2.imshow(<span class="string">"detection result"</span>, draw)</div><div class="line">    cv2.waitKey(<span class="number">0</span>)</div></pre></td></tr></table></figure>
 <p>人脸对齐输出如下：<br><img src="/2017/08/10/mtcnn/timg11.png" alt=""><br><img src="/2017/08/10/mtcnn/timg0.png" alt=""><br>人脸仿射变换对正如下：   </p>
 <table>
@@ -411,6 +411,7 @@
 </tr>
 </tbody>
 </table>
+<p>参考文章：<br><a href="http://blog.csdn.net/fuwenyan/article/details/73201680" target="_blank" rel="external">http://blog.csdn.net/fuwenyan/article/details/73201680</a></p>
 
       
     </div>
@@ -630,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络训练"><span class="nav-number">2.</span> <span class="nav-text">网络训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程代码"><span class="nav-number">3.</span> <span class="nav-text">工程代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络训练"><span class="nav-number">2.</span> <span class="nav-text">网络训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程示例"><span class="nav-number">3.</span> <span class="nav-text">工程示例</span></a></li></ol></div>
             
 
           </div>
