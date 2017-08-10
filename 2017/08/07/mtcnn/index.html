@@ -87,22 +87,26 @@
 
 
 
-<meta name="description" content="算法介绍人脸对齐就是在已经检测到的人脸的基础上，自动找到人脸上的眼睛鼻子嘴和脸轮廓等标志性特征位置，通过这一手段可以衍生出很多产品应用，包括美图软件、魔漫相机、表情检测和性别检测等。目前有很多的人脸对齐算法，比较传统的有ASM、AAM、CLM和一些列改进算法，而目前比较流行的有ESR、3D-ESR、SPR、LBF、SDM、CFSS等。这里将详细介绍分析SDM算法，具体参考论文Supervised">
+<meta name="description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人脸检测之SDM">
-<meta property="og:url" content="http://yoursite.com/2017/08/03/sdm/index.html">
+<meta property="og:title" content="人脸检测之MTCNN">
+<meta property="og:url" content="http://yoursite.com/2017/08/07/mtcnn/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="算法介绍人脸对齐就是在已经检测到的人脸的基础上，自动找到人脸上的眼睛鼻子嘴和脸轮廓等标志性特征位置，通过这一手段可以衍生出很多产品应用，包括美图软件、魔漫相机、表情检测和性别检测等。目前有很多的人脸对齐算法，比较传统的有ASM、AAM、CLM和一些列改进算法，而目前比较流行的有ESR、3D-ESR、SPR、LBF、SDM、CFSS等。这里将详细介绍分析SDM算法，具体参考论文Supervised">
-<meta property="og:image" content="http://yoursite.com/2017/08/03/sdm/0.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/03/sdm/1.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/03/sdm/2.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/03/sdm/3.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/03/sdm/landmarks0.png">
-<meta property="og:updated_time" content="2017-08-10T09:10:10.000Z">
+<meta property="og:description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/0.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/2.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/4.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/timg11.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/timg0.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/chip_1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/07/mtcnn/chip_0.png">
+<meta property="og:updated_time" content="2017-08-10T09:18:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人脸检测之SDM">
-<meta name="twitter:description" content="算法介绍人脸对齐就是在已经检测到的人脸的基础上，自动找到人脸上的眼睛鼻子嘴和脸轮廓等标志性特征位置，通过这一手段可以衍生出很多产品应用，包括美图软件、魔漫相机、表情检测和性别检测等。目前有很多的人脸对齐算法，比较传统的有ASM、AAM、CLM和一些列改进算法，而目前比较流行的有ESR、3D-ESR、SPR、LBF、SDM、CFSS等。这里将详细介绍分析SDM算法，具体参考论文Supervised">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/03/sdm/0.png">
+<meta name="twitter:title" content="人脸检测之MTCNN">
+<meta name="twitter:description" content="算法介绍基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/07/mtcnn/0.jpg">
 
 
 
@@ -130,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/03/sdm/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/07/mtcnn/"/>
 
 
 
 
 
-  <title> 人脸检测之SDM | dreamocean </title>
+  <title> 人脸检测之MTCNN | dreamocean </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +279,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/03/sdm/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/mtcnn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MengyangZhang">
@@ -296,7 +300,7 @@
             
             
               
-                人脸检测之SDM
+                人脸检测之MTCNN
               
             
           </h1>
@@ -311,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T14:02:29+08:00">
-                2017-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-07T14:46:01+08:00">
+                2017-08-07
               </time>
             
 
@@ -351,7 +355,7 @@
 
           
           
-             <span id="/2017/08/03/sdm/" class="leancloud_visitors" data-flag-title="人脸检测之SDM">
+             <span id="/2017/08/07/mtcnn/" class="leancloud_visitors" data-flag-title="人脸检测之MTCNN">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -380,13 +384,34 @@
       
 
       
-        <h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><p>人脸对齐就是在已经检测到的人脸的基础上，自动找到人脸上的眼睛鼻子嘴和脸轮廓等标志性特征位置，通过这一手段可以衍生出很多产品应用，包括美图软件、魔漫相机、表情检测和性别检测等。目前有很多的人脸对齐算法，比较传统的有ASM、AAM、CLM和一些列改进算法，而目前比较流行的有ESR、3D-ESR、SPR、LBF、SDM、CFSS等。这里将详细介绍分析SDM算法，具体参考论文<a href="http://courses.cs.washington.edu/courses/cse590v/13au/intraface.pdf" target="_blank" rel="external">Supervised Descent Method and its Applications to Face Alignment</a> 。<br>SDM人脸对齐算法属于回归方法，基于回归的方法的基本原理：对于一张给定的人脸，给出一个初始的形状，通过不断地迭代，将初始形状回归到接近甚至等于真实形状的位置。<br>事实上SDM并非是一种人脸对齐方法，而是一种监督下降方法，用于解决非线性最小化问题。<br><a id="more"></a><br>解决非线性最优化问题通常有2个难点：</p>
+        <h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><p>基于多任务级联卷积神经网络的人脸检测和对齐算法MTCNN，相对于上篇介绍的SDM算法在性能和准确率上有所提升，而且具有实时处理能力，参考论文<a href="https://arxiv.org/pdf/1604.02878v1.pdf" target="_blank" rel="external">Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks</a>，文章主要通过三阶的级联卷积神经网络（P-Net，R-Net，O-Net）对任务进行从粗到细的处理，具体流程如下：   </p>
 <blockquote>
-<p>（1）方程不可微，计算量太大；<br>（2）Hessian矩阵太大，不是正定矩阵。   </p>
+<p>数据与处理：为应对目标多尺度问题，将原始图像resize到不同尺寸，构建图像金字塔，作为三阶级联架构的输入。<br>第一阶段，通过一个浅层的CNN快速生成候选窗口。该阶段是一个全部由卷积层组成的CNN，取名P-Net，获取候选人脸窗口以及人脸框回归向量。基于人脸框回归向量对候选窗口进行校正，之后采用非极大值抑制NMS合并高重叠率的候选窗口。<br>第二阶段，通过一个更复杂的CNN否决大量非人脸窗口从而精化人脸窗口。第一阶段输出的候选窗口作为R-Net的输入，R-Net能够进一步筛除大量错误的候选窗口，再利用人脸框回归向量对候选窗口做校正，并执行NMS。<br>第三阶段，该层比R-Net层又多了一层卷积层，进一步精化结果并输出5个人脸特征点。<br>与第二阶段相似，但这一阶段用更多的监督来识别人脸区域，而且网络能够输出五个人脸特征点位置坐标。</p>
 </blockquote>
-<p>基于这样的难点，作者提出了自己的SDM方法，可以用于解决上述的问题，并成功解决了人脸对齐中关键点的回归问题，具体示意图如下：<br><img src="/2017/08/03/sdm/0.png" alt=""><br>如上图a所示，传统解决最小化二乘问题的方法就是牛顿下山法，通过牛顿迭代，最终可以找到一个全局最小值。这样的迭代也肯定是效果最好的，但是在实际工程应用中，是不会有足够的计算资源来将所有样本一下都计算进去的，于是就有了上图b的方法，更新每一个Δx，每次都会找到一个最小值，然后不断迭代，减少最小值之间的误差距离，最终就会找到全局最小值，类似深度学习里的Mini batch SGD。<br>给定一张含有m个像素的图片，h表示一个非线性特征提取函数。那么我们的目标就是，在给定一个初始形状x0的基础上，通过回归的方法，将x0回归到该人脸正确的形状x∗上，用数学的方式表达，即为求得使下面的f(x0+Δx)最小的Δx：<br><img src="/2017/08/03/sdm/1.png" alt=""><br><img src="/2017/08/03/sdm/2.png" alt=""><br>那么问题来了，如果每一张脸的初始形状都是一样的（即都是已知样本的真实形状的平均形状），那么怎么让它们回归到各自人脸的真实形状呢，答案就是每张图片提取出的不同的SIFT特征（具体采用什么特征可以依据情况而定，论文中 采用了SIFT特征，但也可以采用如HOG，DOG，甚至LBF等特征）了，虽然采用了相同的初始形状，但在不同的图片上，相同的初始形状所提取出的SIFT特征是完全不同的，也就是ϕ0是不同的，这样就可以通过回归器将其回归到各自的真实形状上了。<br>现在我们的优化目标，就是要得到一个回归器，这个回归器能起到的作用是将一个初始形状回归到真实形状上去。也就是学到正确的回归器使其得到最好的Δx 。当然想要从初始形状一步步回归到真实形状，只学习一个Δx一般是不行的，因为一步就回归到最小点一般来说要求比较高，即使是牛顿步回归的比较快，通常也不能一步就达到目标。所以我们要学习得到多个不同的回归器，它们依次回归下来，能得到一系列的Δx，这样我们就能很快根据xk+1=xk+Δx得到使目标函数最小的点。<br>我们使用的是从初始特征点周围提取的SIFT特征作为第一次回归的输入，然而SIFT算子是不可导的，所以如果想要使用一阶或者二阶方法来最小化上面的目标函数，那就只能用数值逼近的方法来估计Jacobian和Hessian矩阵（比如有限差分方法等）。然而数值估计计算量非常大，所以我们要采用SDM方法来学习下降的方向和下降的尺度，或者说学习Jaobian和Hessian矩阵。<br><img src="/2017/08/03/sdm/3.png" alt=""><br>由上图可知SDM的收敛速度比牛顿步更快，只是收敛得最终结果并没有达到最优（比牛顿步差一点），但SDM更具鲁棒性，在函数的Hessian矩阵不是正定的时候，SDM也能很快收敛。</p>
-<h3 id="工程示例"><a href="#工程示例" class="headerlink" title="工程示例"></a>工程示例</h3><p>使用OpenCV的HarrCascade做检脸，SDM做landmark，标出eyes、nose和left/right mouth，最终结果输出如下：<br><img src="/2017/08/03/sdm/landmarks0.png" alt=""></p>
-<p>参考文章：<br><a href="http://blog.csdn.net/jiajinrang93/article/details/68937710" target="_blank" rel="external">http://blog.csdn.net/jiajinrang93/article/details/68937710</a></p>
+<p>示意图和各层网络结构如下：<br><a id="more"></a><br><img src="/2017/08/07/mtcnn/0.jpg" alt=""><br><img src="/2017/08/07/mtcnn/1.png" alt=""></p>
+<h3 id="网络训练"><a href="#网络训练" class="headerlink" title="网络训练"></a>网络训练</h3><p>整个的训练学习过程就是最小化下面这个函数，其中，N为训练样本数量，aj表示任务的重要性，bj为样本标签，Lj为上面的损失函数：<br><img src="/2017/08/07/mtcnn/2.png" alt=""><br>训练需要注意的点：  </p>
+<blockquote>
+<p>(1) 文中训练使用了在线困难样本生成(Online Hard sample mining)策略，即在一个batch中只选择loss占前70%的样本进行BP。也就是说抛弃了一些对强化分类没有多大作用的简单样本。文中表示，通过实验表明这样做能够进一步提升精度。<br>(2) 不同阶段，classifier、boundingbox regression和landmarks detection在计算Loss时的权重是不一样的；<br>(3) 训练数据共4类，比例3:1:1:2，分别是negative，IOU<0.3； positive，iou="">0.65；part face，0.4。</0.3；></p>
+</blockquote>
+<p>最终算法在FDDB表现如下：<br><img src="/2017/08/07/mtcnn/3.jpg" alt=""><br>对齐效果如下：<br><img src="/2017/08/07/mtcnn/4.png" alt=""><br>我们可以看到mtcnn相对其他算法性能上有明显的提升。</p>
+<h3 id="工程示例"><a href="#工程示例" class="headerlink" title="工程示例"></a>工程示例</h3><p>工程地址：<a href="https://github.com/dreamocean/mtcnn" target="_blank" rel="external">https://github.com/dreamocean/mtcnn</a>     </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</div><div class="line"><span class="keyword">from</span> mtcnn_detector <span class="keyword">import</span> MtcnnDetector</div><div class="line"><span class="keyword">import</span> cv2</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">detector = MtcnnDetector(model_folder=<span class="string">'model'</span>, ctx=mx.cpu(<span class="number">0</span>), num_worker = <span class="number">4</span> , accurate_landmark = <span class="keyword">False</span>)</div><div class="line">img = cv2.imread(<span class="string">'timg0.jpg'</span>)</div><div class="line"><span class="comment"># run detector</span></div><div class="line">results = detector.detect_face(img)</div><div class="line"><span class="keyword">if</span> results <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">    total_boxes = results[<span class="number">0</span>]</div><div class="line">    points = results[<span class="number">1</span>]</div><div class="line">    <span class="comment"># extract aligned face chips</span></div><div class="line">    chips = detector.extract_image_chips(img, points, <span class="number">144</span>, <span class="number">0.37</span>)</div><div class="line">    <span class="keyword">for</span> i, chip <span class="keyword">in</span> enumerate(chips):</div><div class="line">        <span class="comment">#cv2.imshow('chip_'+str(i), chip)</span></div><div class="line">        cv2.imwrite(<span class="string">'chip_'</span>+str(i)+<span class="string">'.png'</span>, chip)</div><div class="line">    draw = img.copy()</div><div class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> total_boxes:</div><div class="line">        cv2.rectangle(draw, (int(b[<span class="number">0</span>]), int(b[<span class="number">1</span>])), (int(b[<span class="number">2</span>]), int(b[<span class="number">3</span>])), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>))</div><div class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> points:</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div><div class="line">            cv2.circle(draw, (p[i], p[i + <span class="number">5</span>]), <span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</div><div class="line">    cv2.imwrite(<span class="string">'timg0.png'</span>, draw)</div><div class="line">    cv2.imshow(<span class="string">"detection result"</span>, draw)</div><div class="line">    cv2.waitKey(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>人脸对齐输出如下：<br><img src="/2017/08/07/mtcnn/timg11.png" alt=""><br><img src="/2017/08/07/mtcnn/timg0.png" alt=""><br>人脸仿射变换对正如下：   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">face1</th>
+<th style="text-align:center">face2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2017/08/07/mtcnn/chip_1.png" alt=""></td>
+<td style="text-align:center"><img src="/2017/08/07/mtcnn/chip_0.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<p>参考文章：<br><a href="http://blog.csdn.net/fuwenyan/article/details/73201680" target="_blank" rel="external">http://blog.csdn.net/fuwenyan/article/details/73201680</a></p>
 
       
     </div>
@@ -447,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/30/harr/" rel="next" title="人脸检测之Haar">
-                <i class="fa fa-chevron-left"></i> 人脸检测之Haar
+              <a href="/2017/08/03/sdm/" rel="next" title="人脸检测之SDM">
+                <i class="fa fa-chevron-left"></i> 人脸检测之SDM
               </a>
             
           </div>
@@ -456,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/07/mtcnn/" rel="prev" title="人脸检测之MTCNN">
-                人脸检测之MTCNN <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -610,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程示例"><span class="nav-number">2.</span> <span class="nav-text">工程示例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络训练"><span class="nav-number">2.</span> <span class="nav-text">网络训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程示例"><span class="nav-number">3.</span> <span class="nav-text">工程示例</span></a></li></ol></div>
             
 
           </div>
