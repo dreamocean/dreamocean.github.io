@@ -1,0 +1,977 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="object detect," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="算法详解在RCNN和Fast RCNN之后，Ross B. Girshick团队在2016年提出了新的Faster RCNN，在结构上，Faster RCN已经将特征抽取(feature extraction)，proposal提取，bounding box regression(rect refine)，classification都整合在了一个网络中，使得综合性能有较大提高，尤其是在检测速度上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目标检测算法：Faster R-CNN">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/faster-rcnn/index.html">
+<meta property="og:site_name" content="dreamocean">
+<meta property="og:description" content="算法详解在RCNN和Fast RCNN之后，Ross B. Girshick团队在2016年提出了新的Faster RCNN，在结构上，Faster RCN已经将特征抽取(feature extraction)，proposal提取，bounding box regression(rect refine)，classification都整合在了一个网络中，使得综合性能有较大提高，尤其是在检测速度上">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/0.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/10.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/12.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/11.jpeg">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/13.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/14.jpeg">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/6.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/15/faster-rcnn/7.png">
+<meta property="og:updated_time" content="2017-08-29T07:49:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="目标检测算法：Faster R-CNN">
+<meta name="twitter:description" content="算法详解在RCNN和Fast RCNN之后，Ross B. Girshick团队在2016年提出了新的Faster RCNN，在结构上，Faster RCN已经将特征抽取(feature extraction)，proposal提取，bounding box regression(rect refine)，classification都整合在了一个网络中，使得综合性能有较大提高，尤其是在检测速度上">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/15/faster-rcnn/0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/15/faster-rcnn/"/>
+
+
+
+
+
+  <title> 目标检测算法：Faster R-CNN | dreamocean </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f2c6325a38d1ee3fb2e2d953b7a1fe92";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dreamocean</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/faster-rcnn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MengyangZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/icon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dreamocean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                目标检测算法：Faster R-CNN
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T13:33:48+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/object-detect/" itemprop="url" rel="index">
+                    <span itemprop="name">object detect</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/15/faster-rcnn/" class="leancloud_visitors" data-flag-title="目标检测算法：Faster R-CNN">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="算法详解"><a href="#算法详解" class="headerlink" title="算法详解"></a>算法详解</h3><p>在RCNN和Fast RCNN之后，Ross B. Girshick团队在2016年提出了新的Faster RCNN，在结构上，Faster RCN已经将特征抽取(feature extraction)，proposal提取，bounding box regression(rect refine)，classification都整合在了一个网络中，使得综合性能有较大提高，尤其是在检测速度上，简单网络目标检测速度达到17fps，在PASCAL VOC上准确率为59.9%；复杂网络达到5fps，准确率78.8%。具体参考论文：<a href="https://arxiv.org/abs/1506.01497" target="_blank" rel="external">Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</a>。下面将简单介绍RCNN和Fast RCNN，再引申到Faster RCNN算法。<br><img src="/2017/08/15/faster-rcnn/0.png" alt=""></p>
+<h4 id="RCNN"><a href="#RCNN" class="headerlink" title="RCNN"></a>RCNN</h4><p>目标检测步骤如下：<br><a id="more"></a></p>
+<blockquote>
+<p>(1)输入测试图像；<br>(2)利用selective search 算法在图像中从上到下提取2000个左右的Region Proposal；<br>(3)将每个Region Proposal缩放(warp)成227*227的大小并输入到CNN，将CNN的fc7层的输出作为特征；<br>(4)将每个Region Proposal提取的CNN特征输入到SVM进行分类；<br>(5)对于SVM分好类的Region Proposal做边框回归，用Bounding box回归值校正原来的建议窗口，生成预测窗口坐标。</p>
+</blockquote>
+<p>算法缺陷:</p>
+<blockquote>
+<p>(1)训练分为多个阶段，步骤繁琐：微调网络+训练SVM+训练边框回归器；<br>(2)训练耗时，占用磁盘空间大；5000张图像产生几百G的特征文件；<br>(3)速度慢：使用GPU，VGG16模型处理一张图像需要47s；<br>(4)测试速度慢：每个候选区域需要运行整个前向CNN计算；<br>(5)SVM和回归是事后操作，在SVM和回归过程中CNN特征没有被学习更新。</p>
+</blockquote>
+<h4 id="Fast-RCNN"><a href="#Fast-RCNN" class="headerlink" title="Fast RCNN"></a>Fast RCNN</h4><p>目标检测步骤如下：   </p>
+<blockquote>
+<p>(1)输入测试图像；<br>(2)利用selective search 算法在图像中从上到下提取2000个左右的建议窗口(Region Proposal)；<br>(3)将整张图片输入CNN，进行特征提取；<br>(4)把建议窗口映射到CNN的最后一层卷积feature map上；<br>(5)通过RoI pooling层使每个建议窗口生成固定尺寸的feature map；<br>(6)利用Softmax Loss(探测分类概率) 和Smooth L1 Loss(探测边框回归)对分类概率和边框回归(Bounding box regression)联合训练。</p>
+</blockquote>
+<p>与RCNN不同处：   </p>
+<blockquote>
+<p>(1)最后一层卷积层后加了一个ROI pooling layer；<br>(2)损失函数使用了多任务损失函数(multi-task loss)，将边框回归直接加入到CNN网络中训练。</p>
+</blockquote>
+<p>相对RCNN的缺陷做的改进:   </p>
+<blockquote>
+<p>(1)测试时速度慢：R-CNN把一张图像分解成大量的建议框，每个建议框拉伸形成的图像都会单独通过CNN提取特征，实际上这些建议框之间大量重叠，特征值之间完全可以共享，造成了运算能力的浪费。    </p>
+<p><strong>FAST-RCNN将整张图像归一化后直接送入CNN，在最后的卷积层输出的feature map上，加入建议框信息，使得在此之前的CNN运算得以共享。</strong>  </p>
+<p>(2)训练时速度慢：R-CNN在训练时，是在采用SVM分类之前，把通过CNN提取的特征存储在硬盘上。这种方法造成了训练性能低下，因为在硬盘上大量的读写数据会造成训练速度缓慢。</p>
+<p><strong>FAST-RCNN在训练时，只需要将一张图像送入网络，每张图像一次性地提取CNN特征和建议区域，训练数据在GPU内存里直接进Loss层，这样候选区域的前几层特征不需要再重复计算且不再需要把大量数据存储在硬盘上。</strong>    </p>
+<p>(3)训练所需空间大：R-CNN中独立的SVM分类器和回归器需要大量特征作为训练样本，需要大量的硬盘空间。</p>
+<p><strong>FAST-RCNN把类别判断和位置回归统一用深度网络实现，不再需要额外存储。</strong></p>
+</blockquote>
+<h4 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster RCNN"></a>Faster RCNN</h4><p>目标检测步骤如下：   </p>
+<blockquote>
+<p>1)输入测试图像；<br>(2)将整张图片输入CNN，进行特征提取；<br>(3)用RPN生成建议窗口(proposals)，每张图片生成300个建议窗口；<br>(4)把建议窗口映射到CNN的最后一层卷积feature map上；<br>(5)通过RoI pooling层使每个RoI生成固定尺寸的feature map；<br>(6)利用Softmax Loss(探测分类概率) 和Smooth L1 Loss(探测边框回归)对分类概率和边框回归(Bounding box regression)联合训练.</p>
+</blockquote>
+<p>与Fast RCNN不同处:    </p>
+<blockquote>
+<p>(1)使用RPN(Region Proposal Network)代替原来的Selective Search方法产生建议窗口；<br>(2)产生建议窗口的CNN和目标检测的CNN共享。</p>
+</blockquote>
+<p>相对于Fast RCNN做的改进:    </p>
+<blockquote>
+<p><strong>高效快速生成建议框，Faster RCNN创造性地采用卷积网络RPN自行产生建议框，并且和目标检测网络共享卷积网络，使得建议框数目从原有的约2000个减少为300个，且建议框的质量也有本质的提高。</strong></p>
+</blockquote>
+<p>Faster RCNN网络结构如下：<br><img src="/2017/08/15/faster-rcnn/1.png" alt=""></p>
+<h5 id="Region-Proposal-Networks-RPN"><a href="#Region-Proposal-Networks-RPN" class="headerlink" title="Region Proposal Networks(RPN)"></a>Region Proposal Networks(RPN)</h5><p>经典的检测方法生成检测框都非常耗时，如OpenCV adaboost使用滑动窗口+图像金字塔生成检测框；或如RCNN使用SS(Selective Search)方法生成检测框。<br>SS算法策略如下：   </p>
+<blockquote>
+<p>算法借助了层次聚类的思想，将层次聚类的思想应用到区域的合并上面，具体思路如下：<br>1、假设现在图像上有n个预分割的区域(Efficient Graph-Based Image Segmentation)，表示为R={R1, R2, …, Rn}；<br>2、计算每个region与它相邻region(注意是相邻的区域)的相似度，这样会得到一个n*n的相似度矩阵(同一个区域之间和一个区域与不相邻区域之间的相似度可设为NaN)，从矩阵中找出最大相似度值对应的两个区域，将这两个区域合二为一，这时候图像上还剩下n-1个区域；<br>3、重复上面的过程(只需要计算新的区域与它相邻区域的新相似度，其他的不用重复计算)，重复一次，区域的总数目就少1，知道最后所有的区域都合并称为了同一个区域(即此过程进行了n-1次，区域总数目最后变成了1)。</p>
+</blockquote>
+<p>而Faster RCNN则抛弃了传统的滑动窗口和SS方法，直接使用RPN生成检测框，这也是Faster RCNN的巨大优势，能极大提升检测框的生成速度。<br><img src="/2017/08/15/faster-rcnn/2.jpg" alt=""><br>从上图可以看到RPN网络实际分为2条线，上面一条通过softmax分类anchors获得foreground和background（检测目标是foreground），下面一条用于计算对于anchors的bounding box regression偏移量，以获得精确的proposal。而最后的Proposal层则负责综合foreground anchors和bounding box regression偏移量获取proposals，同时剔除太小和超出边界的proposals。其实整个网络到了Proposal Layer这里，就完成了相当于目标定位的功能。</p>
+<h3 id="工程示例"><a href="#工程示例" class="headerlink" title="工程示例"></a>工程示例</h3><p>Mxnet已经实现了Faster R-CNN，具体工程路径为mxnet/example/rcnn，执行流程如下：　　　</p>
+<blockquote>
+<p><code>bash script/additional_deps.sh</code> –获取依赖库<br><code>bash script/get_voc.sh</code>　–获取训练数据<br><code>bash script/get_pretrained_model.sh</code>　– 获取预训练好的模型，方便fine-tuning，加速训练<br><code>bash script/resnet_voc0712 0</code>　– 启动训练</p>
+</blockquote>
+<p>训练结果输出如下：　　　<br><img src="/2017/08/15/faster-rcnn/10.png" alt=""><br>模型和参数保存在mxnet/example/rcnn/model目录下。<br>使用训练好的模型执行检测：　　　　<br><code>python demo.py --prefix ./model/e2e --epoch 1 --image 3.jpeg</code><br>结果输出如下：　　<br><img src="/2017/08/15/faster-rcnn/12.png" alt=""><br><img src="/2017/08/15/faster-rcnn/11.jpeg" alt=""><br>其他测试结果如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">result1</th>
+<th style="text-align:center">result2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2017/08/15/faster-rcnn/13.jpg" alt=""></td>
+<td style="text-align:center"><img src="/2017/08/15/faster-rcnn/14.jpeg" alt=""></td>
+</tr>
+</tbody>
+</table>
+<h3 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h3><p>与Selective Search方法相比，当每张图生成的候选区域从2000减少到300时，RPN方法的召回率下降不大，说明RPN方法的目的性更明确，如下图所示：<br><img src="/2017/08/15/faster-rcnn/6.png" alt=""><br>使用更大的Microsoft COCO库训练，直接在PASCAL VOC上测试，准确率提升6%，说明faster RCNN迁移性良好，没有over fitting，具体结果如下：<br><img src="/2017/08/15/faster-rcnn/7.png" alt="">   </p>
+<p>参考文章：<br><a href="http://www.cnblogs.com/dudumiaomiao/p/6560841.html" target="_blank" rel="external">http://www.cnblogs.com/dudumiaomiao/p/6560841.html</a>
+　　</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得我的文章对您有用，请随意赞赏</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+     <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.JPG" alt="MengyangZhang WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/object-detect/" rel="tag"># object detect</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/07/mtcnn/" rel="next" title="人脸检测之MTCNN">
+                <i class="fa fa-chevron-left"></i> 人脸检测之MTCNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/20/yolo/" rel="prev" title="目标检测算法：YOLO">
+                目标检测算法：YOLO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAwNS80NTgy"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/icon.jpg"
+               alt="MengyangZhang" />
+          <p class="site-author-name" itemprop="name">MengyangZhang</p>
+           
+              <p class="site-description motion-element" itemprop="description">技术笔记与分享，与君共勉</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/dreamocean90/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreamocean/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法详解"><span class="nav-number">1.</span> <span class="nav-text">算法详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RCNN"><span class="nav-number">1.1.</span> <span class="nav-text">RCNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fast-RCNN"><span class="nav-number">1.2.</span> <span class="nav-text">Fast RCNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Faster-RCNN"><span class="nav-number">1.3.</span> <span class="nav-text">Faster RCNN</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Region-Proposal-Networks-RPN"><span class="nav-number">1.3.1.</span> <span class="nav-text">Region Proposal Networks(RPN)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程示例"><span class="nav-number">2.</span> <span class="nav-text">工程示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能分析"><span class="nav-number">3.</span> <span class="nav-text">性能分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MengyangZhang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("IRxEjYBk51boMFLlVsOn60MO-gzGzoHsz", "KoiqfIRauOK8zx4rntLsm48H");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+
+  
+
+</body>
+</html>
