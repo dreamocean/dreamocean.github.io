@@ -357,7 +357,7 @@
 
       
         
-          <h3 id="L-Softmax"><a href="#L-Softmax" class="headerlink" title="L-Softmax"></a>L-Softmax</h3><h4 id="算法解析"><a href="#算法解析" class="headerlink" title="算法解析"></a>算法解析</h4><p>Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文<a href="https://arxiv.org/pdf/1612.02295.pdf">Large-Margin Softmax Loss for Convolutional Neural Networks</a>提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。<br>对于Softmax loss而言：<br><img src="/2017/09/07/A-Softmax/1.png" alt=""><br>其中fj表示最终全连接层的类别输出向量f的第j个元素，N为训练样本的个数。由于f=W*X是全连接层的激活函数的输出，W和X均为多维向量，最终的损失函数又可以写为：<br></p>
+          <h3 id="L-Softmax"><a href="#L-Softmax" class="headerlink" title="L-Softmax"></a>L-Softmax</h3><p>Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文<a href="https://arxiv.org/pdf/1612.02295.pdf">Large-Margin Softmax Loss for Convolutional Neural Networks</a>提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。<br>对于Softmax loss而言：<br><img src="/2017/09/07/A-Softmax/1.png" alt=""><br>其中fj表示最终全连接层的类别输出向量f的第j个元素，N为训练样本的个数。由于f=W*X是全连接层的激活函数的输出，W和X均为多维向量，最终的损失函数又可以写为：<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/07/A-Softmax/#more" rel="contents">

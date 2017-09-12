@@ -87,12 +87,12 @@
 
 
 
-<meta name="description" content="L-Softmax算法解析Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文Large-Margin Softmax Loss for Convolutional Neural Networks提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。对于Softmax los">
+<meta name="description" content="L-SoftmaxSoftmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文Large-Margin Softmax Loss for Convolutional Neural Networks提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。对于Softmax loss而言：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="L-Softmax Loss & A-Softmax Loss解析">
 <meta property="og:url" content="http://yoursite.com/2017/09/07/A-Softmax/index.html">
 <meta property="og:site_name" content="dreamocean">
-<meta property="og:description" content="L-Softmax算法解析Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文Large-Margin Softmax Loss for Convolutional Neural Networks提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。对于Softmax los">
+<meta property="og:description" content="L-SoftmaxSoftmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文Large-Margin Softmax Loss for Convolutional Neural Networks提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。对于Softmax loss而言：">
 <meta property="og:image" content="http://yoursite.com/2017/09/07/A-Softmax/1.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/07/A-Softmax/2.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/07/A-Softmax/4.png">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="http://yoursite.com/2017/09/07/A-Softmax/20.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/07/A-Softmax/21.png">
 <meta property="og:image" content="http://yoursite.com/2017/09/07/A-Softmax/22.png">
-<meta property="og:updated_time" content="2017-09-12T02:30:54.000Z">
+<meta property="og:updated_time" content="2017-09-12T02:33:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="L-Softmax Loss & A-Softmax Loss解析">
-<meta name="twitter:description" content="L-Softmax算法解析Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文Large-Margin Softmax Loss for Convolutional Neural Networks提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。对于Softmax los">
+<meta name="twitter:description" content="L-SoftmaxSoftmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文Large-Margin Softmax Loss for Convolutional Neural Networks提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。对于Softmax loss而言：">
 <meta name="twitter:image" content="http://yoursite.com/2017/09/07/A-Softmax/1.png">
 
 
@@ -372,15 +372,14 @@
       
 
       
-        <h3 id="L-Softmax"><a href="#L-Softmax" class="headerlink" title="L-Softmax"></a>L-Softmax</h3><h4 id="算法解析"><a href="#算法解析" class="headerlink" title="算法解析"></a>算法解析</h4><p>Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文<a href="https://arxiv.org/pdf/1612.02295.pdf" target="_blank" rel="external">Large-Margin Softmax Loss for Convolutional Neural Networks</a>提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。<br>对于Softmax loss而言：<br><img src="/2017/09/07/A-Softmax/1.png" alt=""><br>其中fj表示最终全连接层的类别输出向量f的第j个元素，N为训练样本的个数。由于f=W*X是全连接层的激活函数的输出，W和X均为多维向量，最终的损失函数又可以写为：<br><a id="more"></a><br><img src="/2017/09/07/A-Softmax/2.png" alt=""><br>假设一个2分类问题，如果属于类别1的概率大于类别2的概率，则：<br><img src="/2017/09/07/A-Softmax/4.png" alt=""><br>L-Softmax loss的动机是希望通过增加一个正整数变量m，从而产生一个决策余量，能够更加严格地约束上述不等式，即：<br><img src="/2017/09/07/A-Softmax/5.png" alt=""><br>其中m是正整数，cos函数在0到π范围又是单调递减的，所以cos(mx)要小于cos(x)。m值越大则学习的难度也越大，使得模型可以学到类间距离更大的，类内距离更小的特征，具体示意如下：<br><img src="/2017/09/07/A-Softmax/7.png" alt=""><br>最终L-Softmax loss定义如下：<br><img src="/2017/09/07/A-Softmax/6.png" alt=""><br>以一个二分类问题为例，L-Softmax loss学习到的参数可以将两类样本的类间距离加大，最后学到的特征之间的分离程度比原来的要明显得多，具体示意图如下：<br><img src="/2017/09/07/A-Softmax/8.png" alt="">    </p>
-<h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><p>论文在MNIST，CIFAR10以及CIFAR100三个分类问题和人脸比对LFW数据集进行评测，最后的结果是相对于softmax loss，L-Softmax Loss均取得了更好的效果，而且当m越大时，最终的结果会越好。而且论文仅使用了WebFace的人脸数据作为训练集和一个较小的卷积网络，就在LFW上达到了98.71%的正确率，具体LFW测试结果如下：<br><img src="/2017/09/07/A-Softmax/9.png" alt=""><br>L-Softmax Loss有一个清楚的几何解释，并且能够通过设置m来调节训练难度。它还能够有效地防止过拟合，能够有效地减小类内距离，同时增加类间距离。最终的分类和人脸验证实验也证明，它确实取得了比softmax loss更好的结果。</p>
-<h3 id="A-Softmax"><a href="#A-Softmax" class="headerlink" title="A-Softmax"></a>A-Softmax</h3><h4 id="算法解析-1"><a href="#算法解析-1" class="headerlink" title="算法解析"></a>算法解析</h4><p>A-Softmax loss是CVPR2017的论文<a href="https://arxiv.org/abs/1704.08063" target="_blank" rel="external">SphereFace: Deep Hypersphere Embedding for Face Recognition</a>提出的，简单来说就是在L-Softmax loss的基础上添加了两个限制条件||W||=1和b=0，使得预测仅取决于W和x之间的角度，具体示意图如下（其中Modified Softmax Loss仅是在Softmax上加入||W||=1和b=0这两个限制条件）：<br><img src="/2017/09/07/A-Softmax/10.png" alt=""><br>其中Modified Softmax loss数学表达式如下：<br><img src="/2017/09/07/A-Softmax/11.png" alt=""><br>A-Softmax表达式如下：<br><img src="/2017/09/07/A-Softmax/12.png" alt=""><br>对于一个二分问题，从几何角度看A-Softmax与其他loss的区别：<br><img src="/2017/09/07/A-Softmax/13.png" alt=""><br>A-Softmax loss在使用时需要注意的一些特性如下：   </p>
+        <h3 id="L-Softmax"><a href="#L-Softmax" class="headerlink" title="L-Softmax"></a>L-Softmax</h3><p>Softmax Loss函数经常在卷积神经网络中被广泛应用，但是这种形式并不能够有效地学习得到使得类内较为紧凑、类间较离散的特征。论文<a href="https://arxiv.org/pdf/1612.02295.pdf" target="_blank" rel="external">Large-Margin Softmax Loss for Convolutional Neural Networks</a>提出了L-Softmax loss，能够有效地引导网络学习使得类内距离较小、类间距离较大的特征。<br>对于Softmax loss而言：<br><img src="/2017/09/07/A-Softmax/1.png" alt=""><br>其中fj表示最终全连接层的类别输出向量f的第j个元素，N为训练样本的个数。由于f=W*X是全连接层的激活函数的输出，W和X均为多维向量，最终的损失函数又可以写为：<br><a id="more"></a><br><img src="/2017/09/07/A-Softmax/2.png" alt=""><br>假设一个2分类问题，如果属于类别1的概率大于类别2的概率，则：<br><img src="/2017/09/07/A-Softmax/4.png" alt=""><br>L-Softmax loss的动机是希望通过增加一个正整数变量m，从而产生一个决策余量，能够更加严格地约束上述不等式，即：<br><img src="/2017/09/07/A-Softmax/5.png" alt=""><br>其中m是正整数，cos函数在0到π范围又是单调递减的，所以cos(mx)要小于cos(x)。m值越大则学习的难度也越大，使得模型可以学到类间距离更大的，类内距离更小的特征，具体示意如下：<br><img src="/2017/09/07/A-Softmax/7.png" alt=""><br>最终L-Softmax loss定义如下：<br><img src="/2017/09/07/A-Softmax/6.png" alt=""><br>以一个二分类问题为例，L-Softmax loss学习到的参数可以将两类样本的类间距离加大，最后学到的特征之间的分离程度比原来的要明显得多，具体示意图如下：<br><img src="/2017/09/07/A-Softmax/8.png" alt=""><br>论文在MNIST，CIFAR10以及CIFAR100三个分类问题和人脸比对LFW数据集进行评测，最后的结果是相对于softmax loss，L-Softmax Loss均取得了更好的效果，而且当m越大时，最终的结果会越好。而且论文仅使用了WebFace的人脸数据作为训练集和一个较小的卷积网络，就在LFW上达到了98.71%的正确率，具体LFW测试结果如下：<br><img src="/2017/09/07/A-Softmax/9.png" alt=""><br>L-Softmax Loss有一个清楚的几何解释，并且能够通过设置m来调节训练难度。它还能够有效地防止过拟合，能够有效地减小类内距离，同时增加类间距离。最终的分类和人脸验证实验也证明，它确实取得了比softmax loss更好的结果。</p>
+<h3 id="A-Softmax"><a href="#A-Softmax" class="headerlink" title="A-Softmax"></a>A-Softmax</h3><p>A-Softmax loss是CVPR2017的论文<a href="https://arxiv.org/abs/1704.08063" target="_blank" rel="external">SphereFace: Deep Hypersphere Embedding for Face Recognition</a>提出的，简单来说就是在L-Softmax loss的基础上添加了两个限制条件||W||=1和b=0，使得预测仅取决于W和x之间的角度，具体示意图如下（其中Modified Softmax Loss仅是在Softmax上加入||W||=1和b=0这两个限制条件）：<br><img src="/2017/09/07/A-Softmax/10.png" alt=""><br>其中Modified Softmax loss数学表达式如下：<br><img src="/2017/09/07/A-Softmax/11.png" alt=""><br>A-Softmax表达式如下：<br><img src="/2017/09/07/A-Softmax/12.png" alt=""><br>对于一个二分问题，从几何角度看A-Softmax与其他loss的区别：<br><img src="/2017/09/07/A-Softmax/13.png" alt=""><br>A-Softmax loss在使用时需要注意的一些特性如下：   </p>
 <ul>
 <li>通常情况下，m值越大，学习到的特征区分性更强，但学习难度更大，通常m取4时可以取得较好的效果：<img src="/2017/09/07/A-Softmax/18.png" alt=""></li>
 <li>针对二分类问题，m最小值值需满足：<img src="/2017/09/07/A-Softmax/17.png" alt="">  </li>
 <li>针对多分类问题，m最小值需满足： <img src="/2017/09/07/A-Softmax/16.png" alt="">     </li>
 </ul>
-<h4 id="实验结果-1"><a href="#实验结果-1" class="headerlink" title="实验结果"></a>实验结果</h4><p>在LFW和YFT上不同m值的表现如下：<br><img src="/2017/09/07/A-Softmax/19.png" alt=""><br>与softmax loss对比如下：<br><img src="/2017/09/07/A-Softmax/20.png" alt=""><br>与其他算法对比如下：<br><img src="/2017/09/07/A-Softmax/21.png" alt=""><br>在Megaface上的表现如下：<br><img src="/2017/09/07/A-Softmax/22.png" alt=""><br>从实验结果可以看出，A-Softmax loss相对L-Softmax和centerloss在效果上会有所提升。</p>
+<p>在LFW和YFT上不同m值的表现如下：<br><img src="/2017/09/07/A-Softmax/19.png" alt=""><br>与softmax loss对比如下：<br><img src="/2017/09/07/A-Softmax/20.png" alt=""><br>与其他算法对比如下：<br><img src="/2017/09/07/A-Softmax/21.png" alt=""><br>在Megaface上的表现如下：<br><img src="/2017/09/07/A-Softmax/22.png" alt=""><br>从实验结果可以看出，A-Softmax loss相对L-Softmax和centerloss在效果上会有所提升。</p>
 
       
     </div>
@@ -600,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#L-Softmax"><span class="nav-number">1.</span> <span class="nav-text">L-Softmax</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法解析"><span class="nav-number">1.1.</span> <span class="nav-text">算法解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验结果"><span class="nav-number">1.2.</span> <span class="nav-text">实验结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Softmax"><span class="nav-number">2.</span> <span class="nav-text">A-Softmax</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法解析-1"><span class="nav-number">2.1.</span> <span class="nav-text">算法解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验结果-1"><span class="nav-number">2.2.</span> <span class="nav-text">实验结果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#L-Softmax"><span class="nav-number">1.</span> <span class="nav-text">L-Softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Softmax"><span class="nav-number">2.</span> <span class="nav-text">A-Softmax</span></a></li></ol></div>
             
 
           </div>
